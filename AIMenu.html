@@ -18,6 +18,11 @@
 			opacity: 1;
 		}
 	}
+	/* Deselect text when menu is shown */
+	#highlight_menu.show {
+		user-select: none;
+	}
+
 	/* Hide menu when clicking buttons */
 	#highlight_menu.show button:active ~ #highlight_menu.show,
 	#highlight_menu.show button:focus ~ #highlight_menu.show {
