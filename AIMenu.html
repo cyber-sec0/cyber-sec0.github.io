@@ -63,15 +63,15 @@
 
 	@keyframes magnifyIn {
 		0% {
-			transform: translateX(-50%) scale(0.97);
-			opacity: 0.8;
+			transform: translateX(-50%) scale(1);
+			opacity: 1;
 		}
-		30% {
-			transform: translateX(-50%) scale(1.03);
-			opacity: 0.95;
+		20% {
+			transform: translateX(-50%) scale(0.98);
+			opacity: 0.98;
 		}
-		70% {
-			transform: translateX(-50%) scale(0.99);
+		60% {
+			transform: translateX(-50%) scale(1.005);
 			opacity: 1;
 		}
 		100% {
@@ -82,7 +82,6 @@
 
 	.magnify-animation {
 		animation: magnifyIn 0.9s cubic-bezier(0.25, 0.46, 0.45, 0.94) forwards;
-		transform-origin: center center;
 	}
 
 	/* Buttons */
