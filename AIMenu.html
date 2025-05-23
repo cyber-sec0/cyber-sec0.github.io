@@ -79,10 +79,36 @@
 			opacity: 1;
 		}
 	}
+	/* Add to existing CSS */
+	@keyframes isolatedScale {
+		0% {
+			transform: translateX(-50%) scale(0.95);
+		}
+		100% {
+			transform: translateX(-50%) scale(1);
+		}
+	}
 
 	.magnify-animation {
-		animation: magnifyIn 0.9s cubic-bezier(0.25, 0.46, 0.45, 0.94) forwards;
+		animation: isolatedScale 1.2s cubic-bezier(0.23, 1, 0.32, 1) forwards;
 		transform-origin: center center;
+		position: fixed;
+	}
+
+	.prompt-arrow {
+		position: fixed !important;
+		transform: none !important;
+		animation: none !important;
+		z-index: 99999999;
+		pointer-events: none;
+	}
+
+	.prompt-arrow-left {
+		left: calc(50% - 200px) !important; /* Adjust based on your container width */
+	}
+
+	.prompt-arrow-right {
+		right: calc(50% - 200px) !important; /* Adjust based on your container width */
 	}
 
 	/* Buttons */
