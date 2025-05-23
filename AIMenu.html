@@ -18,7 +18,11 @@
       opacity: 1;
     }
   }
-
+/* Hide menu when clicking buttons */
+#highlight_menu.show button:active ~ #highlight_menu.show,
+#highlight_menu.show button:focus ~ #highlight_menu.show {
+  display: none !important;
+}
   @keyframes borderGradientChange {
     0% {
       background-position: 100% 0%;
