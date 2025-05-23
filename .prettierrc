@@ -1,4 +1,6 @@
 {
   "printWidth": 99999999999999999,
-  "proseWrap": "never"
+  "singleQuote": true,
+  "proseWrap": "never",
+  "useTabs":true
 }
