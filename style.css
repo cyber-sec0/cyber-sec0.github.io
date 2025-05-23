@@ -1,0 +1,82 @@
+.container {
+  max-width: 800px;
+  margin-left: 25%;
+  padding: 20px;
+  background-color: rgba(255, 255, 255, 0.8);
+  border-radius: 10px;
+  box-shadow: 0 0 20px rgba(0, 0, 0, 0.1);
+  z-index: 1;
+  position: relative;
+}
+
+h1 {
+  text-align: center;
+  color: #333333;
+}
+
+table {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+th,
+td {
+  padding: 5px; /* Reduced padding */
+  text-align: center;
+  border-bottom: 1px solid #dddddd;
+}
+
+th {
+  background-color: #f2f2f2;
+  color: #333333;
+}
+
+td {
+  background-color: #ffffff;
+  color: #555555;
+}
+
+.crypto-icon {
+  width: 30px;
+  height: auto;
+  vertical-align: middle;
+}
+
+.wallet-address {
+  font-family: monospace;
+  color: blue;
+  position: relative;
+}
+
+.wallet-address:hover {
+  text-decoration: underline; /* Underline the text when hovered */
+  cursor: pointer; /* Change cursor to pointer on hover */
+}
+
+.copy-message {
+  position: absolute; /* Change fixed to absolute */
+  background-color: rgba(0, 0, 0, 0.8);
+  color: white;
+  padding: 10px 20px;
+  border-radius: 5px;
+  display: none;
+  z-index: 999;
+}
+
+.crypto-text {
+  font-size: 12px;
+  color: #777777;
+  text-align: center;
+}
+
+.ML {
+  /* display: none; */
+}
+
+body {
+  background-image: url("https://cdn.glitch.me/0b33ddf5-89e2-4809-b2c9-7d3fc2ac722c/low.gif");
+  background-size: 100% 100%; /* Cover the entire viewport without cropping */
+  font-family: Arial, sans-serif;
+  background-position: center;
+  user-select: none;
+}
