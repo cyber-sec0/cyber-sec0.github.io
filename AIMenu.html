@@ -115,101 +115,44 @@
 		justify-content: space-around;
 	}
 
-	/* White theme styles */
-	@media (prefers-color-scheme: light) {
-		.MenuBTNs,
-		.prompt-arrow {
-			background: #e7edf1;
-			border: 1px solid #d0dce4;
-		}
-		.MenuBTNs:hover,
-		.prompt-arrow:hover {
-			background: #ccd9e1;
-		}
-		::-webkit-scrollbar-thumb {
-			background: #d1dce3;
-		}
-		#copyAnswer svg path,
-		#NewAnswer svg path {
-			fill: currentColor;
-		}
-		#copyAnswer svg rect,
-		#AnswerCopied svg path {
-			stroke: currentColor;
-		}
-		#speak svg,
-		#SpeakingPause svg {
-			fill: currentColor;
-		}
-		.prompt-arrow svg path {
-			stroke: currentColor;
-		}
-		#avatar svg {
-			fill: #e7edf1;
-		}
-		#avatar svg path {
-			fill: black;
-		}
-		#prompt,
-		.AnswerContainer {
-			color: black;
-		}
-		#AIBox.AnswerBox,
-		.animated-prompt-box {
-			background: #e7edf1;
-		}
+	/* Light/Dark themes */
+	.MenuBTNs:hover {
+		background: light-dark(#ccd9e1, rgb(255 255 255 / 40%));
 	}
-	/* Dark theme styles */
-	@media (prefers-color-scheme: dark) {
-		a {
-			color: #1e90ff;
-		}
-		#copyAnswer svg path,
-		#NewAnswer svg path {
-			fill: white;
-		}
-		#avatar svg {
-			fill: #484b61;
-		}
-		#avatar svg path {
-			fill: white;
-		}
-		#copyAnswer svg rect,
-		#AnswerCopied svg path {
-			stroke: white;
-		}
-		::-webkit-scrollbar-thumb {
-			background: #484d65;
-		}
-		#speak svg,
-		#SpeakingPause svg {
-			fill: #fff;
-		}
-		.prompt-arrow svg path {
-			stroke: white;
-		}
-		.MenuBTNs {
-			background: #212430;
-			border: 1px solid #41455a;
-		}
-		.prompt-arrow {
-			background: #484d64;
-			border: 1px solid #41455a;
-		}
-		.MenuBTNs:hover {
-			background: rgb(255 255 255 / 40%);
-		}
-		.prompt-arrow:hover {
-			background: #212430;
-		}
-		#prompt,
-		.AnswerContainer {
-			color: white;
-		}
-		.animated-prompt-box,
-		#AIBox.AnswerBox {
-			background: rgb(37, 36, 53);
-		}
+
+	.prompt-arrow:hover {
+		background: light-dark(#ccd9e1, #212430);
+	}
+
+	#copyAnswer svg path,
+	#NewAnswer svg path {
+		fill: light-dark(currentColor, white);
+	}
+
+	#copyAnswer svg rect,
+	#AnswerCopied svg path {
+		stroke: light-dark(currentColor, white);
+	}
+
+	#speak svg,
+	#SpeakingPause svg {
+		fill: light-dark(currentColor, #fff);
+	}
+
+	.prompt-arrow svg path {
+		stroke: light-dark(currentColor, white);
+	}
+
+	#avatar svg {
+		fill: light-dark(#e7edf1, #484b61);
+	}
+
+	#avatar svg path {
+		fill: light-dark(black, white);
+	}
+
+	a {
+		color: light-dark(inherit, #1e90ff);
 	}
 
 	.AI-BG-box button {
@@ -234,6 +177,8 @@
 		flex-direction: row;
 		align-items: center;
 		justify-content: center;
+		background: light-dark(#e7edf1, #212430);
+		border: 1px solid light-dark(#d0dce4, #41455a);
 	}
 
 	#dictate,
@@ -260,10 +205,12 @@
 
 	::-webkit-scrollbar-thumb {
 		border-radius: 3px;
+		background: light-dark(#d1dce3, #484d65);
 	}
 
 	:host {
 		all: initial;
+    color-scheme: light dark;
 		--color-OrangeORLilac: #9168c0;
 		--border-color-1: #9168c0; /* Writing Mode */
 		--border-color-2: #5684d1; /* Writing Mode */
@@ -400,6 +347,7 @@
 		text-size-adjust: 100%;
 		text-shadow: 0 0 0px #fff;
 		line-height: 1.4rem !important;
+		color: light-dark(black, white);
 		font-family: 'Segoe UI', Tahoma, sans-serif !important;
 	}
 
@@ -477,6 +425,8 @@
 		position: absolute;
 		display: inline-block;
 		transform: translateY(-50%);
+		background: light-dark(#e7edf1, #484d64);
+		border: 1px solid light-dark(#d0dce4, #41455a);
 	}
 
 	.prompt-arrow-left {
@@ -510,6 +460,7 @@
 		border-radius: 15px;
 		transform: translateX(-50%);
 		box-shadow: #767e8499 0px 0px 0px 10px;
+		background: light-dark(#e7edf1, rgb(37, 36, 53));
 	}
 
 	/* States and Animations */
@@ -555,6 +506,7 @@
 		padding-bottom: 10px;
 		transform: translateX(-50%);
 		box-shadow: inset #767e8499 0px 0px 0px 10px;
+		background: light-dark(#e7edf1, rgb(37, 36, 53));
 	}
 
 	.animated-prompt-box::before {
@@ -617,6 +569,7 @@
 		user-select: none;
 		position: relative;
 		background-color: inherit;
+		color: light-dark(black, white);
 	}
 
 	#context,
@@ -758,7 +711,7 @@
 		<li class="popuptext"></li>
 		<li id="ShowCurrencyORUnits"></li>
 		<li class="popuptext" id="SearchBTN">Search</li>
-		<li class="popuptext" id="CopyBTN"><span>│</span> Copy</li>
+		<li class="popuptext" id="CopyBTN"><span>â</span> Copy</li>
 	</ul>
 </div>
 <div class="animated-prompt-box" id="AIBox">
