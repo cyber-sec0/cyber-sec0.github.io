@@ -409,14 +409,14 @@
 
 	/* Arrow elements */
 	.prompt-arrow {
-		top: 50%;
-		z-index: 10;
+		top: 15%;
 		width: 16px;
 		height: 16px;
 		padding: 8px;
 		cursor: pointer;
+		position: fixed;
+		z-index: 10000000;
 		border-radius: 8px;
-		position: absolute;
 		display: inline-block;
 		transform: translateY(-50%);
 		background: light-dark(#e7edf1, #484d64);
@@ -424,11 +424,13 @@
 	}
 
 	.prompt-arrow-left {
-		left: -45px;
+		left: calc(50% - 40px - 20%);
+		display: none;
 	}
 
 	.prompt-arrow-right {
-		right: -45px;
+		right: calc(50% - 45px - 20%);
+		display: none;
 	}
 
 	.prompt-arrow svg {
@@ -511,7 +513,7 @@
 		border-radius: 15px;
 		background-repeat: no-repeat;
 		animation: borderGradientChange 8s ease-in-out infinite;
-		-webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+		mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
 		mask-composite: exclude;
 		background-image: linear-gradient(to right, transparent 0%, var(--color-OrangeORLilac) 20%, #ff8051 40%, #ff8051 60%, var(--color-OrangeORLilac) 80%, transparent 100%);
 		/*   background-image: linear-gradient(to right, transparent 0%, var(--border-color-1) 20%, var(--border-color-2) 40%, var(--border-color-2) 60%, var(--border-color-1) 80%, transparent 100%);  /* Writing Mode */
@@ -724,13 +726,13 @@
 		<li class="popuptext" id="CopyBTN"><span>&#x2502;</span> Copy</li>
 	</ul>
 </div>
+<div class="prompt-arrow prompt-arrow-left">
+	<svg width="16" height="16" viewbox="-2 0 16 16" fill="none">
+		<path d="M8 3.49219L3.49219 8L8 12.5078" stroke-linecap="round" />
+	</svg>
+</div>
 <div class="animated-prompt-box" id="AIBox">
 	<!-- <div class="animated-prompt-box mode-normal" id="AIBox"> Writing Mode -->
-	<div class="prompt-arrow prompt-arrow-left">
-		<svg width="16" height="16" viewbox="-2 0 16 16" fill="none">
-			<path d="M8 3.49219L3.49219 8L8 12.5078" stroke-linecap="round" />
-		</svg>
-	</div>
 	<div id="tabcontext">
 		<p>Switch mode</p>
 		<p id="TabBox">Tab</p>
@@ -773,11 +775,11 @@
 	<div id="context">PAGE CONTEXT</div>
 	<!-- <div id="writing">WRITING</div> -->
 	<input class="Prompt" id="prompt" placeholder="Ask Gemini anything..." />
-	<div class="prompt-arrow prompt-arrow-right">
-		<svg width="16" height="16" viewbox="-2 0 16 16" fill="none">
-			<path d="M3.49219 3.49219L8 8L3.49219 12.5078" stroke-linecap="round" />
-		</svg>
-	</div>
+</div>
+<div class="prompt-arrow prompt-arrow-right">
+	<svg width="16" height="16" viewbox="-2 0 16 16" fill="none">
+		<path d="M3 3.49219L7.50781 8L3 12.5078" stroke-linecap="round" />
+	</svg>
 </div>
 <div id="CloseOverlay"></div>
 <div id="AIBox" class="AnswerBox">
