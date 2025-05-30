@@ -8,13 +8,6 @@
 	</defs>
 </svg>
 <style>
-	@font-face {
-		font-family: 'Be Vietnam';
-		font-style: normal;
-		font-weight: 400;
-		src: url(https://fonts.gstatic.com/s/bevietnam/v10/FBVzdDflz-iPfoPuIC2iIqYn6A.woff2) format('woff2');
-		unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
-	}
 	/* Keyframes */
 	@keyframes stateAnimation {
 		0%,
@@ -87,10 +80,6 @@
 		}
 	}
 
-	.magnify-animation {
-		animation: magnifyIn 0.99s cubic-bezier(0.25, 0.46, 0.45, 0.94) forwards;
-	}
-
 	/* Buttons */
 	.show-button {
 		animation: growAndFade 0.2s ease-out forwards;
@@ -120,46 +109,6 @@
 
 	#ShowCurrencyORUnits {
 		justify-content: space-around;
-	}
-
-	/* Light/Dark themes */
-	.MenuBTNs:hover {
-		background: light-dark(#ccd9e1, rgb(255 255 255 / 40%));
-	}
-
-	.prompt-arrow:hover {
-		background: light-dark(#ccd9e1, #212430);
-	}
-
-	#copyAnswer svg path,
-	#NewAnswer svg path {
-		fill: light-dark(currentColor, white);
-	}
-
-	#copyAnswer svg rect,
-	#AnswerCopied svg path {
-		stroke: light-dark(currentColor, white);
-	}
-
-	#speak svg,
-	#SpeakingPause svg {
-		fill: light-dark(currentColor, #fff);
-	}
-
-	.prompt-arrow svg path {
-		stroke: light-dark(currentColor, white);
-	}
-
-	#avatar svg {
-		fill: light-dark(#e7edf1, #484b61);
-	}
-
-	#avatar svg path {
-		fill: light-dark(black, white);
-	}
-
-	a {
-		color: light-dark(inherit, #1e90ff);
 	}
 
 	.AI-BG-box button {
@@ -205,6 +154,46 @@
 		border: 1px solid #41455a;
 	}
 
+	/* Light/Dark themes */
+	.MenuBTNs:hover {
+		background: light-dark(#ccd9e1, rgb(255 255 255 / 40%));
+	}
+
+	.prompt-arrow:hover {
+		background: light-dark(#ccd9e1, #212430);
+	}
+
+	#copyAnswer svg path,
+	#NewAnswer svg path {
+		fill: light-dark(currentColor, white);
+	}
+
+	#copyAnswer svg rect,
+	#AnswerCopied svg path {
+		stroke: light-dark(currentColor, white);
+	}
+
+	#speak svg,
+	#SpeakingPause svg {
+		fill: light-dark(currentColor, #fff);
+	}
+
+	.prompt-arrow svg path {
+		stroke: light-dark(currentColor, white);
+	}
+
+	#avatar svg {
+		fill: light-dark(#e7edf1, #484b61);
+	}
+
+	#avatar svg path {
+		fill: light-dark(black, white);
+	}
+
+	a {
+		color: light-dark(inherit, #1e90ff);
+	}
+
 	/* Scrollbar */
 	::-webkit-scrollbar {
 		width: 7px;
@@ -215,19 +204,7 @@
 		background: light-dark(#d1dce3, #484d65);
 	}
 
-	:host {
-		all: initial;
-		color-scheme: light dark;
-		--color-OrangeORLilac: #9168c0;
-		--border-color-1: #9168c0; /* Writing Mode */
-		--border-color-2: #5684d1; /* Writing Mode */
-	}
-
 	/* Hover Effects */
-	.show {
-		display: inline-flex !important;
-	}
-
 	#dictate:hover,
 	#TopPause:hover,
 	.AI-BG-box button:hover {
@@ -271,8 +248,8 @@
 	#ShowCurrencyORUnits::after {
 		top: -10px;
 		content: '';
-		right: -10px;
 		left: -14px;
+		right: -10px;
 		height: 36px;
 		display: none;
 		position: absolute;
@@ -302,17 +279,13 @@
 	}
 
 	/* Containers */
-	#LoadBar {
-		margin-bottom: -4%;
-	}
-
 	#finalanswer-txt {
 		padding-top: 3%;
-		font-family: 'Be Vietnam', sans-serif;
 		font-size: 14px;
 		line-height: 19.6px;
 		font-style: normal;
-		color: #ffffff;
+		color: light-dark(black, #ffffff);
+		font-family: 'Be Vietnam', sans-serif;
 	}
 
 	/* Keep the AIMenu at the bottom right independent of the text response size */
@@ -418,39 +391,6 @@
 		background-color: rgb(87, 89, 89);
 	}
 
-	/* Arrow elements */
-	.prompt-arrow {
-		top: 15%;
-		width: 16px;
-		height: 16px;
-		padding: 8px;
-		cursor: pointer;
-		position: fixed;
-		z-index: 10000000;
-		border-radius: 8px;
-		display: inline-block;
-		transform: translateY(-50%);
-		background: light-dark(#e7edf1, #484d64);
-		border: 1px solid light-dark(#d0dce4, #41455a);
-	}
-
-	.prompt-arrow-left {
-		left: calc(50% - 40px - 20%);
-		display: none;
-	}
-
-	.prompt-arrow-right {
-		right: calc(50% - 45px - 20%);
-		display: none;
-	}
-
-	.prompt-arrow svg {
-		width: 16px;
-		height: 16px;
-		display: block;
-		cursor: pointer;
-	}
-
 	#AIBox.AnswerBox {
 		top: 23.4%;
 		left: 50.3%;
@@ -468,6 +408,39 @@
 		transform: translateX(-50%);
 		box-shadow: #767e8499 0px 0px 0px 10px;
 		background: light-dark(#e7edf1, rgb(37, 36, 53));
+	}
+
+	/* Arrow elements */
+	.prompt-arrow {
+		top: 15%;
+		width: 16px;
+		height: 16px;
+		padding: 8px;
+		cursor: pointer;
+		position: fixed;
+		z-index: 10000000;
+		border-radius: 8px;
+		display: inline-block;
+		transform: translateY(-50%);
+		background: light-dark(#e7edf1, #484d64);
+		border: 1px solid light-dark(#d0dce4, #41455a);
+	}
+
+	.prompt-arrow-left {
+		display: none;
+		left: calc(50% - 40px - 20%);
+	}
+
+	.prompt-arrow-right {
+		display: none;
+		right: calc(50% - 45px - 20%);
+	}
+
+	.prompt-arrow svg {
+		width: 16px;
+		height: 16px;
+		display: block;
+		cursor: pointer;
 	}
 
 	/* States and Animations */
@@ -532,9 +505,25 @@
 	}
 
 	/* Miscellaneous */
+	#msg-txt p {
+		margin: 0;
+	}
+
 	.GreyBar,
 	#CopyBTN > span {
 		color: #7b7d7f;
+	}
+
+	#LoadBar {
+		margin-bottom: -4%;
+	}
+
+	.show {
+		display: inline-flex !important;
+	}
+
+	.magnify-animation {
+		animation: magnifyIn 0.99s cubic-bezier(0.25, 0.46, 0.45, 0.94) forwards;
 	}
 
 	.feedback {
@@ -547,11 +536,27 @@
 		display: inline;
 	}
 
+	#context {
+		background-color: rgb(255, 122, 0);
+	}
+
+	#finalanswer-txt::selection {
+		background: light-dark(#c0d1f1, #53296f);
+	}
+
 	pre {
 		padding: 10px;
 		overflow: auto;
 		white-space: pre-wrap;
 		border: 1px solid #cccccc;
+	}
+
+	:host {
+		all: initial;
+		color-scheme: light dark;
+		--color-OrangeORLilac: #9168c0;
+		--border-color-1: #9168c0; /* Writing Mode */
+		--border-color-2: #5684d1; /* Writing Mode */
 	}
 
 	#LineEl {
@@ -561,6 +566,14 @@
 		position: fixed;
 		margin-left: -5%;
 		background-color: #41455a;
+	}
+
+	@font-face {
+		font-weight: 400;
+		font-style: normal;
+		font-family: 'Be Vietnam';
+		src: url(https://fonts.gstatic.com/s/bevietnam/v10/FBVzdDflz-iPfoPuIC2iIqYn6A.woff2) format('woff2');
+		unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
 	}
 
 	#prompt {
@@ -589,8 +602,20 @@
 		padding: 0.375rem 0.5rem;
 	}
 
-	#context {
-		background-color: rgb(255, 122, 0);
+	.header-bar {
+		left: 50%;
+		top: -25.5%;
+		display: none;
+		color: #ffffff;
+		font-size: 10px;
+		padding: 4px 8px;
+		position: absolute;
+		z-index: 9999999 !important;
+		background-color: #383a47;
+		border-top-left-radius: 6px;
+		transform: translateX(-50%);
+		border-top-right-radius: 6px;
+		font-family: 'Space Mono', monospace;
 	}
 
 	/* Mode-specific styles Writing Mode */
@@ -693,25 +718,6 @@
 		width: 100%;
 		height: 100%;
 		position: absolute;
-	}
-
-	.header-bar {
-		left: 50%;
-		top: -25.5%;
-		color: #ffffff;
-		font-size: 10px;
-		padding: 4px 8px;
-		position: absolute;
-		z-index: 9999999 !important;
-		background-color: #383a47;
-		border-top-left-radius: 6px;
-		transform: translateX(-50%);
-		border-top-right-radius: 6px;
-		font-family: 'Space Mono', monospace;
-	}
-
-	#msg-txt p {
-		margin: 0;
 	}
 </style>
 <div id="highlight_menu">
