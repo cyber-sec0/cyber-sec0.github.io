@@ -2,5 +2,6 @@
   "printWidth": 99999999999999999,
   "singleQuote": true,
   "proseWrap": "never",
+  "encoding": "utf-8",
   "useTabs":true
 }
