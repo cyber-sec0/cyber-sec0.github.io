@@ -191,6 +191,9 @@
 
 	#avatar svg path {
 		fill: light-dark(black, white);
+		transform: scale(0.8);
+		transform-origin: center;
+		transition: transform 0.3s ease;
 	}
 
 	a {
@@ -382,8 +385,8 @@
 	#highlight_menu {
 		color: white;
 		display: none;
-		z-index: 999999;
 		position: fixed;
+		z-index: 1000000;
 		font-size: 13.4px;
 		border-radius: 15px;
 		flex-direction: column;
@@ -401,7 +404,7 @@
 		max-height: 63%;
 		min-height: 24%;
 		position: fixed;
-		z-index: 999999;
+		z-index: 1000000;
 		overflow-y: auto;
 		overflow-x: clip;
 		border-radius: 15px;
