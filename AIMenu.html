@@ -158,12 +158,24 @@
 	}
 
 	/* Light/Dark themes */
+	a {
+		color: light-dark(inherit, #1e90ff);
+	}
+
 	.MenuBTNs:hover {
 		background: light-dark(#ccd9e1, rgb(255 255 255 / 40%));
 	}
 
 	.prompt-arrow:hover {
 		background: light-dark(#ccd9e1, #212430);
+	}
+
+	#avatar svg {
+		fill: light-dark(#e7edf1, #484b61);
+	}
+
+	.prompt-arrow svg path {
+		stroke: light-dark(currentColor, white);
 	}
 
 	#copyAnswer svg path,
@@ -181,14 +193,6 @@
 		fill: light-dark(currentColor, #fff);
 	}
 
-	.prompt-arrow svg path {
-		stroke: light-dark(currentColor, white);
-	}
-
-	#avatar svg {
-		fill: light-dark(#e7edf1, #484b61);
-	}
-
 	#avatar svg path {
 		fill: light-dark(black, white);
 		transform: scale(0.8);
@@ -196,8 +200,14 @@
 		transition: transform 0.3s ease;
 	}
 
-	a {
-		color: light-dark(inherit, #1e90ff);
+	.download-button:hover,
+	.close-button:hover {
+		background: light-dark(#f1f4f5, #2f3241);
+	}
+
+	.download-button svg path,
+	.close-button svg rect {
+		fill: light-dark(#bcbcbc, white);
 	}
 
 	/* Scrollbar */
@@ -769,9 +779,8 @@
 		height: 26px;
 		display: flex;
 		cursor: pointer;
-		border-radius: 50%;
+		border-radius: 8px;
 		align-items: center;
-		background-color: #fff;
 		justify-content: center;
 	}
 </style>
