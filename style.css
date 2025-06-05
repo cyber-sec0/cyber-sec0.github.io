@@ -74,7 +74,7 @@ td {
 }
 
 body {
-  background-image: url("https://cdn.glitch.me/0b33ddf5-89e2-4809-b2c9-7d3fc2ac722c/low.gif");
+  background-image: url("Imgs/low.gif");
   background-size: 100% 100%; /* Cover the entire viewport without cropping */
   font-family: Arial, sans-serif;
   background-position: center;
