@@ -214,6 +214,7 @@
 	}
 
 	::-webkit-scrollbar-thumb {
+		cursor: grab;
 		border-radius: 3px;
 		background: light-dark(#d1dce3, #484d65);
 	}
@@ -585,10 +586,31 @@
 	}
 
 	pre {
-		padding: 10px;
-		overflow: auto;
-		white-space: pre-wrap;
-		border: 1px solid #cccccc;
+		color: #f8f8f2;
+		border-radius: 8px;
+		background-color: light-dark(white, black);
+	}
+
+	code {
+		padding: 15px;
+		display: block;
+		overflow-x: auto;
+		font-family: 'Fira Code', 'Courier New', monospace;
+	}
+
+	pre code::-webkit-scrollbar {
+		width: 7px;
+		height: 7px;
+	}
+
+	pre code::-webkit-scrollbar-track {
+		background: transparent;
+	}
+
+	pre code::-webkit-scrollbar-thumb {
+		cursor: grab;
+		border-radius: 3px;
+		background: light-dark(#d1dce3, #484d65);
 	}
 
 	:host {
