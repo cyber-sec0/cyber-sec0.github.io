@@ -170,22 +170,20 @@
 		fill: light-dark(#e7edf1, #484b61);
 	}
 
-	.prompt-arrow svg path {
-		stroke: light-dark(currentColor, white);
-	}
-
-	#copyAnswer svg path,
-	#NewAnswer svg path {
-		fill: light-dark(currentColor, white);
-	}
-
 	#copyAnswer svg rect,
-	#AnswerCopied svg path {
+	#AnswerCopied svg path,
+	.prompt-arrow svg path,
+	#check,
+	#copy-code-rect {
 		stroke: light-dark(currentColor, white);
 	}
 
 	#speak svg,
-	#SpeakingPause svg {
+	#SpeakingPause svg,
+	#copyAnswer svg path,
+	#NewAnswer svg path,
+	#down-code,
+	#copy-code-path {
 		fill: light-dark(currentColor, #fff);
 	}
 
@@ -586,8 +584,8 @@
 	}
 
 	pre {
-		color: #f8f8f2;
 		border-radius: 8px;
+		color: light-dark(black, white);
 		background-color: light-dark(white, black);
 	}
 
@@ -611,6 +609,51 @@
 		cursor: grab;
 		border-radius: 3px;
 		background: light-dark(#d1dce3, #484d65);
+	}
+
+	.code-header {
+		padding-left: 8px;
+		display: flex;
+		align-items: center;
+		border-top-left-radius: 5px;
+		border-top-right-radius: 5px;
+		justify-content: space-between;
+		color: light-dark(#eee, white);
+		background: light-dark(#d0dbe3, #41455a);
+	}
+
+	.code-language {
+		font-size: 0.9em;
+		font-family: sans-serif;
+		text-transform: capitalize;
+		color: light-dark(#434d56, white);
+	}
+
+	.code-btn {
+		border: none;
+		cursor: pointer;
+		background: none;
+		border-radius: 3px;
+		transform: scale(0.9);
+		-webkit-transform-origin-y: bottom;
+	}
+
+	#icon-checkmark-template {
+		transform: scale(1);
+	}
+
+	.code-btn[data-action='download'] {
+		margin-right: 5px;
+	}
+
+	.code-btn:hover {
+		background: light-dark(#f2f4f6, #2e3241);
+	}
+
+	.code-block-wrapper > pre {
+		margin-top: 0 !important;
+		border-top-left-radius: 0 !important;
+		border-top-right-radius: 0 !important;
 	}
 
 	:host {
@@ -1018,3 +1061,33 @@
 		</div>
 	</div>
 </div>
+
+<template id="icon-copy-template">
+	<svg width="16" height="16" viewBox="0 0 16 16">
+		<path id="copy-code-path" fill-rule="evenodd" clip-rule="evenodd" d="M4.22727 4.5H3.5C2.39543 4.5 1.5 5.39543 1.5 6.5V12.5C1.5 13.6046 2.39543 14.5 3.5 14.5H9.5C10.6046 14.5 11.5 13.6046 11.5 12.5V11.7727H10.5V12.5C10.5 13.0523 10.0523 13.5 9.5 13.5H3.5C2.94772 13.5 2.5 13.0523 2.5 12.5V6.5C2.5 5.94772 2.94772 5.5 3.5 5.5H4.22727V4.5Z"></path>
+		<rect id="copy-code-rect" x="5" y="2" width="9" height="9" rx="1.5" fill="none"></rect>
+	</svg>
+</template>
+<template id="icon-download-template">
+	<svg id="down-code" width="16" height="16" viewBox="0 0 16 16" fill="none"><path fill-rule="evenodd" clip-rule="evenodd" d="M7.99468 2.03568C8.27083 2.03568 8.49468 2.25953 8.49468 2.53568V9.49166C8.49468 9.52273 8.53687 9.54374 8.55855 9.52148L10.5952 7.43046C10.7879 7.23264 11.1045 7.22847 11.3023 7.42115C11.5001 7.61382 11.5043 7.93038 11.3116 8.12819L9.08245 10.4168C8.49216 11.0229 7.51775 11.0211 6.92964 10.413L4.65768 8.06357C4.46571 7.86506 4.47102 7.54852 4.66952 7.35656C4.86803 7.1646 5.18457 7.1699 5.37653 7.36841L7.44934 9.51186C7.46518 9.52824 7.49468 9.51445 7.49468 9.49166V2.53568C7.49468 2.25953 7.71854 2.03568 7.99468 2.03568ZM3.01236 11.004C3.01236 10.7278 2.7885 10.504 2.51236 10.504C2.23622 10.504 2.01236 10.7278 2.01236 11.004V12.4643C2.01236 13.2928 2.68393 13.9643 3.51236 13.9643H12.5C13.3284 13.9643 14 13.2928 14 12.4643V11.004C14 10.7278 13.7761 10.504 13.5 10.504C13.2239 10.504 13 10.7278 13 11.004V12.4643C13 12.7405 12.7761 12.9643 12.5 12.9643H3.51236C3.23622 12.9643 3.01236 12.7405 3.01236 12.4643V11.004Z" /></svg>
+</template>
+<template id="icon-checkmark-template">
+	<svg width="16" height="16" viewBox="0 0 10 8" fill="none"><path id="check" d="M1.02063 3.68066L3.67635 6.65194L8.97935 1.34802" stroke-width="1.5" stroke-linecap="round" /></svg>
+</template>
+
+<template id="code-block-header-template">
+	<div class="code-header">
+		<span class="code-language">{{language}}</span>
+		<div>
+			<button class="code-btn" data-action="copy">
+				<svg width="16" height="16" viewBox="0 0 16 16">
+					<path id="copy-code-path" fill-rule="evenodd" clip-rule="evenodd" d="M4.22727 4.5H3.5C2.39543 4.5 1.5 5.39543 1.5 6.5V12.5C1.5 13.6046 2.39543 14.5 3.5 14.5H9.5C10.6046 14.5 11.5 13.6046 11.5 12.5V11.7727H10.5V12.5C10.5 13.0523 10.0523 13.5 9.5 13.5H3.5C2.94772 13.5 2.5 13.0523 2.5 12.5V6.5C2.5 5.94772 2.94772 5.5 3.5 5.5H4.22727V4.5Z"></path>
+					<rect id="copy-code-rect" x="5" y="2" width="9" height="9" rx="1.5" fill="none"></rect>
+				</svg>
+			</button>
+			<button class="code-btn" data-action="download" data-lang="{{language}}">
+				<svg id="down-code" width="16" height="16" viewBox="0 0 16 16" fill="none"><path fill-rule="evenodd" clip-rule="evenodd" d="M7.99468 2.03568C8.27083 2.03568 8.49468 2.25953 8.49468 2.53568V9.49166C8.49468 9.52273 8.53687 9.54374 8.55855 9.52148L10.5952 7.43046C10.7879 7.23264 11.1045 7.22847 11.3023 7.42115C11.5001 7.61382 11.5043 7.93038 11.3116 8.12819L9.08245 10.4168C8.49216 11.0229 7.51775 11.0211 6.92964 10.413L4.65768 8.06357C4.46571 7.86506 4.47102 7.54852 4.66952 7.35656C4.86803 7.1646 5.18457 7.1699 5.37653 7.36841L7.44934 9.51186C7.46518 9.52824 7.49468 9.51445 7.49468 9.49166V2.53568C7.49468 2.25953 7.71854 2.03568 7.99468 2.03568ZM3.01236 11.004C3.01236 10.7278 2.7885 10.504 2.51236 10.504C2.23622 10.504 2.01236 10.7278 2.01236 11.004V12.4643C2.01236 13.2928 2.68393 13.9643 3.51236 13.9643H12.5C13.3284 13.9643 14 13.2928 14 12.4643V11.004C14 10.7278 13.7761 10.504 13.5 10.504C13.2239 10.504 13 10.7278 13 11.004V12.4643C13 12.7405 12.7761 12.9643 12.5 12.9643H3.51236C3.23622 12.9643 3.01236 12.7405 3.01236 12.4643V11.004Z" /></svg>
+			</button>
+		</div>
+	</div>
+</template>
