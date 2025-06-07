@@ -294,8 +294,18 @@
 	}
 
 	/* Containers */
+	#msg {
+		padding-bottom: 7%;
+	}
+
+	#finalanswer {
+		display: flex;
+		overflow: hidden;
+		flex-direction: column;
+	}
+
 	#finalanswer-txt {
-		padding-top: 4%;
+		overflow-y: auto;
 		letter-spacing: 0.2px;
 		color: light-dark(black, #ffffff);
 		font-family: 'Google Sans', 'Roboto', sans-serif;
@@ -330,18 +340,19 @@
 		display: none;
 		margin-top: 1%;
 		margin-left: 19vw; /* Default: When .insert-to-page-btn is showing */
-		padding-bottom: 4%;
+		padding-top: 1.5%;
+		padding-bottom: 2%;
 	}
 
 	#AIMenu:has(> .insert-to-page-btn[style*='display: none']) {
 		/* When .insert-to-page-btn is hidden */
 		gap: 7%;
-		position: fixed;
 		margin-left: 27.4vw;
 	}
 
 	.AnswerContainer {
 		top: 7px;
+		height: 100%;
 		font: initial;
 		display: flex;
 		margin-left: 1%;
@@ -430,7 +441,6 @@
 		min-height: 24%;
 		position: fixed;
 		z-index: 1000000;
-		overflow-y: auto;
 		overflow-x: clip;
 		border-radius: 15px;
 		transform: translateX(-50%);
@@ -713,8 +723,8 @@
 
 	#ContainerGemini.BoxGemini {
 		position: fixed;
-		margin-top: 5.2%;
-		margin-left: -2vw;
+		margin-top: 1.2%;
+		margin-left: -2.3vw;
 	}
 
 	.AI-BG-box button img {
