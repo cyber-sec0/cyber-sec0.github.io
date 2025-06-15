@@ -1,82 +1,81 @@
 .container {
-  max-width: 800px;
-  margin-left: 25%;
-  padding: 20px;
-  background-color: rgba(255, 255, 255, 0.8);
-  border-radius: 10px;
-  box-shadow: 0 0 20px rgba(0, 0, 0, 0.1);
-  z-index: 1;
-  position: relative;
+	z-index: 1;
+	padding: 20px;
+	max-width: 800px;
+	margin-left: 25%;
+	position: relative;
+	border-radius: 10px;
+	background-color: rgba(255, 255, 255, 0.8);
+	box-shadow: 0 0 20px rgba(0, 0, 0, 0.1);
 }
 
 h1 {
-  text-align: center;
-  color: #333333;
+	color: #333333;
+	text-align: center;
 }
 
 table {
-  width: 100%;
-  border-collapse: collapse;
+	width: 100%;
+	border-collapse: collapse;
 }
 
-th,
-td {
-  padding: 5px; /* Reduced padding */
-  text-align: center;
-  border-bottom: 1px solid #dddddd;
+th, td {
+	padding: 5px;
+	text-align: center;
+	border-bottom: 1px solid #dddddd;
 }
 
 th {
-  background-color: #f2f2f2;
-  color: #333333;
+	color: #333333;
+	background-color: #f2f2f2;
 }
 
 td {
-  background-color: #ffffff;
-  color: #555555;
+	color: #555555;
+	background-color: #ffffff;
 }
 
 .crypto-icon {
-  width: 30px;
-  height: auto;
-  vertical-align: middle;
+	width: 30px;
+	height: auto;
+	vertical-align: middle;
 }
 
 .wallet-address {
-  font-family: monospace;
-  color: blue;
-  position: relative;
+	color: blue;
+	position: relative;
+	font-family: monospace;
 }
 
 .wallet-address:hover {
-  text-decoration: underline; /* Underline the text when hovered */
-  cursor: pointer; /* Change cursor to pointer on hover */
+	cursor: pointer;
+	text-decoration: underline;
 }
 
 .copy-message {
-  position: absolute; /* Change fixed to absolute */
-  background-color: rgba(0, 0, 0, 0.8);
-  color: white;
-  padding: 10px 20px;
-  border-radius: 5px;
-  display: none;
-  z-index: 999;
+	z-index: 999;
+	display: none;
+	color: white;
+	position: absolute;
+	border-radius: 5px;
+	padding: 10px 20px;
+	background-color: rgba(0, 0, 0, 0.8);
 }
 
 .crypto-text {
-  font-size: 12px;
-  color: #777777;
-  text-align: center;
+	font-size: 12px;
+	color: #777777;
+	text-align: center;
 }
 
-.ML {
-  /* display: none; */
+.ML,.PM {
+	/* display: none; */
 }
 
 body {
-  background-image: url("Imgs/low.gif");
-  background-size: 100% 100%; /* Cover the entire viewport without cropping */
-  font-family: Arial, sans-serif;
-  background-position: center;
-  user-select: none;
+	user-select: none;
+	background-size: 100% 100%;
+	background-position: center;
+	font-family: Arial, sans-serif;
+	background-image: url('Imgs/low.gif');
 }
