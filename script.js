@@ -7,7 +7,7 @@ document.querySelectorAll('.wallet-address').forEach(function (element) {
 
     copyMessage.style.display = 'block'; // Show copied message
     copyMessage.style.top = this.getBoundingClientRect().top - document.body.getBoundingClientRect().top - copyMessage.offsetHeight + 50 + 'px';
-    copyMessage.style.left = '37%';
+    copyMessage.style.left = '30%';
 
     setTimeout(function () {
       document.getElementById('copyMessage').style.display = 'none';
