@@ -6,8 +6,8 @@ document.querySelectorAll('.wallet-address').forEach(function (element) {
     const copyMessage = document.querySelector('#copyMessage'); // Get the next sibling which is the copy message
 
     copyMessage.style.display = 'block'; // Show copied message
-    copyMessage.style.top = this.getBoundingClientRect().top - document.body.getBoundingClientRect().top - copyMessage.offsetHeight + 55 + 'px';
-    copyMessage.style.left = '20%';
+    copyMessage.style.top = this.getBoundingClientRect().top - document.body.getBoundingClientRect().top - copyMessage.offsetHeight + 52 + 'px';
+    copyMessage.style.left = '22%';
 
     setTimeout(function () {
       document.getElementById('copyMessage').style.display = 'none';
