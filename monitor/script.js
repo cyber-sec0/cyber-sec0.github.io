@@ -1,256 +1,347 @@
-document.addEventListener('DOMContentLoaded', () => {
-	//Ensure the DOM is loaded before running the script.
-	if (!window.wcm_api) {
-		//Check if the Tampermonkey script's API is available.
-		document.getElementById('scriptWarning').classList.remove('hidden');
-		return; //Stop execution if the API bridge is not found.
+let editingKey = null; //Currently editing entry key
+
+//Storage interface - communicates with Tampermonkey script
+const storage = {
+	getValue: (key, defaultValue) => {
+		return new Promise((resolve) => {
+			const messageId = Date.now() + Math.random();
+			const handler = (event) => {
+				if (event.data.type === 'storage_response' && event.data.messageId === messageId) {
+					window.removeEventListener('message', handler);
+					resolve(event.data.value !== undefined ? event.data.value : defaultValue);
+				}
+			};
+			window.addEventListener('message', handler);
+			window.postMessage({ type: 'storage_get', key, messageId }, '*');
+		});
+	},
+	setValue: (key, value) => {
+		return new Promise((resolve) => {
+			const messageId = Date.now() + Math.random();
+			const handler = (event) => {
+				if (event.data.type === 'storage_response' && event.data.messageId === messageId) {
+					window.removeEventListener('message', handler);
+					resolve();
+				}
+			};
+			window.addEventListener('message', handler);
+			window.postMessage({ type: 'storage_set', key, value, messageId }, '*');
+		});
+	},
+	deleteValue: (key) => {
+		return new Promise((resolve) => {
+			const messageId = Date.now() + Math.random();
+			const handler = (event) => {
+				if (event.data.type === 'storage_response' && event.data.messageId === messageId) {
+					window.removeEventListener('message', handler);
+					resolve();
+				}
+			};
+			window.addEventListener('message', handler);
+			window.postMessage({ type: 'storage_delete', key, messageId }, '*');
+		});
+	},
+	listValues: () => {
+		return new Promise((resolve) => {
+			const messageId = Date.now() + Math.random();
+			const handler = (event) => {
+				if (event.data.type === 'storage_response' && event.data.messageId === messageId) {
+					window.removeEventListener('message', handler);
+					resolve(event.data.value || []);
+				}
+			};
+			window.addEventListener('message', handler);
+			window.postMessage({ type: 'storage_list', messageId }, '*');
+		});
+	},
+};
+
+//Initialize the page
+document.addEventListener('DOMContentLoaded', async () => {
+	await loadGlobalSettings();
+	await loadEntries();
+	setupEventListeners();
+});
+
+//Load global settings
+const loadGlobalSettings = async () => {
+	const intervalMs = await storage.getValue('check_interval_ms', 60000);
+	const hours = Math.floor(intervalMs / 3600000);
+	const minutes = Math.floor((intervalMs % 3600000) / 60000);
+	document.getElementById('checkIntervalHoursInput').value = hours;
+	document.getElementById('checkIntervalMinutesInput').value = minutes;
+};
+
+//Save global settings
+const saveGlobalSettings = async () => {
+	const hours = parseInt(document.getElementById('checkIntervalHoursInput').value) || 0;
+	const minutes = parseInt(document.getElementById('checkIntervalMinutesInput').value) || 0;
+	const totalMs = hours * 3600000 + minutes * 60000;
+	if (totalMs < 60000) {
+		alert('Minimum interval is 1 minute.');
+		return;
+	}
+	await storage.setValue('check_interval_ms', totalMs);
+	alert('Global settings saved!');
+};
+
+//Setup event listeners
+const setupEventListeners = () => {
+	document.getElementById('saveSettingsBtn').addEventListener('click', saveGlobalSettings);
+	document.getElementById('toggleFormBtn').addEventListener('click', toggleForm);
+	document.getElementById('comparisonMethodInput').addEventListener('change', toggleListFields);
+	document.getElementById('tokenEnabledCheckbox').addEventListener('change', toggleTokenFields);
+	document.getElementById('addBtn').addEventListener('click', addEntry);
+	document.getElementById('updateBtn').addEventListener('click', updateEntry);
+	document.getElementById('cancelBtn').addEventListener('click', cancelEdit);
+};
+
+//Toggle form visibility
+const toggleForm = () => {
+	const formContainer = document.getElementById('formContainer');
+	const toggleBtn = document.getElementById('toggleFormBtn');
+	if (formContainer.classList.contains('hidden')) {
+		formContainer.classList.remove('hidden');
+		toggleBtn.textContent = '−';
+		resetForm();
+	} else {
+		formContainer.classList.add('hidden');
+		toggleBtn.textContent = '+';
+		cancelEdit();
+	}
+};
+
+//Toggle list fields based on comparison method
+const toggleListFields = () => {
+	const method = document.getElementById('comparisonMethodInput').value;
+	const listFields = document.getElementById('listFields');
+	if (method === 'order' || method === 'new_items') {
+		listFields.classList.remove('hidden');
+	} else {
+		listFields.classList.add('hidden');
+	}
+};
+
+//Toggle token fields
+const toggleTokenFields = () => {
+	const enabled = document.getElementById('tokenEnabledCheckbox').checked;
+	const tokenFields = document.getElementById('tokenFields');
+	if (enabled) {
+		tokenFields.classList.remove('hidden');
+	} else {
+		tokenFields.classList.add('hidden');
+	}
+};
+
+//Reset form to default state
+const resetForm = () => {
+	document.getElementById('formTitle').textContent = 'Add New Site or Endpoint';
+	document.getElementById('nameInput').value = '';
+	document.getElementById('urlInput').value = '';
+	document.getElementById('websiteInput').value = '';
+	document.getElementById('comparisonMethodInput').value = 'text';
+	document.getElementById('selectorInput').value = '';
+	document.getElementById('idAttributeInput').value = '';
+	document.getElementById('tokenEnabledCheckbox').checked = false;
+	document.getElementById('tokenUrlInput').value = '';
+	document.getElementById('tokenSelectorInput').value = '';
+	document.getElementById('tokenAttributeInput').value = '';
+	document.getElementById('tokenRegExInput').value = '';
+	document.getElementById('tokenPlaceholderInput').value = '';
+	document.getElementById('advancedSelectorInput').value = '';
+	document.getElementById('headerInput').value = '';
+	document.getElementById('bodyInput').value = '';
+	document.getElementById('addBtn').classList.remove('hidden');
+	document.getElementById('updateBtn').classList.add('hidden');
+	document.getElementById('cancelBtn').classList.add('hidden');
+	toggleListFields();
+	toggleTokenFields();
+	editingKey = null;
+};
+
+//Add new entry
+const addEntry = async () => {
+	const data = getFormData();
+	if (!data) return;
+
+	const counter = await storage.getValue('Number', 0);
+	const newCounter = counter + 1;
+	const key = data.url + 'Counter' + newCounter;
+
+	await storage.setValue('Number', newCounter);
+	await storage.setValue(key, data);
+
+	alert('Entry added successfully!');
+	resetForm();
+	await loadEntries();
+};
+
+//Update existing entry
+const updateEntry = async () => {
+	if (!editingKey) return;
+
+	const data = getFormData();
+	if (!data) return;
+
+	await storage.setValue(editingKey, data);
+	alert('Entry updated successfully!');
+	resetForm();
+	await loadEntries();
+};
+
+//Cancel edit mode
+const cancelEdit = () => {
+	resetForm();
+	editingKey = null;
+};
+
+//Get form data
+const getFormData = () => {
+	const name = document.getElementById('nameInput').value.trim();
+	const url = document.getElementById('urlInput').value.trim();
+
+	if (!name || !url) {
+		alert('Name and URL are required.');
+		return null;
 	}
 
-	const checkIntervalHoursInput = document.getElementById('checkIntervalHoursInput');
-	const checkIntervalMinutesInput = document.getElementById('checkIntervalMinutesInput');
-	const saveSettingsBtn = document.getElementById('saveSettingsBtn');
-	const formContainer = document.getElementById('formContainer');
-	const formTitle = document.getElementById('formTitle');
-	const toggleFormBtn = document.getElementById('toggleFormBtn');
-	const nameInput = document.getElementById('nameInput');
-	const urlInput = document.getElementById('urlInput');
-	const websiteInput = document.getElementById('websiteInput');
-	const comparisonMethodInput = document.getElementById('comparisonMethodInput');
-	const listFields = document.getElementById('listFields');
-	const selectorInput = document.getElementById('selectorInput');
-	const idAttributeInput = document.getElementById('idAttributeInput');
-	const headersInput = document.getElementById('headersInput');
-	const bodyInput = document.getElementById('bodyInput');
-	const addBtn = document.getElementById('addBtn');
-	const sitesList = document.getElementById('sitesList');
-	const pausedSitesList = document.getElementById('pausedSitesList');
-	const buttonGroup = document.querySelector('.button-group');
-	const tokenEnabledCheckbox = document.getElementById('tokenEnabledCheckbox');
-	const tokenFields = document.getElementById('tokenFields');
-	const tokenUrlInput = document.getElementById('tokenUrlInput');
-	const tokenSelectorInput = document.getElementById('tokenSelectorInput');
-	const tokenAttributeInput = document.getElementById('tokenAttributeInput');
-	const tokenRegExInput = document.getElementById('tokenRegExInput');
-	const tokenPlaceholderInput = document.getElementById('tokenPlaceholderInput');
-
-	let currentlyEditingKey = null; //Holds the key of the site being edited.
-
-	const loadGlobalSettings = async () => {
-		//Fetches and displays global settings.
-		const settings = await window.wcm_api.getGlobalSettings();
-		const totalMs = settings.interval || 60000;
-		checkIntervalHoursInput.value = Math.floor(totalMs / 3600000);
-		checkIntervalMinutesInput.value = Math.floor((totalMs % 3600000) / 60000);
+	const data = {
+		name,
+		url,
+		website: document.getElementById('websiteInput').value.trim(),
+		comparisonMethod: document.getElementById('comparisonMethodInput').value,
+		selector: document.getElementById('advancedSelectorInput').value.trim(),
+		tokenEnabled: document.getElementById('tokenEnabledCheckbox').checked,
+		lastChecked: 0,
+		content: '',
+		isPaused: false,
 	};
 
-	saveSettingsBtn.addEventListener('click', async () => {
-		//Saves the global check interval.
-		const hours = parseInt(checkIntervalHoursInput.value, 10) || 0;
-		const minutes = parseInt(checkIntervalMinutesInput.value, 10) || 0;
-		const totalMs = hours * 3600000 + minutes * 60000;
-		if (totalMs >= 60000) {
-			await window.wcm_api.setGlobalSettings({ interval: totalMs });
-			alert(`Check interval saved to ${hours} hour(s) and ${minutes} minute(s).`);
-		} else {
-			alert('Please enter a total interval of at least 1 minute.');
+	//List-specific fields
+	if (data.comparisonMethod === 'order' || data.comparisonMethod === 'new_items') {
+		data.selector = document.getElementById('selectorInput').value.trim();
+		data.idAttribute = document.getElementById('idAttributeInput').value.trim();
+		if (!data.selector || !data.idAttribute) {
+			alert('CSS Selector and ID Attribute are required for list-based comparisons.');
+			return null;
 		}
-	});
+	}
 
-	const showForm = () => {
-		formContainer.classList.remove('hidden');
-		toggleFormBtn.textContent = '-';
-		toggleFormBtn.title = 'Hide form';
-	};
-	const hideForm = () => {
-		formContainer.classList.add('hidden');
-		toggleFormBtn.textContent = '+';
-		toggleFormBtn.title = 'Add new site';
-	};
-	toggleFormBtn.addEventListener('click', () => {
-		formContainer.classList.contains('hidden') ? (resetForm(), showForm()) : (hideForm(), resetForm());
-	}); //Toggle form visibility.
+	//Token fields
+	if (data.tokenEnabled) {
+		data.tokenUrl = document.getElementById('tokenUrlInput').value.trim();
+		data.tokenSelector = document.getElementById('tokenSelectorInput').value.trim();
+		data.tokenAttribute = document.getElementById('tokenAttributeInput').value.trim();
+		data.tokenRegEx = document.getElementById('tokenRegExInput').value.trim();
+		data.tokenPlaceholder = document.getElementById('tokenPlaceholderInput').value.trim();
 
-	comparisonMethodInput.addEventListener('change', () => {
-		listFields.classList.toggle('hidden', !['order', 'new_items'].includes(comparisonMethodInput.value));
-	}); //Show/hide list-specific fields.
-	tokenEnabledCheckbox.addEventListener('change', () => {
-		tokenFields.classList.toggle('hidden', !tokenEnabledCheckbox.checked);
-	}); //Show/hide token-specific fields.
-
-	const resetForm = () => {
-		//Clears the form fields for a new entry.
-		formTitle.textContent = 'Add New Site or Endpoint';
-		[nameInput, urlInput, websiteInput, selectorInput, idAttributeInput, headersInput, bodyInput, tokenUrlInput, tokenSelectorInput, tokenAttributeInput, tokenRegExInput, tokenPlaceholderInput].forEach((el) => (el.value = ''));
-		comparisonMethodInput.value = 'text';
-		tokenEnabledCheckbox.checked = false;
-		urlInput.readOnly = false;
-		addBtn.textContent = 'Add Site';
-		currentlyEditingKey = null;
-		listFields.classList.add('hidden');
-		tokenFields.classList.add('hidden');
-		document.getElementById('cancelBtn')?.remove();
-	};
-
-	addBtn.addEventListener('click', async () => {
-		//Handles adding or updating a site.
-		const name = nameInput.value.trim(),
-			url = urlInput.value.trim(),
-			website = websiteInput.value.trim();
-		const comparisonMethod = comparisonMethodInput.value,
-			selector = selectorInput.value.trim(),
-			idAttribute = idAttributeInput.value.trim();
-		const tokenEnabled = tokenEnabledCheckbox.checked,
-			tokenUrl = tokenUrlInput.value.trim(),
-			tokenSelector = tokenSelectorInput.value.trim();
-		const tokenAttribute = tokenAttributeInput.value.trim(),
-			tokenRegEx = tokenRegExInput.value.trim(),
-			tokenPlaceholder = tokenPlaceholderInput.value.trim();
-
-		if (!name || !url) {
-			alert('Name and Endpoint URL cannot be empty.');
-			return;
+		if (!data.tokenUrl || !data.tokenSelector || !data.tokenPlaceholder) {
+			alert('Token URL, CSS Selector, and Placeholder are required when token fetching is enabled.');
+			return null;
 		}
-		if (['order', 'new_items'].includes(comparisonMethod) && (!selector || !idAttribute)) {
-			alert('Selector and ID Attribute are required for this comparison method.');
-			return;
+	}
+
+	//Advanced fields
+	const headerText = document.getElementById('headerInput').value.trim();
+	if (headerText) {
+		try {
+			data.header = JSON.parse(headerText);
+		} catch (e) {
+			alert('Invalid JSON in Custom Headers field.');
+			return null;
 		}
-		if (tokenEnabled && (!tokenUrl || !tokenSelector || !tokenPlaceholder)) {
-			alert('Token Fetch URL, Selector, and Placeholder are required for Dynamic Token Fetching.');
-			return;
-		}
+	}
 
-		let headers = {};
-		if (headersInput.value.trim()) {
-			try {
-				headers = JSON.parse(headersInput.value.trim());
-			} catch (e) {
-				alert('Headers are not valid JSON.');
-				return;
-			}
-		}
-		const body = bodyInput.value.trim();
-		const data = { name, website, comparisonMethod, selector, idAttribute, header: headers, body, tokenEnabled, tokenUrl, tokenSelector, tokenAttribute, tokenRegEx, tokenPlaceholder, isPaused: false };
+	data.body = document.getElementById('bodyInput').value.trim();
 
-		if (currentlyEditingKey) {
-			//EDIT MODE
-			const allData = await window.wcm_api.getValues();
-			const existingData = allData[currentlyEditingKey] || {};
-			await window.wcm_api.setValue(currentlyEditingKey, { ...existingData, ...data });
-			alert(`"${name}" has been updated!`);
-		} else {
-			//ADD MODE
-			const { counter } = await window.wcm_api.getGlobalSettings();
-			const newCounter = counter + 1;
-			const key = `Counter${newCounter}${url}`;
-			const initialData = { ...data, content: '', lastChecked: 0 };
-			await window.wcm_api.setValue(key, initialData); //Save the new site's configuration.
-			await window.wcm_api.setGlobalSettings({ counter: newCounter }); //Increment the global counter.
-			window.wcm_api.initialFetch(key, initialData); //Let the script fetch initial content in the background.
-		}
-		hideForm();
-		resetForm();
-		loadSites();
-	});
+	return data;
+};
 
-	const loadSites = async () => {
-		//Fetches all site data and renders the lists.
-		sitesList.innerHTML = '';
-		pausedSitesList.innerHTML = ''; //Clear current lists.
-		document.getElementById('pausedSection').style.display = 'none';
+//Load and display entries
+const loadEntries = async () => {
+	const keys = await storage.listValues();
+	const entryList = document.getElementById('entryList');
+	entryList.innerHTML = '';
 
-		const allData = await window.wcm_api.getValues();
-		const sortedKeys = Object.keys(allData).sort((a, b) => (allData[a].name || '').localeCompare(allData[b].name || '')); //Sort alphabetically by name.
+	for (const key of keys) {
+		if (/^Number$|^I_am_a_Dev$|^check_interval_ms$|^lock_/.test(key)) continue;
 
-		for (const key of sortedKeys) {
-			const storedData = allData[key];
-			const url = key.replace(/Counter\d+/, '');
-			const li = document.createElement('li');
-			const isPaused = storedData.isPaused || false;
+		const data = await storage.getValue(key, {});
+		if (!data.name) continue;
 
-			let detailsHtml = `<strong>${storedData.name || url}</strong><small><span class="detail-label">Endpoint:</span> ${url}</small>`;
-			if (storedData.website && storedData.website !== url) {
-				detailsHtml += `<small><span class="detail-label">Opens:</span> ${storedData.website}</small>`;
-			}
-			if (storedData.comparisonMethod) {
-				detailsHtml += `<small><span class="detail-label">Method:</span> ${storedData.comparisonMethod.replace(/_/g, ' ')}</small>`;
-			}
-			if (['order', 'new_items'].includes(storedData.comparisonMethod) && storedData.selector) {
-				detailsHtml += `<small><span class="detail-label">Selector:</span> ${storedData.selector}</small>`;
-			}
-			if (storedData.tokenEnabled) {
-				detailsHtml += `<small><span class="detail-label">Token Fetching:</span> Enabled</small>`;
-			}
+		const li = document.createElement('li');
+		li.innerHTML = `
+            <div class="entry-details">
+                <strong>${escapeHtml(data.name)}</strong>
+                <small><span class="detail-label">URL:</span> ${escapeHtml(data.url || key.replace(/Counter\d+/, ''))}</small>
+                ${data.website ? `<small><span class="detail-label">Opens:</span> ${escapeHtml(data.website)}</small>` : ''}
+                <small><span class="detail-label">Method:</span> ${escapeHtml(data.comparisonMethod || 'text')}</small>
+                ${data.selector ? `<small><span class="detail-label">Selector:</span> ${escapeHtml(data.selector)}</small>` : ''}
+                ${data.isPaused ? '<small style="color: #ff9800;">⏸️ PAUSED</small>' : ''}
+                ${data.lastChecked ? `<small><span class="detail-label">Last Check:</span> ${new Date(data.lastChecked).toLocaleString()}</small>` : ''}
+            </div>
+            <div class="entry-actions">
+                <button class="action-btn" onclick="editEntry('${key}')" title="Edit">✏️</button>
+                <button class="action-btn" onclick="togglePause('${key}')" title="${data.isPaused ? 'Resume' : 'Pause'}">${data.isPaused ? '▶️' : '⏸️'}</button>
+                <button class="action-btn" onclick="deleteEntry('${key}')" title="Delete">🗑️</button>
+            </div>
+        `;
+		entryList.appendChild(li);
+	}
+};
 
-			li.innerHTML = `<div class="entry-details">${detailsHtml}</div>
-                <div class="entry-actions">
-                    <button class="action-btn pause-btn" title="${isPaused ? 'Resume' : 'Pause'}">${isPaused ? '▶️' : '⏸️'}</button>
-                    <button class="action-btn edit-btn" title="Edit">✏️</button>
-                    <button class="action-btn delete-btn" title="Delete">❌</button>
-                </div>`;
+//Edit entry
+window.editEntry = async (key) => {
+	const data = await storage.getValue(key, {});
+	if (!data.name) return;
 
-			li.querySelector('.pause-btn').addEventListener('click', async () => {
-				//Toggles the paused state of a site.
-				storedData.isPaused = !storedData.isPaused;
-				await window.wcm_api.setValue(key, storedData);
-				loadSites();
-			});
-			li.querySelector('.delete-btn').addEventListener('click', async () => {
-				//Deletes a site.
-				if (confirm(`Stop monitoring "${storedData.name || url}"?`)) {
-					await window.wcm_api.deleteValue(key);
-					loadSites();
-				}
-			});
-			li.querySelector('.edit-btn').addEventListener('click', () => {
-				//Populates the form to edit a site.
-				if (currentlyEditingKey && currentlyEditingKey !== key) {
-					alert('Please save or cancel the current edit before starting another.');
-					return;
-				}
-				showForm();
-				formTitle.textContent = `Editing: ${storedData.name}`;
-				nameInput.value = storedData.name || '';
-				urlInput.value = url;
-				urlInput.readOnly = true;
-				websiteInput.value = storedData.website || '';
-				comparisonMethodInput.value = storedData.comparisonMethod || 'text';
-				listFields.classList.toggle('hidden', !['order', 'new_items'].includes(comparisonMethodInput.value));
-				selectorInput.value = storedData.selector || '';
-				idAttributeInput.value = storedData.idAttribute || '';
-				tokenEnabledCheckbox.checked = storedData.tokenEnabled || false;
-				tokenFields.classList.toggle('hidden', !tokenEnabledCheckbox.checked);
-				tokenUrlInput.value = storedData.tokenUrl || '';
-				tokenSelectorInput.value = storedData.tokenSelector || '';
-				tokenAttributeInput.value = storedData.tokenAttribute || '';
-				tokenRegExInput.value = storedData.tokenRegEx || '';
-				tokenPlaceholderInput.value = storedData.tokenPlaceholder || '';
-				headersInput.value = JSON.stringify(storedData.header || {}, null, 2);
-				bodyInput.value = storedData.body || '';
-				currentlyEditingKey = key;
-				addBtn.textContent = 'Save Changes';
-				if (!document.getElementById('cancelBtn')) {
-					const cancelBtn = document.createElement('button');
-					cancelBtn.id = 'cancelBtn';
-					cancelBtn.textContent = 'Cancel';
-					cancelBtn.style.backgroundColor = '#555';
-					buttonGroup.appendChild(cancelBtn);
-					cancelBtn.addEventListener('click', () => {
-						hideForm();
-						resetForm();
-					});
-				}
-				window.scrollTo({ top: 0, behavior: 'smooth' });
-			});
+	editingKey = key;
+	document.getElementById('formTitle').textContent = 'Edit Entry';
+	document.getElementById('nameInput').value = data.name || '';
+	document.getElementById('urlInput').value = data.url || key.replace(/Counter\d+/, '');
+	document.getElementById('websiteInput').value = data.website || '';
+	document.getElementById('comparisonMethodInput').value = data.comparisonMethod || 'text';
+	document.getElementById('selectorInput').value = data.comparisonMethod === 'order' || data.comparisonMethod === 'new_items' ? data.selector || '' : '';
+	document.getElementById('idAttributeInput').value = data.idAttribute || '';
+	document.getElementById('tokenEnabledCheckbox').checked = data.tokenEnabled || false;
+	document.getElementById('tokenUrlInput').value = data.tokenUrl || '';
+	document.getElementById('tokenSelectorInput').value = data.tokenSelector || '';
+	document.getElementById('tokenAttributeInput').value = data.tokenAttribute || '';
+	document.getElementById('tokenRegExInput').value = data.tokenRegEx || '';
+	document.getElementById('tokenPlaceholderInput').value = data.tokenPlaceholder || '';
+	document.getElementById('advancedSelectorInput').value = data.comparisonMethod === 'text' ? data.selector || '' : '';
+	document.getElementById('headerInput').value = data.header ? JSON.stringify(data.header, null, 2) : '';
+	document.getElementById('bodyInput').value = data.body || '';
 
-			if (isPaused) {
-				//Append to the appropriate list.
-				pausedSitesList.appendChild(li);
-				document.getElementById('pausedSection').style.display = 'block';
-			} else {
-				sitesList.appendChild(li);
-			}
-		}
-	};
-	loadGlobalSettings(); //Initialize global settings fields.
-	loadSites(); //Initial load of all monitored sites.
-});
+	document.getElementById('addBtn').classList.add('hidden');
+	document.getElementById('updateBtn').classList.remove('hidden');
+	document.getElementById('cancelBtn').classList.remove('hidden');
+	document.getElementById('formContainer').classList.remove('hidden');
+	document.getElementById('toggleFormBtn').textContent = '−';
+
+	toggleListFields();
+	toggleTokenFields();
+};
+
+//Toggle pause state
+window.togglePause = async (key) => {
+	const data = await storage.getValue(key, {});
+	data.isPaused = !data.isPaused;
+	await storage.setValue(key, data);
+	await loadEntries();
+};
+
+//Delete entry
+window.deleteEntry = async (key) => {
+	if (confirm('Are you sure you want to delete this entry?')) {
+		await storage.deleteValue(key);
+		await loadEntries();
+	}
+};
+
+//Escape HTML for safe display
+const escapeHtml = (text) => {
+	const div = document.createElement('div');
+	div.textContent = text;
+	return div.innerHTML;
+};

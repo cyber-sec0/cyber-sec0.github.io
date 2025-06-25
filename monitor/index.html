@@ -4,13 +4,10 @@
 		<meta charset="UTF-8" />
 		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
 		<title>Website Monitor Settings</title>
-		<link rel="stylesheet" href="style.css" />
+		<link rel="stylesheet" href="styles.css" />
 	</head>
 	<body>
 		<div class="container">
-			<div id="scriptWarning" class="hidden">
-				<p><b>Warning:</b> The 'Website Changes Monitor' Tampermonkey script is not detected. This page will not function correctly without it. Please install or enable the script and reload the page.</p>
-			</div>
 			<h2>Website Monitor</h2>
 			<h4>GLOBAL SETTINGS</h4>
 			<div class="form-group">
@@ -27,7 +24,7 @@
 				<button id="saveSettingsBtn">Save Global Settings</button>
 			</div>
 			<div class="header-with-button">
-				<h3>ADD / EDIT</h3>
+				<h3>ADD</h3>
 				<button id="toggleFormBtn" title="Add new site">+</button>
 			</div>
 			<div id="formContainer" class="form-group hidden">
@@ -52,26 +49,28 @@
 				<div id="tokenFields" class="hidden">
 					<h4>Dynamic Token Settings</h4>
 					<label class="label-with-icon"><span>Token Fetch URL</span><span class="help-icon" title="The URL of the page where the script can find a fresh token.">?</span></label
-					><input type="text" id="tokenUrlInput" placeholder="Page containing the token" /> <label class="label-with-icon"><span>Token CSS Selector</span><span class="help-icon" title="The CSS selector to find the element containing the token on the fetch URL (e.g., 'script').">?</span></label
-					><input type="text" id="tokenSelectorInput" placeholder="e.g., input[name=nonce]" /> <label class="label-with-icon"><span>Token Regular Expression (Optional)</span><span class="help-icon" title="Use a RegEx to extract the token from the element's text content. The first capturing group ( ) will be used as the token.">?</span></label
-					><input type="text" id="tokenRegExInput" placeholder='"nonce":"([a-z0-9]+)"' /> <label class="label-with-icon"><span>Token Attribute (Optional)</span><span class="help-icon" title="The attribute of the token element to read (e.g., 'value'). This is ignored if a RegEx is provided.">?</span></label
-					><input type="text" id="tokenAttributeInput" placeholder="e.g., value." /> <label class="label-with-icon"><span>Placeholder in Body/Headers</span><span class="help-icon" title="A unique placeholder (e.g., %%NONCE%%) in your saved Body/Headers that will be replaced with the fresh token.">?</span></label
-					><input type="text" id="tokenPlaceholderInput" placeholder="e.g., %%NONCE%%" />
+					><input type="text" id="tokenUrlInput" placeholder="Page containing the token" /> <label class="label-with-icon"><span>Token CSS Selector</span><span class="help-icon" title="A CSS selector to find the element containing the token.">?</span></label
+					><input type="text" id="tokenSelectorInput" placeholder="Ex: input[name='_token'] or meta[name='csrf-token']" /> <label class="label-with-icon"><span>Token Attribute (Optional)</span><span class="help-icon" title="If the token is in an attribute (like 'value' or 'content'), specify it here. Leave blank if the token is in the element's text.">?</span></label
+					><input type="text" id="tokenAttributeInput" placeholder="Ex: value or content" /> <label class="label-with-icon"><span>Token RegEx (Optional)</span><span class="help-icon" title="A regular expression to extract the token from the element's text. Use parentheses to capture the token.">?</span></label
+					><input type="text" id="tokenRegExInput" placeholder="Ex: token:([a-zA-Z0-9]+)" /> <label class="label-with-icon"><span>Token Placeholder</span><span class="help-icon" title="The placeholder in your headers/body that will be replaced with the actual token.">?</span></label
+					><input type="text" id="tokenPlaceholderInput" placeholder="Ex: %%NONCE%% or {{TOKEN}}" />
 				</div>
 				<hr />
-				<label class="label-with-icon"><span>Headers (Optional)</span><span class="help-icon" title="Request headers in JSON format. Needed for some POST requests.">?</span></label
-				><textarea id="headersInput" placeholder='{ "Content-Type": "application/x-www-form-urlencoded" }'></textarea> <label class="label-with-icon"><span>Body (Optional)</span><span class="help-icon" title="Request body data. Providing this will make the request a POST.">?</span></label
-				><textarea id="bodyInput" placeholder="action=search&value=some_data"></textarea>
-				<div class="button-group"><button id="addBtn">Add Site</button></div>
-			</div>
-			<h3>Monitored Sites</h3>
-			<ul id="sitesList"></ul>
-			<div id="pausedSection" class="hidden">
-				<details open>
-					<summary>Paused Sites</summary>
-					<ul id="pausedSitesList"></ul>
+				<details>
+					<summary>Advanced Settings</summary>
+					<label class="label-with-icon"><span>CSS Selector (Optional)</span><span class="help-icon" title="A CSS selector to monitor only a specific part of the page. Leave blank to monitor the entire page.">?</span></label
+					><input type="text" id="advancedSelectorInput" placeholder="Ex: .content or #main" /> <label class="label-with-icon"><span>Custom Headers (Optional)</span><span class="help-icon" title="Custom HTTP headers in JSON format. Use for authentication or special requirements.">?</span></label
+					><textarea id="headerInput" placeholder='{"Authorization": "Bearer token", "X-Custom": "value"}'></textarea> <label class="label-with-icon"><span>POST Body (Optional)</span><span class="help-icon" title="Request body for POST requests. Leave blank for GET requests.">?</span></label
+					><textarea id="bodyInput" placeholder='{"key": "value"} or form data'></textarea>
 				</details>
+				<div class="button-group">
+					<button id="addBtn">Add Entry</button>
+					<button id="updateBtn" class="hidden">Update Entry</button>
+					<button id="cancelBtn" class="hidden">Cancel</button>
+				</div>
 			</div>
+			<h3>CURRENT ENTRIES</h3>
+			<ul id="entryList"></ul>
 		</div>
 		<script src="script.js"></script>
 	</body>
