@@ -58,6 +58,11 @@ const storage = {
 
 //Initialize the page
 document.addEventListener('DOMContentLoaded', async () => {
+	const scriptWarning = document.getElementById('scriptWarning');
+	if (scriptWarning) {
+		//Check if element exists before trying to access its classList
+		scriptWarning.classList.remove('hidden');
+	}
 	await loadGlobalSettings();
 	await loadEntries();
 	setupEventListeners();
