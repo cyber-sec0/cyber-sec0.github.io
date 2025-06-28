@@ -82,6 +82,7 @@ tr td {
 
 body {
 	user-select: none;
+	background-color: black;
 	background-size: 100% 100%;
 	background-position: center;
 	font-family: Arial, sans-serif;
