@@ -1,7 +1,189 @@
 <head>
 	<title>Website Monitor Settings</title>
 	<style>
-		body{font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Helvetica,Arial,sans-serif;background-color:#121212;color:#e0e0e0;margin:0;padding:2rem}.container{max-width:800px;margin:0 auto}h2,h3,h4{color:#bb86fc;border-bottom:2px solid #373737;padding-bottom:.5rem}h4{border-bottom:none;margin-bottom:.5rem}.header-with-button{display:flex;justify-content:space-between;align-items:center}.form-group{margin-top:1rem;margin-bottom:1.5rem;padding:1.5rem;background-color:#1e1e1e;border-radius:8px;border:1px solid #333}label{display:block;margin-bottom:.5rem;color:#a0a0a0}.label-with-icon{display:flex;align-items:center;gap:8px}.label-with-icon>label{margin-bottom:0;cursor:pointer;display:inline-block}.help-icon{cursor:help;font-style:normal;font-weight:700;display:inline-block;border-radius:50%;width:1.2em;height:1.2em;text-align:center;line-height:1.2em;background-color:#555;font-size:.8em}input,textarea,select{width:100%;background-color:#2c2c2c;color:#e0e0e0;border:1px solid #444;border-radius:4px;padding:.75rem;font-family:'Courier New',Courier,monospace;font-size:14px;margin-bottom:1rem}.interval-group{display:flex;gap:20px;align-items:center}.interval-group>div{display:flex;flex-direction:column}.interval-group input[type=number]{width:100px;margin-top:8px}input:read-only{background-color:#404040;}.hidden{display:none}textarea{min-height:100px;resize:vertical}.button-group{display:flex;gap:10px}button{background-color:#bb86fc;color:#121212;font-weight:700;border:none;border-radius:4px;padding:.75rem 1.5rem;cursor:pointer;transition:background-color .2s}ul{list-style:none;padding:0}li{background-color:#1e1e1e;border:1px solid #333;border-radius:4px;padding:1rem;margin-top:1rem;display:flex;justify-content:space-between;align-items:flex-start;transition: opacity 0.3s;}.entry-details{word-break:break-all;flex-grow:1}.entry-details strong{font-size:1.1em}.entry-details small{display:block;color:#a0a0a0;margin-top:4px}.entry-details .detail-label{color:#888;font-weight:700}.entry-actions{display:flex;gap:4px;margin-left:1rem}.action-btn{background:0 0;border:none;font-size:1.2rem;cursor:pointer;color:#a0a0a0;padding:2px 4px;border-radius:4px;}.action-btn:hover{background-color:#333}.help-text{font-size:12px;color:#888;margin-top:-1rem;margin-bottom:1rem;padding:.5rem;background-color:#222;border-radius:4px}#toggleFormBtn{font-size:1.5rem;width:40px;height:40px;padding:0;line-height:40px;text-align:center}details summary{cursor:pointer;font-size:1.2em;font-weight:700;}
+		body {
+			font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+			background-color: #121212;
+			color: #e0e0e0;
+			margin: 0;
+			padding: 2rem;
+		}
+		.container {
+			max-width: 800px;
+			margin: 0 auto;
+		}
+		h2,
+		h3,
+		h4 {
+			color: #bb86fc;
+			border-bottom: 2px solid #373737;
+			padding-bottom: 0.5rem;
+		}
+		h4 {
+			border-bottom: none;
+			margin-bottom: 0.5rem;
+		}
+		.header-with-button {
+			display: flex;
+			justify-content: space-between;
+			align-items: center;
+		}
+		.form-group {
+			margin-top: 1rem;
+			margin-bottom: 1.5rem;
+			padding: 1.5rem;
+			background-color: #1e1e1e;
+			border-radius: 8px;
+			border: 1px solid #333;
+		}
+		label {
+			display: block;
+			margin-bottom: 0.5rem;
+			color: #a0a0a0;
+		}
+		.label-with-icon {
+			display: flex;
+			align-items: center;
+			gap: 8px;
+		}
+		.label-with-icon > label {
+			margin-bottom: 0;
+			cursor: pointer;
+			display: inline-block;
+		}
+		.help-icon {
+			cursor: help;
+			font-style: normal;
+			font-weight: 700;
+			display: inline-block;
+			border-radius: 50%;
+			width: 1.2em;
+			height: 1.2em;
+			text-align: center;
+			line-height: 1.2em;
+			background-color: #555;
+			font-size: 0.8em;
+		}
+		input,
+		textarea,
+		select {
+			width: 100%;
+			background-color: #2c2c2c;
+			color: #e0e0e0;
+			border: 1px solid #444;
+			border-radius: 4px;
+			padding: 0.75rem;
+			font-family: 'Courier New', Courier, monospace;
+			font-size: 14px;
+			margin-bottom: 1rem;
+		}
+		.interval-group {
+			display: flex;
+			gap: 20px;
+			align-items: center;
+		}
+		.interval-group > div {
+			display: flex;
+			flex-direction: column;
+		}
+		.interval-group input[type='number'] {
+			width: 100px;
+			margin-top: 8px;
+		}
+		input:read-only {
+			background-color: #404040;
+		}
+		.hidden {
+			display: none;
+		}
+		textarea {
+			min-height: 100px;
+			resize: vertical;
+		}
+		.button-group {
+			display: flex;
+			gap: 10px;
+		}
+		button {
+			background-color: #bb86fc;
+			color: #121212;
+			font-weight: 700;
+			border: none;
+			border-radius: 4px;
+			padding: 0.75rem 1.5rem;
+			cursor: pointer;
+			transition: background-color 0.2s;
+		}
+		ul {
+			list-style: none;
+			padding: 0;
+		}
+		li {
+			background-color: #1e1e1e;
+			border: 1px solid #333;
+			border-radius: 4px;
+			padding: 1rem;
+			margin-top: 1rem;
+			display: flex;
+			justify-content: space-between;
+			align-items: flex-start;
+			transition: opacity 0.3s;
+		}
+		.entry-details {
+			word-break: break-all;
+			flex-grow: 1;
+		}
+		.entry-details strong {
+			font-size: 1.1em;
+		}
+		.entry-details small {
+			display: block;
+			color: #a0a0a0;
+			margin-top: 4px;
+		}
+		.entry-details .detail-label {
+			color: #888;
+			font-weight: 700;
+		}
+		.entry-actions {
+			display: flex;
+			gap: 4px;
+			margin-left: 1rem;
+		}
+		.action-btn {
+			background: 0 0;
+			border: none;
+			font-size: 1.2rem;
+			cursor: pointer;
+			color: #a0a0a0;
+			padding: 2px 4px;
+			border-radius: 4px;
+		}
+		.action-btn:hover {
+			background-color: #333;
+		}
+		.help-text {
+			font-size: 12px;
+			color: #888;
+			margin-top: -1rem;
+			margin-bottom: 1rem;
+			padding: 0.5rem;
+			background-color: #222;
+			border-radius: 4px;
+		}
+		#toggleFormBtn {
+			font-size: 1.5rem;
+			width: 40px;
+			height: 40px;
+			padding: 0;
+			line-height: 40px;
+			text-align: center;
+		}
+		details summary {
+			cursor: pointer;
+			font-size: 1.2em;
+			font-weight: 700;
+		}
 	</style>
 </head>
 <body>
@@ -10,17 +192,27 @@
 		<h4>GLOBAL SETTINGS</h4>
 		<div class="form-group">
 			<div class="interval-group">
-				<div><label for="checkIntervalHoursInput" class="label-with-icon"><span>Hours</span><span class="help-icon" title="Set the hours to wait between checks.">?</span></label><input type="number" id="checkIntervalHoursInput" min="0" value="0"></div>
-				<div><label for="checkIntervalMinutesInput" class="label-with-icon"><span>Minutes</span><span class="help-icon" title="Set the minutes to wait between checks. Minimum total is 1 minute.">?</span></label><input type="number" id="checkIntervalMinutesInput" min="0" value="1"></div>
+				<div>
+					<label for="checkIntervalHoursInput" class="label-with-icon"><span>Hours</span><span class="help-icon" title="Set the hours to wait between checks.">?</span></label
+					><input type="number" id="checkIntervalHoursInput" min="0" value="0" />
+				</div>
+				<div>
+					<label for="checkIntervalMinutesInput" class="label-with-icon"><span>Minutes</span><span class="help-icon" title="Set the minutes to wait between checks. Minimum total is 1 minute.">?</span></label
+					><input type="number" id="checkIntervalMinutesInput" min="0" value="1" />
+				</div>
 			</div>
 			<button id="saveSettingsBtn">Save Global Settings</button>
 		</div>
-		<div class="header-with-button"><h3>ADD</h3><button id="toggleFormBtn" title="Add new site">+</button></div>
+		<div class="header-with-button">
+			<h3>ADD</h3>
+			<button id="toggleFormBtn" title="Add new site">+</button>
+		</div>
 		<div id="formContainer" class="form-group hidden">
 			<h3 id="formTitle">Add New Site or Endpoint</h3>
-			<label class="label-with-icon"><span>Name</span><span class="help-icon" title="A nickname for this entry, for your reference.">?</span></label><input type="text" id="nameInput" placeholder="Ex: Movies 2024">
-			<label class="label-with-icon"><span>Endpoint URL</span><span class="help-icon" title="The specific URL the script will request to check for changes.">?</span></label><input type="text" id="urlInput" placeholder="URL to check for changes">
-			<label class="label-with-icon"><span>Website to Open (Optional)</span><span class="help-icon" title="If a change is detected, this URL will be opened. If blank, the Endpoint URL is used.">?</span></label><input type="text" id="websiteInput" placeholder="URL to open when a change occurs">
+			<label class="label-with-icon"><span>Name</span><span class="help-icon" title="A nickname for this entry, for your reference.">?</span></label
+			><input type="text" id="nameInput" placeholder="Ex: Movies 2024" /> <label class="label-with-icon"><span>Endpoint URL</span><span class="help-icon" title="The specific URL the script will request to check for changes.">?</span></label
+			><input type="text" id="urlInput" placeholder="URL to check for changes" /> <label class="label-with-icon"><span>Website to Open (Optional)</span><span class="help-icon" title="If a change is detected, this URL will be opened. If blank, the Endpoint URL is used.">?</span></label
+			><input type="text" id="websiteInput" placeholder="URL to open when a change occurs" />
 			<label class="label-with-icon"><span>Comparison Method</span><span class="help-icon" title="Choose how the script should detect changes.">?</span></label>
 			<select id="comparisonMethodInput">
 				<option value="text">Text Content (ignores HTML tags)</option>
@@ -28,22 +220,25 @@
 				<option value="new_items">New Items Only (in a list)</option>
 			</select>
 			<div id="listFields" class="hidden">
-				<label class="label-with-icon"><span>CSS Selector for List Items</span><span class="help-icon" title="A CSS selector to find all items in a list (e.g., 'li.post'). Required for list-based comparisons.">?</span></label><input type="text" id="selectorInput" placeholder="Ex: .post or li[data-script-id]">
-				<label class="label-with-icon"><span>Unique ID Attribute</span><span class="help-icon" title="An attribute on each list item that holds a unique ID (e.g., 'id' or 'data-id'). Required for list-based comparisons.">?</span></label><input type="text" id="idAttributeInput" placeholder="Ex: data-script-id or id">
+				<label class="label-with-icon"><span>CSS Selector for List Items</span><span class="help-icon" title="A CSS selector to find all items in a list (e.g., 'li.post'). Required for list-based comparisons.">?</span></label
+				><input type="text" id="selectorInput" placeholder="Ex: .post or li[data-script-id]" /> <label class="label-with-icon"><span>Unique ID Attribute</span><span class="help-icon" title="An attribute on each list item that holds a unique ID (e.g., 'id' or 'data-id'). Required for list-based comparisons.">?</span></label
+				><input type="text" id="idAttributeInput" placeholder="Ex: data-script-id or id" />
 			</div>
-			<hr>
-			<div class="label-with-icon"><input type="checkbox" id="tokenEnabledCheckbox" style="width: auto; margin-right: 8px;"> <label for="tokenEnabledCheckbox">Enable Dynamic Token Fetching</label> <span class="help-icon" title="Check this for sites that use temporary security tokens (nonces) that expire.">?</span></div>
+			<hr />
+			<div class="label-with-icon"><input type="checkbox" id="tokenEnabledCheckbox" style="width: auto; margin-right: 8px" /> <label for="tokenEnabledCheckbox">Enable Dynamic Token Fetching</label> <span class="help-icon" title="Check this for sites that use temporary security tokens (nonces) that expire.">?</span></div>
 			<div id="tokenFields" class="hidden">
 				<h4>Dynamic Token Settings</h4>
-				 <label class="label-with-icon"><span>Token Fetch URL</span><span class="help-icon" title="The URL of the page where the script can find a fresh token.">?</span></label><input type="text" id="tokenUrlInput" placeholder="Page containing the token">
-				 <label class="label-with-icon"><span>Token CSS Selector</span><span class="help-icon" title="The CSS selector to find the element containing the token on the fetch URL (e.g., 'script').">?</span></label><input type="text" id="tokenSelectorInput" placeholder="e.g., input[name=nonce] or script">
-				 <label class="label-with-icon"><span>Token Regular Expression (Optional)</span><span class="help-icon" title="Use a RegEx to extract the token from the element's text content. The first capturing group ( ) will be used as the token.">?</span></label><input type="text" id="tokenRegExInput" placeholder='"nonce":"([a-z0-9]+)"'>
-				 <label class="label-with-icon"><span>Token Attribute (Optional)</span><span class="help-icon" title="The attribute of the token element to read (e.g., 'value'). This is ignored if a RegEx is provided.">?</span></label><input type="text" id="tokenAttributeInput" placeholder="e.g., value.">
-				 <label class="label-with-icon"><span>Placeholder in Body/Headers</span><span class="help-icon" title="A unique placeholder (e.g., %%NONCE%%) in your saved Body/Headers that will be replaced with the fresh token.">?</span></label><input type="text" id="tokenPlaceholderInput" placeholder="e.g., %%NONCE%%">
+				<label class="label-with-icon"><span>Token Fetch URL</span><span class="help-icon" title="The URL of the page where the script can find a fresh token.">?</span></label
+				><input type="text" id="tokenUrlInput" placeholder="Page containing the token" /> <label class="label-with-icon"><span>Token CSS Selector</span><span class="help-icon" title="The CSS selector to find the element containing the token on the fetch URL (e.g., 'script').">?</span></label
+				><input type="text" id="tokenSelectorInput" placeholder="e.g., input[name=nonce] or script" /> <label class="label-with-icon"><span>Token Regular Expression (Optional)</span><span class="help-icon" title="Use a RegEx to extract the token from the element's text content. The first capturing group ( ) will be used as the token.">?</span></label
+				><input type="text" id="tokenRegExInput" placeholder='"nonce":"([a-z0-9]+)"' /> <label class="label-with-icon"><span>Token Attribute (Optional)</span><span class="help-icon" title="The attribute of the token element to read (e.g., 'value'). This is ignored if a RegEx is provided.">?</span></label
+				><input type="text" id="tokenAttributeInput" placeholder="e.g., value." /> <label class="label-with-icon"><span>Placeholder in Body/Headers</span><span class="help-icon" title="A unique placeholder (e.g., %%NONCE%%) in your saved Body/Headers that will be replaced with the fresh token.">?</span></label
+				><input type="text" id="tokenPlaceholderInput" placeholder="e.g., %%NONCE%%" />
 			</div>
-			<hr>
-			<label class="label-with-icon"><span>Headers (Optional)</span><span class="help-icon" title="Request headers in JSON format. Needed for some POST requests.">?</span></label><textarea id="headersInput" placeholder='{ "Content-Type": "application/x-www-form-urlencoded" }'></textarea>
-			<label class="label-with-icon"><span>Body (Optional)</span><span class="help-icon" title="Request body data. Providing this will make the request a POST.">?</span></label><textarea id="bodyInput" placeholder="action=search&value=some_data"></textarea>
+			<hr />
+			<label class="label-with-icon"><span>Headers (Optional)</span><span class="help-icon" title="Request headers in JSON format. Needed for some POST requests.">?</span></label
+			><textarea id="headersInput" placeholder='{ "Content-Type": "application/x-www-form-urlencoded" }'></textarea> <label class="label-with-icon"><span>Body (Optional)</span><span class="help-icon" title="Request body data. Providing this will make the request a POST.">?</span></label
+			><textarea id="bodyInput" placeholder="action=search&value=some_data"></textarea>
 			<div class="button-group"><button id="addBtn">Add Site</button></div>
 		</div>
 		<h3>Monitored Sites</h3>
@@ -57,167 +252,255 @@
 	</div>
 </body>
 <script>
-	    const checkIntervalHoursInput = document.getElementById('checkIntervalHoursInput');
-    const checkIntervalMinutesInput = document.getElementById('checkIntervalMinutesInput');
-    const saveSettingsBtn = document.getElementById('saveSettingsBtn');
-    const formContainer = document.getElementById('formContainer');
-    const formTitle = document.getElementById('formTitle');
-    const toggleFormBtn = document.getElementById('toggleFormBtn');
-    const nameInput = document.getElementById('nameInput');
-    const urlInput = document.getElementById('urlInput');
-    const websiteInput = document.getElementById('websiteInput');
-    const comparisonMethodInput = document.getElementById('comparisonMethodInput');
-    const listFields = document.getElementById('listFields');
-    const selectorInput = document.getElementById('selectorInput');
-    const idAttributeInput = document.getElementById('idAttributeInput');
-    const headersInput = document.getElementById('headersInput');
-    const bodyInput = document.getElementById('bodyInput');
-    const addBtn = document.getElementById('addBtn');
-    const sitesList = document.getElementById('sitesList');
-    const pausedSitesList = document.getElementById('pausedSitesList');
-    const buttonGroup = document.querySelector('.button-group');
-    const tokenEnabledCheckbox = document.getElementById('tokenEnabledCheckbox');
-    const tokenFields = document.getElementById('tokenFields');
-    const tokenUrlInput = document.getElementById('tokenUrlInput');
-    const tokenSelectorInput = document.getElementById('tokenSelectorInput');
-    const tokenAttributeInput = document.getElementById('tokenAttributeInput');
-    const tokenRegExInput = document.getElementById('tokenRegExInput');
-    const tokenPlaceholderInput = document.getElementById('tokenPlaceholderInput');
+	setTimeout(() => {
+		const checkIntervalHoursInput = document.getElementById('checkIntervalHoursInput');
+		const checkIntervalMinutesInput = document.getElementById('checkIntervalMinutesInput');
+		const saveSettingsBtn = document.getElementById('saveSettingsBtn');
+		const formContainer = document.getElementById('formContainer');
+		const formTitle = document.getElementById('formTitle');
+		const toggleFormBtn = document.getElementById('toggleFormBtn');
+		const nameInput = document.getElementById('nameInput');
+		const urlInput = document.getElementById('urlInput');
+		const websiteInput = document.getElementById('websiteInput');
+		const comparisonMethodInput = document.getElementById('comparisonMethodInput');
+		const listFields = document.getElementById('listFields');
+		const selectorInput = document.getElementById('selectorInput');
+		const idAttributeInput = document.getElementById('idAttributeInput');
+		const headersInput = document.getElementById('headersInput');
+		const bodyInput = document.getElementById('bodyInput');
+		const addBtn = document.getElementById('addBtn');
+		const sitesList = document.getElementById('sitesList');
+		const pausedSitesList = document.getElementById('pausedSitesList');
+		const buttonGroup = document.querySelector('.button-group');
+		const tokenEnabledCheckbox = document.getElementById('tokenEnabledCheckbox');
+		const tokenFields = document.getElementById('tokenFields');
+		const tokenUrlInput = document.getElementById('tokenUrlInput');
+		const tokenSelectorInput = document.getElementById('tokenSelectorInput');
+		const tokenAttributeInput = document.getElementById('tokenAttributeInput');
+		const tokenRegExInput = document.getElementById('tokenRegExInput');
+		const tokenPlaceholderInput = document.getElementById('tokenPlaceholderInput');
 
-    let currentlyEditingKey = null;
+		let currentlyEditingKey = null;
 
-    const loadGlobalSettings = () => {
-      const totalMs = window.gm_storage.getValue('check_interval_ms', 60000);
-      const hours = Math.floor(totalMs / 3600000);
-      const minutes = Math.floor((totalMs % 3600000) / 60000);
-      checkIntervalHoursInput.value = hours;
-      checkIntervalMinutesInput.value = minutes;
-    };
+		const loadGlobalSettings = () => {
+			const totalMs = window.gm_storage.getValue('check_interval_ms', 60000);
+			const hours = Math.floor(totalMs / 3600000);
+			const minutes = Math.floor((totalMs % 3600000) / 60000);
+			checkIntervalHoursInput.value = hours;
+			checkIntervalMinutesInput.value = minutes;
+		};
 
-    saveSettingsBtn.addEventListener('click', () => {
-      const hours = parseInt(checkIntervalHoursInput.value, 10) || 0;
-      const minutes = parseInt(checkIntervalMinutesInput.value, 10) || 0;
-      const totalMs = (hours * 3600000) + (minutes * 60000);
-      if (totalMs >= 60000) {
-        window.gm_storage.setValue('check_interval_ms', totalMs);
-        alert(`Check interval saved to ${hours} hour(s) and ${minutes} minute(s).`);
-      } else { alert('Please enter a total interval of at least 1 minute.'); }
-    });
+		saveSettingsBtn.addEventListener('click', () => {
+			const hours = parseInt(checkIntervalHoursInput.value, 10) || 0;
+			const minutes = parseInt(checkIntervalMinutesInput.value, 10) || 0;
+			const totalMs = hours * 3600000 + minutes * 60000;
+			if (totalMs >= 60000) {
+				window.gm_storage.setValue('check_interval_ms', totalMs);
+				alert(`Check interval saved to ${hours} hour(s) and ${minutes} minute(s).`);
+			} else {
+				alert('Please enter a total interval of at least 1 minute.');
+			}
+		});
 
-    const showForm = () => { formContainer.classList.remove('hidden'); toggleFormBtn.textContent = '-'; toggleFormBtn.title = 'Hide form'; };
-    const hideForm = () => { formContainer.classList.add('hidden'); toggleFormBtn.textContent = '+'; toggleFormBtn.title = 'Add new site'; };
+		const showForm = () => {
+			formContainer.classList.remove('hidden');
+			toggleFormBtn.textContent = '-';
+			toggleFormBtn.title = 'Hide form';
+		};
+		const hideForm = () => {
+			formContainer.classList.add('hidden');
+			toggleFormBtn.textContent = '+';
+			toggleFormBtn.title = 'Add new site';
+		};
 
-    toggleFormBtn.addEventListener('click', () => {
-      if (formContainer.classList.contains('hidden')) { resetForm(); showForm(); } else { hideForm(); resetForm(); }
-    });
+		toggleFormBtn.addEventListener('click', () => {
+			if (formContainer.classList.contains('hidden')) {
+				resetForm();
+				showForm();
+			} else {
+				hideForm();
+				resetForm();
+			}
+		});
 
-    comparisonMethodInput.addEventListener('change', () => {
-      listFields.classList.toggle('hidden', !['order', 'new_items'].includes(comparisonMethodInput.value));
-    });
+		comparisonMethodInput.addEventListener('change', () => {
+			listFields.classList.toggle('hidden', !['order', 'new_items'].includes(comparisonMethodInput.value));
+		});
 
-    tokenEnabledCheckbox.addEventListener('change', () => {
-      tokenFields.classList.toggle('hidden', !tokenEnabledCheckbox.checked);
-    });
+		tokenEnabledCheckbox.addEventListener('change', () => {
+			tokenFields.classList.toggle('hidden', !tokenEnabledCheckbox.checked);
+		});
 
-    const resetForm = () => {
-      formTitle.textContent = 'Add New Site or Endpoint';
-      [nameInput, urlInput, websiteInput, selectorInput, idAttributeInput, headersInput, bodyInput, tokenUrlInput, tokenSelectorInput, tokenAttributeInput, tokenRegExInput, tokenPlaceholderInput].forEach(el => el.value = '');
-      comparisonMethodInput.value = 'text'; tokenEnabledCheckbox.checked = false;
-      urlInput.readOnly = false; addBtn.textContent = 'Add Site'; currentlyEditingKey = null;
-      listFields.classList.add('hidden'); tokenFields.classList.add('hidden');
-      document.getElementById('cancelBtn')?.remove();
-    };
+		const resetForm = () => {
+			formTitle.textContent = 'Add New Site or Endpoint';
+			[nameInput, urlInput, websiteInput, selectorInput, idAttributeInput, headersInput, bodyInput, tokenUrlInput, tokenSelectorInput, tokenAttributeInput, tokenRegExInput, tokenPlaceholderInput].forEach((el) => (el.value = ''));
+			comparisonMethodInput.value = 'text';
+			tokenEnabledCheckbox.checked = false;
+			urlInput.readOnly = false;
+			addBtn.textContent = 'Add Site';
+			currentlyEditingKey = null;
+			listFields.classList.add('hidden');
+			tokenFields.classList.add('hidden');
+			document.getElementById('cancelBtn')?.remove();
+		};
 
-    addBtn.addEventListener('click', () => {
-      const name = nameInput.value.trim(); const url = urlInput.value.trim(); const website = websiteInput.value.trim();
-      const comparisonMethod = comparisonMethodInput.value; const selector = selectorInput.value.trim(); const idAttribute = idAttributeInput.value.trim();
-      const tokenEnabled = tokenEnabledCheckbox.checked; const tokenUrl = tokenUrlInput.value.trim(); const tokenSelector = tokenSelectorInput.value.trim();
-      const tokenAttribute = tokenAttributeInput.value.trim(); const tokenRegEx = tokenRegExInput.value.trim(); const tokenPlaceholder = tokenPlaceholderInput.value.trim();
+		addBtn.addEventListener('click', () => {
+			const name = nameInput.value.trim();
+			const url = urlInput.value.trim();
+			const website = websiteInput.value.trim();
+			const comparisonMethod = comparisonMethodInput.value;
+			const selector = selectorInput.value.trim();
+			const idAttribute = idAttributeInput.value.trim();
+			const tokenEnabled = tokenEnabledCheckbox.checked;
+			const tokenUrl = tokenUrlInput.value.trim();
+			const tokenSelector = tokenSelectorInput.value.trim();
+			const tokenAttribute = tokenAttributeInput.value.trim();
+			const tokenRegEx = tokenRegExInput.value.trim();
+			const tokenPlaceholder = tokenPlaceholderInput.value.trim();
 
-      if (!name || !url) { alert('Name and Endpoint URL cannot be empty.'); return; }
-      if (['order', 'new_items'].includes(comparisonMethod) && (!selector || !idAttribute)) { alert('Selector and ID Attribute are required for this comparison method.'); return; }
-      if (tokenEnabled && (!tokenUrl || !tokenSelector || !tokenPlaceholder)) { alert('Token Fetch URL, Selector, and Placeholder are required for Dynamic Token Fetching.'); return; }
+			if (!name || !url) {
+				alert('Name and Endpoint URL cannot be empty.');
+				return;
+			}
+			if (['order', 'new_items'].includes(comparisonMethod) && (!selector || !idAttribute)) {
+				alert('Selector and ID Attribute are required for this comparison method.');
+				return;
+			}
+			if (tokenEnabled && (!tokenUrl || !tokenSelector || !tokenPlaceholder)) {
+				alert('Token Fetch URL, Selector, and Placeholder are required for Dynamic Token Fetching.');
+				return;
+			}
 
-      let headers = {}; if (headersInput.value.trim()) { try { headers = JSON.parse(headersInput.value.trim()); } catch (e) { alert('Headers are not valid JSON.'); return; } }
-      const body = bodyInput.value.trim();
+			let headers = {};
+			if (headersInput.value.trim()) {
+				try {
+					headers = JSON.parse(headersInput.value.trim());
+				} catch (e) {
+					alert('Headers are not valid JSON.');
+					return;
+				}
+			}
+			const body = bodyInput.value.trim();
 
-      const data = { name, website, comparisonMethod, selector, idAttribute, header: headers, body, tokenEnabled, tokenUrl, tokenSelector, tokenAttribute, tokenRegEx, tokenPlaceholder, isPaused: false };
+			const data = { name, website, comparisonMethod, selector, idAttribute, header: headers, body, tokenEnabled, tokenUrl, tokenSelector, tokenAttribute, tokenRegEx, tokenPlaceholder, isPaused: false };
 
-      if (currentlyEditingKey) { //EDIT MODE
-        window.gm_storage.setValue(currentlyEditingKey, { ...window.gm_storage.getValue(currentlyEditingKey, {}), ...data });
-        alert(`"${name}" has been updated!`);
-      } else { //ADD MODE
-        const counter = window.gm_storage.getValue('Number', 0) + 1; const key = `Counter${counter}${url}`;
-        window.gm_storage.setValue(key, { ...data, content: '', lastChecked: 0 }); window.gm_storage.setValue('Number', counter);
-      }
-      hideForm(); resetForm(); loadSites();
-    });
+			if (currentlyEditingKey) {
+				//EDIT MODE
+				window.gm_storage.setValue(currentlyEditingKey, { ...window.gm_storage.getValue(currentlyEditingKey, {}), ...data });
+				alert(`"${name}" has been updated!`);
+			} else {
+				//ADD MODE
+				const counter = window.gm_storage.getValue('Number', 0) + 1;
+				const key = `Counter${counter}${url}`;
+				window.gm_storage.setValue(key, { ...data, content: '', lastChecked: 0 });
+				window.gm_storage.setValue('Number', counter);
+			}
+			hideForm();
+			resetForm();
+			loadSites();
+		});
 
-    const loadSites = () => {
-      sitesList.innerHTML = '';
-      pausedSitesList.innerHTML = '';
-      document.getElementById('pausedSection').style.display = 'none';
-      let pausedCount = 0;
+		const loadSites = () => {
+			sitesList.innerHTML = '';
+			pausedSitesList.innerHTML = '';
+			document.getElementById('pausedSection').style.display = 'none';
+			let pausedCount = 0;
 
-      window.gm_storage.listValues().forEach(key => {
-        if (/^Number$|^check_interval_ms$|^lock_/.test(key)) { return; }
-        const storedData = window.gm_storage.getValue(key, {}); const url = key.replace(/Counter\d+/, '');
-        const li = document.createElement('li');
-        const isPaused = storedData.isPaused || false;
-        li.style.opacity = isPaused ? '0.5' : '1';
+			window.gm_storage.listValues().forEach((key) => {
+				if (/^Number$|^check_interval_ms$|^lock_/.test(key)) {
+					return;
+				}
+				const storedData = window.gm_storage.getValue(key, {});
+				const url = key.replace(/Counter\d+/, '');
+				const li = document.createElement('li');
+				const isPaused = storedData.isPaused || false;
+				li.style.opacity = isPaused ? '0.5' : '1';
 
-        let detailsHtml = `<strong>${storedData.name||url}</strong><small><span class="detail-label">Endpoint:</span> ${url}</small>`;
-        if(storedData.website && storedData.website !== url) { detailsHtml += `<small><span class="detail-label">Opens:</span> ${storedData.website}</small>`; }
-        if(storedData.comparisonMethod) { detailsHtml += `<small><span class="detail-label">Method:</span> ${storedData.comparisonMethod.replace(/_/g, ' ')}</small>`; }
-        if(['order', 'new_items'].includes(storedData.comparisonMethod) && storedData.selector) { detailsHtml += `<small><span class="detail-label">Selector:</span> ${storedData.selector}</small>`; }
-        if(storedData.tokenEnabled) { detailsHtml += `<small><span class="detail-label">Token Fetching:</span> Enabled</small>`; }
+				let detailsHtml = `<strong>${storedData.name || url}</strong><small><span class="detail-label">Endpoint:</span> ${url}</small>`;
+				if (storedData.website && storedData.website !== url) {
+					detailsHtml += `<small><span class="detail-label">Opens:</span> ${storedData.website}</small>`;
+				}
+				if (storedData.comparisonMethod) {
+					detailsHtml += `<small><span class="detail-label">Method:</span> ${storedData.comparisonMethod.replace(/_/g, ' ')}</small>`;
+				}
+				if (['order', 'new_items'].includes(storedData.comparisonMethod) && storedData.selector) {
+					detailsHtml += `<small><span class="detail-label">Selector:</span> ${storedData.selector}</small>`;
+				}
+				if (storedData.tokenEnabled) {
+					detailsHtml += `<small><span class="detail-label">Token Fetching:</span> Enabled</small>`;
+				}
 
-        li.innerHTML = `<div class="entry-details">${detailsHtml}</div>
+				li.innerHTML = `<div class="entry-details">${detailsHtml}</div>
                                   <div class="entry-actions">
                                       <button class="action-btn pause-btn" title="${isPaused ? 'Resume' : 'Pause'}">${isPaused ? '▶️' : '⏸️'}</button>
                                       <button class="action-btn edit-btn" title="Edit">✏️</button>
                                       <button class="action-btn delete-btn" title="Delete">❌</button>
                                   </div>`;
 
-          li.querySelector('.pause-btn').addEventListener('click', () => {
-            const currentData = window.gm_storage.getValue(key, {});
-            currentData.isPaused = !currentData.isPaused;
-            window.gm_storage.setValue(key, currentData);
-            loadSites();
-          });
-          li.querySelector('.delete-btn').addEventListener('click', () => { if (confirm(`Stop monitoring "${storedData.name||url}"?`)) { window.gm_storage.deleteValue(key); loadSites(); }});
-          li.querySelector('.edit-btn').addEventListener('click', () => {
-            if (currentlyEditingKey && currentlyEditingKey !== key) { alert('Please save or cancel the current edit before starting another.'); return; }
-            showForm(); formTitle.textContent = `Editing: ${storedData.name}`;
-            nameInput.value = storedData.name || ''; urlInput.value = url; urlInput.readOnly = true;
-            websiteInput.value = storedData.website || '';
-            comparisonMethodInput.value = storedData.comparisonMethod || 'text';
-            listFields.classList.toggle('hidden', !['order', 'new_items'].includes(comparisonMethodInput.value));
-            selectorInput.value = storedData.selector || ''; idAttributeInput.value = storedData.idAttribute || '';
-            tokenEnabledCheckbox.checked = storedData.tokenEnabled || false; tokenFields.classList.toggle('hidden', !tokenEnabledCheckbox.checked);
-            tokenUrlInput.value = storedData.tokenUrl || ''; tokenSelectorInput.value = storedData.tokenSelector || '';
-            tokenAttributeInput.value = storedData.tokenAttribute || ''; tokenRegExInput.value = storedData.tokenRegEx || ''; tokenPlaceholderInput.value = storedData.tokenPlaceholder || '';
-            headersInput.value = JSON.stringify(storedData.header || {}, null, 2); bodyInput.value = storedData.body || '';
-            currentlyEditingKey = key; addBtn.textContent = 'Save Changes';
-            if (!document.getElementById('cancelBtn')) {
-              const cancelBtn = document.createElement('button'); cancelBtn.id = 'cancelBtn'; cancelBtn.textContent = 'Cancel'; buttonGroup.appendChild(cancelBtn);
-              cancelBtn.addEventListener('click', () => { hideForm(); resetForm(); });
-            }
-            window.scrollTo({ top: 0, behavior: 'smooth' });
-          });
+				li.querySelector('.pause-btn').addEventListener('click', () => {
+					const currentData = window.gm_storage.getValue(key, {});
+					currentData.isPaused = !currentData.isPaused;
+					window.gm_storage.setValue(key, currentData);
+					loadSites();
+				});
+				li.querySelector('.delete-btn').addEventListener('click', () => {
+					if (confirm(`Stop monitoring "${storedData.name || url}"?`)) {
+						window.gm_storage.deleteValue(key);
+						loadSites();
+					}
+				});
+				li.querySelector('.edit-btn').addEventListener('click', () => {
+					if (currentlyEditingKey && currentlyEditingKey !== key) {
+						alert('Please save or cancel the current edit before starting another.');
+						return;
+					}
+					showForm();
+					formTitle.textContent = `Editing: ${storedData.name}`;
+					nameInput.value = storedData.name || '';
+					urlInput.value = url;
+					urlInput.readOnly = true;
+					websiteInput.value = storedData.website || '';
+					comparisonMethodInput.value = storedData.comparisonMethod || 'text';
+					listFields.classList.toggle('hidden', !['order', 'new_items'].includes(comparisonMethodInput.value));
+					selectorInput.value = storedData.selector || '';
+					idAttributeInput.value = storedData.idAttribute || '';
+					tokenEnabledCheckbox.checked = storedData.tokenEnabled || false;
+					tokenFields.classList.toggle('hidden', !tokenEnabledCheckbox.checked);
+					tokenUrlInput.value = storedData.tokenUrl || '';
+					tokenSelectorInput.value = storedData.tokenSelector || '';
+					tokenAttributeInput.value = storedData.tokenAttribute || '';
+					tokenRegExInput.value = storedData.tokenRegEx || '';
+					tokenPlaceholderInput.value = storedData.tokenPlaceholder || '';
+					headersInput.value = JSON.stringify(storedData.header || {}, null, 2);
+					bodyInput.value = storedData.body || '';
+					currentlyEditingKey = key;
+					addBtn.textContent = 'Save Changes';
+					if (!document.getElementById('cancelBtn')) {
+						const cancelBtn = document.createElement('button');
+						cancelBtn.id = 'cancelBtn';
+						cancelBtn.textContent = 'Cancel';
+						buttonGroup.appendChild(cancelBtn);
+						cancelBtn.addEventListener('click', () => {
+							hideForm();
+							resetForm();
+						});
+					}
+					window.scrollTo({ top: 0, behavior: 'smooth' });
+				});
 
-          if (isPaused) {
-            pausedSitesList.appendChild(li);
-            pausedCount++;
-          } else {
-            sitesList.appendChild(li);
-          }
-        });
+				if (isPaused) {
+					pausedSitesList.appendChild(li);
+					pausedCount++;
+				} else {
+					sitesList.appendChild(li);
+				}
+			});
 
-        if (pausedCount > 0) {
-          document.getElementById('pausedSection').style.display = 'block';
-        }
-      };
-    loadGlobalSettings();
-    loadSites();
+			if (pausedCount > 0) {
+				document.getElementById('pausedSection').style.display = 'block';
+			}
+		};
+		loadGlobalSettings();
+		loadSites();
+	}, '2000');
 </script>
