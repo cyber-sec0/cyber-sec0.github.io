@@ -1,130 +1,58 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 	<head>
+		<meta charset="UTF-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+		<link rel="stylesheet" href="style.css" />
 		<title>Website Monitor Settings</title>
-		<style>
-			body {
-				font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
-				background-color: #121212;
-				color: #e0e0e0;
-				margin: 0;
-				padding: 2rem;
-			}
-			.container {
-				max-width: 800px;
-				margin: 0 auto;
-			}
-			h2,
-			h3,
-			h4 {
-				color: #bb86fc;
-				border-bottom: 2px solid #373737;
-				padding-bottom: 0.5rem;
-			}
-			h4 {
-				border-bottom: none;
-				margin-bottom: 0.5rem;
-			}
-			.form-group {
-				margin-top: 1rem;
-				margin-bottom: 1.5rem;
-				padding: 1.5rem;
-				background-color: #1e1e1e;
-				border-radius: 8px;
-				border: 1px solid #333;
-			}
-			label {
-				display: block;
-				margin-bottom: 0.5rem;
-				color: #a0a0a0;
-			}
-			.label-with-icon {
-				display: flex;
-				align-items: center;
-				gap: 8px;
-			}
-			.help-icon {
-				cursor: help;
-				background-color: #555;
-				border-radius: 50%;
-				width: 1.2em;
-				height: 1.2em;
-				text-align: center;
-				line-height: 1.2em;
-				font-size: 0.8em;
-			}
-			input,
-			textarea,
-			select {
-				width: 100%;
-				background-color: #2c2c2c;
-				color: #e0e0e0;
-				border: 1px solid #444;
-				border-radius: 4px;
-				padding: 0.75rem;
-				font-family: monospace;
-				margin-bottom: 1rem;
-			}
-			.hidden {
-				display: none;
-			}
-			button {
-				background-color: #bb86fc;
-				color: #121212;
-				font-weight: 700;
-				border: none;
-				border-radius: 4px;
-				padding: 0.75rem 1.5rem;
-				cursor: pointer;
-			}
-			.entry-details strong {
-				font-size: 1.1em;
-			}
-			.entry-details small {
-				display: block;
-				color: #a0a0a0;
-			}
-		</style>
 	</head>
 	<body>
 		<div class="container">
 			<h2>Website Monitor</h2>
-			<!-- Global Settings & Form Here -->
+			<!-- GLOBAL SETTINGS -->
+			<section class="form-group">
+				<label>Check Interval</label>
+				<div class="interval-group">
+					<input id="hours" type="number" min="0" placeholder="Hours" />
+					<input id="minutes" type="number" min="1" placeholder="Minutes" />
+				</div>
+				<button id="save-settings">Save</button>
+			</section>
+
+			<!-- ADD SITE -->
+			<button id="toggle-form">+</button>
+			<form id="site-form" class="hidden">
+				<input id="name" placeholder="Name" />
+				<input id="url" placeholder="Endpoint URL" />
+				<input id="opens" placeholder="Open URL (optional)" />
+				<select id="method">
+					<option value="text">Text</option>
+					<option value="order">Order</option>
+					<option value="new_items">New Items</option>
+				</select>
+				<div id="list-fields" class="hidden">
+					<input id="selector" placeholder="CSS Selector" />
+					<input id="id-attr" placeholder="ID Attribute" />
+				</div>
+				<label><input id="token-enabled" type="checkbox" /> Dynamic Token</label>
+				<div id="token-fields" class="hidden">
+					<input id="token-url" placeholder="Token URL" />
+					<input id="token-selector" placeholder="Token Selector" />
+					<input id="token-placeholder" placeholder="Placeholder" />
+				</div>
+				<textarea id="headers" placeholder="Headers JSON"></textarea>
+				<textarea id="body" placeholder="Body"></textarea>
+				<button id="add-site">Add Site</button>
+			</form>
+
+			<!-- LIST -->
 			<h3>Monitored Sites</h3>
-			<ul id="sitesList"></ul>
-			<div id="pausedSection">
-				<details>
-					<summary>Paused Sites</summary>
-					<ul id="pausedSitesList"></ul>
-				</details>
-			</div>
+			<ul id="sites"></ul>
+			<details id="paused">
+				<summary>Paused</summary>
+				<ul id="paused-sites"></ul>
+			</details>
 		</div>
-
-		<script>
-			document.addEventListener('DOMContentLoaded', () => {
-				// Settings Page JavaScript
-				const loadSites = () => {
-					// Load sites using GM_listValues/GM_getValue
-				};
-
-				const resetForm = () => {
-					// Reset form logic
-				};
-
-				// Event listeners for buttons/inputs
-				document.getElementById('saveSettingsBtn').addEventListener('click', saveGlobalSettings);
-				document.getElementById('addBtn').addEventListener('click', addOrUpdateSite);
-
-				loadSites();
-			});
-
-			function saveGlobalSettings() {
-				// Save settings using GM_setValue
-			}
-
-			function addOrUpdateSite() {
-				// Handle site configuration
-			}
-		</script>
+		<script src="settings.js"></script>
 	</body>
 </html>
