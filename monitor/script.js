@@ -17,7 +17,6 @@ setTimeout(() => {
 	const addBtn = document.getElementById('addBtn');
 	const sitesList = document.getElementById('sitesList');
 	const pausedSitesList = document.getElementById('pausedSitesList');
-	const buttonGroup = document.querySelector('.button-group');
 	const tokenEnabledCheckbox = document.getElementById('tokenEnabledCheckbox');
 	const tokenFields = document.getElementById('tokenFields');
 	const tokenUrlInput = document.getElementById('tokenUrlInput');
@@ -27,14 +26,6 @@ setTimeout(() => {
 	const tokenPlaceholderInput = document.getElementById('tokenPlaceholderInput');
 
 	let currentlyEditingKey = null;
-
-	const loadGlobalSettings = () => {
-		const totalMs = window.gm_storage.getValue('check_interval_ms', 60000);
-		const hours = Math.floor(totalMs / 3600000);
-		const minutes = Math.floor((totalMs % 3600000) / 60000);
-		checkIntervalHoursInput.value = hours;
-		checkIntervalMinutesInput.value = minutes;
-	};
 
 	saveSettingsBtn.addEventListener('click', () => {
 		const hours = parseInt(checkIntervalHoursInput.value, 10) || 0;
@@ -122,7 +113,7 @@ setTimeout(() => {
 			try {
 				headers = JSON.parse(headersInput.value.trim());
 			} catch (e) {
-				alert('Headers are not valid JSON.');
+				alert('Invalid JSON headers!');
 				return;
 			}
 		}
@@ -225,7 +216,7 @@ setTimeout(() => {
 					const cancelBtn = document.createElement('button');
 					cancelBtn.id = 'cancelBtn';
 					cancelBtn.textContent = 'Cancel';
-					buttonGroup.appendChild(cancelBtn);
+					document.querySelector('.button-group').appendChild(cancelBtn);
 					cancelBtn.addEventListener('click', () => {
 						hideForm();
 						resetForm();
@@ -246,6 +237,12 @@ setTimeout(() => {
 			document.getElementById('pausedSection').style.display = 'block';
 		}
 	};
-	loadGlobalSettings();
+
+	const totalMs = window.gm_storage.getValue('check_interval_ms', 60000);
+	const hours = Math.floor(totalMs / 3600000);
+	const minutes = Math.floor((totalMs % 3600000) / 60000);
+	checkIntervalHoursInput.value = hours;
+	checkIntervalMinutesInput.value = minutes;
+
 	loadSites();
 }, '2000');
