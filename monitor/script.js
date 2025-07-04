@@ -237,10 +237,20 @@ const loadSites = () => {
 	}
 };
 
-const totalMs = window.gm_storage.getValue('check_interval_ms', 60000);
-const hours = Math.floor(totalMs / 3600000);
-const minutes = Math.floor((totalMs % 3600000) / 60000);
-checkIntervalHoursInput.value = hours;
-checkIntervalMinutesInput.value = minutes;
+//This function waits for the userscript to create the gm_storage object
+function waitForStorage() {
+	if (window.gm_storage) {
+		//This code now runs only after gm_storage is ready
+		const totalMs = window.gm_storage.getValue('check_interval_ms', 60000);
+		const hours = Math.floor(totalMs / 3600000);
+		const minutes = Math.floor((totalMs % 3600000) / 60000);
+		checkIntervalHoursInput.value = hours;
+		checkIntervalMinutesInput.value = minutes;
 
-loadSites();
+		loadSites();
+	} else {
+		setTimeout(waitForStorage, 100); //Wait 100ms and check again
+	}
+}
+
+waitForStorage();
