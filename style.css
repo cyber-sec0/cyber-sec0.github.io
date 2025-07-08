@@ -80,6 +80,10 @@ tr td {
 	/* display: none; */
 }
 
+.mb-12 {
+	margin-top: -1.5rem;
+}
+
 body {
 	user-select: none;
 	background-color: black;
