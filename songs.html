@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>YouTube Switcher</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        html, body {
+            height: 100%;
+            overflow: hidden;
+        }
+        iframe {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            border: none;
+        }
+        #switchBtn {
+            position: fixed;
+            top: 20px;
+            right: 20px;
+            z-index: 1000;
+            padding: 12px 20px;
+            background: #ff0000;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 14px;
+            font-weight: bold;
+        }
+        #switchBtn:hover {
+            background: #cc0000;
+        }
+    </style>
+</head>
+<body>
+    <iframe id="videoFrame" src="https://www.youtube.com/embed/jfKfPfyJRdk" allowfullscreen></iframe>
+    <button id="switchBtn">Switch Video</button>
+
+    <script>
+        let currentVideo = 1; //1 = jfK video, 2 = mtX video
+        
+        window.onload = () => {
+            document.getElementById('switchBtn').onclick = () => {
+                const iframe = document.getElementById('videoFrame') || document.querySelector('iframe');
+                if (currentVideo === 1) {
+                    iframe.src = 'https://www.youtube.com/embed/mtXASss7EY0?autoplay=1';
+                    currentVideo = 2;
+                } else {
+                    iframe.src = 'https://www.youtube.com/embed/jfKfPfyJRdk';
+                    currentVideo = 1;
+                }
+            };
+        };
+    </script>
+</body>
+</html>
