@@ -43,7 +43,7 @@
     </style>
   </head>
   <body>
-    <iframe id="videoFrame" src="https://www.youtube.com/embed/jfKfPfyJRdk" allowfullscreen></iframe>
+    <iframe id="videoFrame" src="https://www.youtube.com/embed/jfKfPfyJRdk?autoplay=1" allowfullscreen></iframe>
     <button id="switchBtn">Switch Video</button>
     <script>
         let currentVideo = 1; //1 = jfK video, 2 = mtX video
@@ -55,7 +55,7 @@
                     iframe.src = 'https://www.youtube.com/embed/mtXASss7EY0?autoplay=1'; //名曲J-POPオルゴールメドレー - Relaxing Music Box 24/7 Live - 睡眠用BGM, 安眠用BGM, 快眠用BGM
                     currentVideo = 2;
                 } else {
-                    iframe.src = 'https://www.youtube.com/embed/jfKfPfyJRdk';
+                    iframe.src = 'https://www.youtube.com/embed/jfKfPfyJRdk?autoplay=1';
                     currentVideo = 1;
                 }
             };
