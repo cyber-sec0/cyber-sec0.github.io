@@ -1,51 +1,34 @@
 <!DOCTYPE html>
 <html>
-<head>
+  <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>YouTube Switcher</title>
     <link rel="icon" href="https://www.youtube.com/s/desktop/03f86491/img/favicon.ico">
     <style>
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
-        html, body {
-            height: 100%;
-            overflow: hidden;
-        }
-        iframe {
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            border: none;
-        }
-        #switchBtn {
-            position: fixed;
-            top: 20px;
-            right: 20px;
-            z-index: 1000;
-            padding: 12px 20px;
-            background: #ff0000;
-            color: white;
-            border: none;
-            border-radius: 5px;
-            cursor: pointer;
-            font-size: 14px;
-            font-weight: bold;
-        }
-        #switchBtn:hover {
-            background: #cc0000;
-        }
+      * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+      }
+
+      html,
+      body {
+        height: 100%;
+        overflow: hidden;
+      }
+
+      iframe {
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: calc(100% - 30px); //leave space for YouTube controls border: none; } #switchBtn { position: fixed; top: 20px; right: 20px; z-index: 1000; padding: 12px 20px; background: #ff0000; color: white; border: none; border-radius: 5px; cursor: pointer; font-size: 14px; font-weight: bold; } #switchBtn:hover { background: #cc0000; } 
     </style>
-</head>
-<body>
+  </head>
+  <body>
     <iframe id="videoFrame" src="https://www.youtube.com/embed/jfKfPfyJRdk" allowfullscreen></iframe>
     <button id="switchBtn">Switch Video</button>
-
     <script>
         let currentVideo = 1; //1 = jfK video, 2 = mtX video
         
