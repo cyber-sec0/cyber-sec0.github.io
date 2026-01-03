@@ -1,144 +1,144 @@
 <!DOCTYPE html>
 <html lang="en">
-	<head>
-		<meta charset="UTF-8" />
-		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
-		<title>Website Monitor Settings</title>
-		<link rel="icon" type="image/png" href="https://i.imgur.com/0kx5i9q.png" />
-		<link rel="stylesheet" href="style.css" />
-	</head>
-	<body>
-		<div class="container">
-			<h2>Website Monitor</h2>
-			<h4>GLOBAL SETTINGS</h4>
-			<div class="form-group">
-				<div class="interval-group">
-					<div>
-						<label for="checkIntervalHoursInput" class="label-with-icon">
-							<span>Hours</span>
-							<span class="help-icon" title="Set the hours to wait between checks.">?</span>
-						</label>
-						<input type="number" id="checkIntervalHoursInput" min="0" value="0" />
-					</div>
-					<div>
-						<label for="checkIntervalMinutesInput" class="label-with-icon">
-							<span>Minutes</span>
-							<span class="help-icon" title="Set the minutes to wait between checks. Minimum total is 1 minute.">?</span>
-						</label>
-						<input type="number" id="checkIntervalMinutesInput" min="0" value="1" />
-					</div>
-				</div>
-				<button id="saveSettingsBtn">Save Global Settings</button>
-			</div>
-			<div class="header-with-button">
-				<h3>ADD</h3>
-				<button id="toggleFormBtn" title="Add new site">+</button>
-			</div>
-			<div id="formContainer" class="form-group hidden">
-				<h3 id="formTitle">Add New Site or Endpoint</h3>
-				<label class="label-with-icon">
-					<span>Name</span>
-					<span class="help-icon" title="A nickname for this entry, for your reference.">?</span>
-				</label>
-				<input type="text" id="nameInput" placeholder="Ex: Movies 2024" />
-				<label class="label-with-icon">
-					<span>Endpoint URL</span>
-					<span class="help-icon" title="The specific URL the script will request to check for changes.">?</span>
-				</label>
-				<input type="text" id="urlInput" placeholder="URL to check for changes" />
-				<label class="label-with-icon">
-					<span>Website to Open (Optional)</span>
-					<span class="help-icon" title="If a change is detected, this URL will be opened. If blank, the Endpoint URL is used.">?</span>
-				</label>
-				<input type="text" id="websiteInput" placeholder="URL to open when a change occurs" />
-				<label class="label-with-icon">
-					<span>Comparison Method</span>
-					<span class="help-icon" title="Choose how the script should detect changes.">?</span>
-				</label>
-				<select id="comparisonMethodInput">
-					<option value="text">Text Content (ignores HTML tags)</option>
-					<option value="order">Element Order (for lists)</option>
-					<option value="new_items">New Items Only (in a list)</option>
-				</select>
-				<div id="listFields" class="hidden">
-					<label class="label-with-icon">
-						<span>CSS Selector for List Items</span>
-						<span class="help-icon" title="A CSS selector to find all items in a list (e.g., 'li.post'). Required for list-based comparisons.">?</span>
-					</label>
-					<input type="text" id="selectorInput" placeholder="Ex: .post or li[data-script-id]" />
-					<label class="label-with-icon">
-						<span>Unique ID Attribute</span>
-						<span class="help-icon" title="An attribute on each list item that holds a unique ID (e.g., 'id', 'data-id', 'href' or even 'innerText'). Required for list-based comparisons.">?</span>
-					</label>
-					<input type="text" id="idAttributeInput" placeholder="Ex: data-script-id or id" />
-				</div>
-				<hr />
-				<label class="label-with-icon">
-					<span>Notification Behavior</span>
-					<span class="help-icon" title="Choose what happens when a browser notification appears.">?</span>
-				</label>
-				<select id="notificationTypeInput">
-					<option value="">Disabled</option>
-					<option value="show">Show Content (Click to Open)</option>
-					<option value="copy">Click to Copy Changes (Clipboard)</option>
-				</select>
-				<div class="label-with-icon">
-					<input type="checkbox" id="tokenEnabledCheckbox" style="width: auto; margin-right: 8px; margin-top: 19px" />
-					<label for="tokenEnabledCheckbox">Enable Dynamic Token Fetching</label>
-					<span class="help-icon" title="Check this for sites that use temporary security tokens (nonces) that expire.">?</span>
-				</div>
-				<div id="tokenFields" class="hidden">
-					<h4>Dynamic Token Settings</h4>
-					<label class="label-with-icon">
-						<span>Token Fetch URL</span>
-						<span class="help-icon" title="The URL of the page where the script can find a fresh token.">?</span>
-					</label>
-					<input type="text" id="tokenUrlInput" placeholder="Page containing the token" />
-					<label class="label-with-icon">
-						<span>Token CSS Selector</span>
-						<span class="help-icon" title="The CSS selector to find the element containing the token on the fetch URL (e.g., 'script').">?</span>
-					</label>
-					<input type="text" id="tokenSelectorInput" placeholder="e.g., input[name=nonce] or script" />
-					<label class="label-with-icon">
-						<span>Token Regular Expression (Optional)</span>
-						<span class="help-icon" title="Use a RegEx to extract the token from the element's text content. The first capturing group ( ) will be used as the token.">?</span>
-					</label>
-					<input type="text" id="tokenRegExInput" placeholder='"nonce":"([a-z0-9]+)"' />
-					<label class="label-with-icon">
-						<span>Token Attribute (Optional)</span>
-						<span class="help-icon" title="The attribute of the token element to read (e.g., 'value'). This is ignored if a RegEx is provided.">?</span>
-					</label>
-					<input type="text" id="tokenAttributeInput" placeholder="e.g., value." />
-					<label class="label-with-icon">
-						<span>Placeholder in Body/Headers</span>
-						<span class="help-icon" title="A unique placeholder (e.g., %%NONCE%%) in your saved Body/Headers that will be replaced with the fresh token.">?</span>
-					</label>
-					<input type="text" id="tokenPlaceholderInput" placeholder="e.g., %%NONCE%%" />
-				</div>
-				<hr />
-				<label class="label-with-icon">
-					<span>Headers (Optional)</span>
-					<span class="help-icon" title="Request headers in JSON format. Needed for some POST requests.">?</span>
-				</label>
-				<textarea id="headersInput" placeholder='{ "accept": "*/*", "content-type": "application/x-www-form-urlencoded" }'></textarea>
-				<label class="label-with-icon">
-					<span>Body (Optional)</span>
-					<span class="help-icon" title="Request body data. Providing this will make the request a POST.">?</span>
-				</label>
-				<textarea id="bodyInput" placeholder="action=search&value=some_data"></textarea>
-				<div class="button-group">
-					<button id="addBtn">Add Site</button>
-				</div>
-			</div>
-			<h3>Monitored Sites</h3>
-			<ul id="sitesList"></ul>
-			<div id="pausedSection">
-				<details>
-					<summary>Paused Sites</summary>
-					<ul id="pausedSitesList"></ul>
-				</details>
-			</div>
-		</div>
-		<script src="script.js"></script>
-	</body>
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Website Monitor Settings</title>
+    <link rel="icon" type="image/png" href="https://i.imgur.com/0kx5i9q.png" />
+    <link rel="stylesheet" href="style.css" />
+  </head>
+  <body>
+    <div class="container">
+      <h2>Website Monitor</h2>
+      <h4>GLOBAL SETTINGS</h4>
+      <div class="form-group">
+        <div class="interval-group">
+          <div>
+            <label for="checkIntervalHoursInput" class="label-with-icon">
+              <span>Hours</span>
+              <span class="help-icon" title="Set the hours to wait between checks.">?</span>
+            </label>
+            <input type="number" id="checkIntervalHoursInput" min="0" value="0" />
+          </div>
+          <div>
+            <label for="checkIntervalMinutesInput" class="label-with-icon">
+              <span>Minutes</span>
+              <span class="help-icon" title="Set the minutes to wait between checks. Minimum total is 1 minute.">?</span>
+            </label>
+            <input type="number" id="checkIntervalMinutesInput" min="0" value="1" />
+          </div>
+        </div>
+        <button id="saveSettingsBtn">Save Global Settings</button>
+      </div>
+      <div class="header-with-button">
+        <h3>ADD</h3>
+        <button id="toggleFormBtn" title="Add new site">+</button>
+      </div>
+      <div id="formContainer" class="form-group hidden">
+        <h3 id="formTitle">Add New Site or Endpoint</h3>
+        <label class="label-with-icon">
+          <span>Name</span>
+          <span class="help-icon" title="A nickname for this entry, for your reference.">?</span>
+        </label>
+        <input type="text" id="nameInput" placeholder="Ex: Movies 2024" />
+        <label class="label-with-icon">
+          <span>Endpoint URL</span>
+          <span class="help-icon" title="The specific URL the script will request to check for changes.">?</span>
+        </label>
+        <input type="text" id="urlInput" placeholder="URL to check for changes" />
+        <label class="label-with-icon">
+          <span>Website to Open (Optional)</span>
+          <span class="help-icon" title="If a change is detected, this URL will be opened. If blank, the Endpoint URL is used.">?</span>
+        </label>
+        <input type="text" id="websiteInput" placeholder="URL to open when a change occurs" />
+        <label class="label-with-icon">
+          <span>Comparison Method</span>
+          <span class="help-icon" title="Choose how the script should detect changes.">?</span>
+        </label>
+        <select id="comparisonMethodInput">
+          <option value="text">Text Content (ignores HTML tags)</option>
+          <option value="order">Element Order (for lists)</option>
+          <option value="new_items">New Items Only (in a list)</option>
+        </select>
+        <div id="listFields" class="hidden">
+          <label class="label-with-icon">
+            <span>CSS Selector for List Items</span>
+            <span class="help-icon" title="A CSS selector to find all items in a list (e.g., 'li.post'). Required for list-based comparisons.">?</span>
+          </label>
+          <input type="text" id="selectorInput" placeholder="Ex: .post or li[data-script-id]" />
+          <label class="label-with-icon">
+            <span>Unique ID Attribute</span>
+            <span class="help-icon" title="An attribute on each list item that holds a unique ID (e.g., 'id', 'data-id', 'href' or even 'innerText'). Required for list-based comparisons.">?</span>
+          </label>
+          <input type="text" id="idAttributeInput" placeholder="Ex: data-script-id or id" />
+        </div>
+        <hr />
+        <label class="label-with-icon">
+          <span>Notification Behavior</span>
+          <span class="help-icon" title="Choose what happens when a website change is detected and when a browser notification appears (if enabled).">?</span>
+        </label>
+        <select id="notificationTypeInput">
+          <option value="">Disabled</option>
+          <option value="show">Show Content</option>
+          <option value="copy">Click to Copy Changes (Clipboard)</option>
+        </select>
+        <div class="label-with-icon">
+          <input type="checkbox" id="tokenEnabledCheckbox" style="width: auto; margin-right: 8px; margin-top: 19px;" />
+          <label for="tokenEnabledCheckbox">Enable Dynamic Token Fetching</label>
+          <span class="help-icon" title="Check this for sites that use temporary security tokens (nonces) that expire.">?</span>
+        </div>
+        <div id="tokenFields" class="hidden">
+          <h4>Dynamic Token Settings</h4>
+          <label class="label-with-icon">
+            <span>Token Fetch URL</span>
+            <span class="help-icon" title="The URL of the page where the script can find a fresh token.">?</span>
+          </label>
+          <input type="text" id="tokenUrlInput" placeholder="Page containing the token" />
+          <label class="label-with-icon">
+            <span>Token CSS Selector</span>
+            <span class="help-icon" title="The CSS selector to find the element containing the token on the fetch URL (e.g., 'script').">?</span>
+          </label>
+          <input type="text" id="tokenSelectorInput" placeholder="e.g., input[name=nonce] or script" />
+          <label class="label-with-icon">
+            <span>Token Regular Expression (Optional)</span>
+            <span class="help-icon" title="Use a RegEx to extract the token from the element's text content. The first capturing group ( ) will be used as the token.">?</span>
+          </label>
+          <input type="text" id="tokenRegExInput" placeholder='"nonce":"([a-z0-9]+)"' />
+          <label class="label-with-icon">
+            <span>Token Attribute (Optional)</span>
+            <span class="help-icon" title="The attribute of the token element to read (e.g., 'value'). This is ignored if a RegEx is provided.">?</span>
+          </label>
+          <input type="text" id="tokenAttributeInput" placeholder="e.g., value." />
+          <label class="label-with-icon">
+            <span>Placeholder in Body/Headers</span>
+            <span class="help-icon" title="A unique placeholder (e.g., %%NONCE%%) in your saved Body/Headers that will be replaced with the fresh token.">?</span>
+          </label>
+          <input type="text" id="tokenPlaceholderInput" placeholder="e.g., %%NONCE%%" />
+        </div>
+        <hr />
+        <label class="label-with-icon">
+          <span>Headers (Optional)</span>
+          <span class="help-icon" title="Request headers in JSON format. Needed for some POST requests.">?</span>
+        </label>
+        <textarea id="headersInput" placeholder='{ "accept": "*/*", "content-type": "application/x-www-form-urlencoded" }'></textarea>
+        <label class="label-with-icon">
+          <span>Body (Optional)</span>
+          <span class="help-icon" title="Request body data. Providing this will make the request a POST.">?</span>
+        </label>
+        <textarea id="bodyInput" placeholder="action=search&value=some_data"></textarea>
+        <div class="button-group">
+          <button id="addBtn">Add Site</button>
+        </div>
+      </div>
+      <h3>Monitored Sites</h3>
+      <ul id="sitesList"></ul>
+      <div id="pausedSection">
+        <details>
+          <summary>Paused Sites</summary>
+          <ul id="pausedSitesList"></ul>
+        </details>
+      </div>
+    </div>
+    <script src="script.js"></script>
+  </body>
 </html>

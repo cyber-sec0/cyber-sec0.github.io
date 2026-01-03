@@ -16,7 +16,6 @@ const bodyInput = document.getElementById('bodyInput');
 const addBtn = document.getElementById('addBtn');
 const sitesList = document.getElementById('sitesList');
 const pausedSitesList = document.getElementById('pausedSitesList');
-// CHANGED: We now use the dropdown input instead of the checkbox
 const notificationTypeInput = document.getElementById('notificationTypeInput');
 const tokenEnabledCheckbox = document.getElementById('tokenEnabledCheckbox');
 const tokenFields = document.getElementById('tokenFields');
@@ -74,8 +73,7 @@ const resetForm = () => {
 	[nameInput, urlInput, websiteInput, selectorInput, idAttributeInput, headersInput, bodyInput, tokenUrlInput, tokenSelectorInput, tokenAttributeInput, tokenRegExInput, tokenPlaceholderInput].forEach((el) => (el.value = ''));
 	comparisonMethodInput.value = 'text';
 	tokenEnabledCheckbox.checked = false;
-	// CHANGED: Reset the dropdown value
-	notificationTypeInput.value = '';
+	notificationTypeInput.value = ''; // Reset notification dropdown
 	urlInput.readOnly = false;
 	addBtn.textContent = 'Add Site';
 	currentlyEditingKey = null;
@@ -97,7 +95,6 @@ addBtn.addEventListener('click', () => {
 	const tokenAttribute = tokenAttributeInput.value.trim();
 	const tokenRegEx = tokenRegExInput.value.trim();
 	const tokenPlaceholder = tokenPlaceholderInput.value.trim();
-	// CHANGED: Get value from dropdown
 	const notifType = notificationTypeInput.value;
 
 	if (!name || !url) {
@@ -138,9 +135,8 @@ addBtn.addEventListener('click', () => {
 		tokenAttribute,
 		tokenRegEx,
 		tokenPlaceholder,
-		// CHANGED: Save notification logic based on dropdown
-		notification: !!notifType,
-		notificationType: notifType,
+		notification: !!notifType, // True if 'show' or 'copy' is selected
+		notificationType: notifType, // 'show', 'copy', or ''
 	};
 
 	if (currentlyEditingKey) {
@@ -186,7 +182,6 @@ const loadSites = () => {
 		if (storedData.tokenEnabled) {
 			detailsHtml += `<small><span class="detail-label">Token:</span> Enabled</small>`;
 		}
-		// CHANGED: Display label based on saved type
 		if (storedData.notification) {
 			const typeLabel = storedData.notificationType === 'copy' ? 'Copy' : 'Show';
 			detailsHtml += `<small><span class="detail-label">Notify:</span> ${typeLabel}</small>`;
@@ -235,7 +230,6 @@ const loadSites = () => {
 			tokenRegExInput.value = storedData.tokenRegEx || '';
 			tokenPlaceholderInput.value = storedData.tokenPlaceholder || '';
 
-			// CHANGED: Load saved data into the dropdown correctly
 			if (storedData.notification) {
 				notificationTypeInput.value = storedData.notificationType || 'show';
 			} else {
