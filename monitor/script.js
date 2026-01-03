@@ -16,6 +16,7 @@ const bodyInput = document.getElementById('bodyInput');
 const addBtn = document.getElementById('addBtn');
 const sitesList = document.getElementById('sitesList');
 const pausedSitesList = document.getElementById('pausedSitesList');
+const notificationCheckbox = document.getElementById('notificationCheckbox');
 const tokenEnabledCheckbox = document.getElementById('tokenEnabledCheckbox');
 const tokenFields = document.getElementById('tokenFields');
 const tokenUrlInput = document.getElementById('tokenUrlInput');
@@ -72,6 +73,7 @@ const resetForm = () => {
 	[nameInput, urlInput, websiteInput, selectorInput, idAttributeInput, headersInput, bodyInput, tokenUrlInput, tokenSelectorInput, tokenAttributeInput, tokenRegExInput, tokenPlaceholderInput].forEach((el) => (el.value = ''));
 	comparisonMethodInput.value = 'text';
 	tokenEnabledCheckbox.checked = false;
+	notificationCheckbox.checked = false;
 	urlInput.readOnly = false;
 	addBtn.textContent = 'Add Site';
 	currentlyEditingKey = null;
@@ -118,7 +120,23 @@ addBtn.addEventListener('click', () => {
 	}
 	const body = bodyInput.value.trim();
 
-	const data = { name, website, comparisonMethod, selector, idAttribute, header: headers, body, tokenEnabled, tokenUrl, tokenSelector, tokenAttribute, tokenRegEx, tokenPlaceholder, isPaused: false };
+	const data = {
+		name,
+		website,
+		comparisonMethod,
+		selector,
+		idAttribute,
+		header: headers,
+		body,
+		tokenEnabled,
+		tokenUrl,
+		tokenSelector,
+		tokenAttribute,
+		tokenRegEx,
+		tokenPlaceholder,
+		notification: notificationCheckbox.checked,
+		isPaused: false,
+	};
 
 	if (currentlyEditingKey) {
 		//EDIT MODE
@@ -165,6 +183,9 @@ const loadSites = () => {
 		if (storedData.tokenEnabled) {
 			detailsHtml += `<small><span class="detail-label">Token Fetching:</span> Enabled</small>`;
 		}
+		if (storedData.notification) {
+			detailsHtml += `<small><span class="detail-label">Notification:</span> On</small>`;
+		}
 
 		li.innerHTML = `<div class="entry-details">${detailsHtml}</div>
 							  <div class="entry-actions">
@@ -201,6 +222,7 @@ const loadSites = () => {
 			selectorInput.value = storedData.selector || '';
 			idAttributeInput.value = storedData.idAttribute || '';
 			tokenEnabledCheckbox.checked = storedData.tokenEnabled || false;
+			notificationCheckbox.checked = storedData.notification || false;
 			tokenFields.classList.toggle('hidden', !tokenEnabledCheckbox.checked);
 			tokenUrlInput.value = storedData.tokenUrl || '';
 			tokenSelectorInput.value = storedData.tokenSelector || '';
@@ -221,7 +243,10 @@ const loadSites = () => {
 					resetForm();
 				});
 			}
-			window.scrollTo({ top: 0, behavior: 'smooth' });
+			window.scrollTo({
+				top: 0,
+				behavior: 'smooth',
+			});
 		});
 
 		if (isPaused) {
