@@ -16,7 +16,7 @@ const bodyInput = document.getElementById('bodyInput');
 const addBtn = document.getElementById('addBtn');
 const sitesList = document.getElementById('sitesList');
 const pausedSitesList = document.getElementById('pausedSitesList');
-const notificationCheckbox = document.getElementById('notificationCheckbox');
+const notificationCheckbox = document.getElementById('notificationCheckbox'); // Added
 const tokenEnabledCheckbox = document.getElementById('tokenEnabledCheckbox');
 const tokenFields = document.getElementById('tokenFields');
 const tokenUrlInput = document.getElementById('tokenUrlInput');
@@ -73,7 +73,7 @@ const resetForm = () => {
 	[nameInput, urlInput, websiteInput, selectorInput, idAttributeInput, headersInput, bodyInput, tokenUrlInput, tokenSelectorInput, tokenAttributeInput, tokenRegExInput, tokenPlaceholderInput].forEach((el) => (el.value = ''));
 	comparisonMethodInput.value = 'text';
 	tokenEnabledCheckbox.checked = false;
-	notificationCheckbox.checked = false;
+	notificationCheckbox.checked = false; // Added: Reset notification box
 	urlInput.readOnly = false;
 	addBtn.textContent = 'Add Site';
 	currentlyEditingKey = null;
@@ -120,6 +120,7 @@ addBtn.addEventListener('click', () => {
 	}
 	const body = bodyInput.value.trim();
 
+	// Updated data object to include notification
 	const data = {
 		name,
 		website,
@@ -134,19 +135,19 @@ addBtn.addEventListener('click', () => {
 		tokenAttribute,
 		tokenRegEx,
 		tokenPlaceholder,
-		notification: notificationCheckbox.checked,
-		isPaused: false,
+		notification: notificationCheckbox.checked, // Save checkbox state
 	};
 
 	if (currentlyEditingKey) {
-		//EDIT MODE
-		window.gm_storage.setValue(currentlyEditingKey, { ...window.gm_storage.getValue(currentlyEditingKey, {}), ...data });
+		//EDIT MODE - Preserve existing isPaused state
+		const currentData = window.gm_storage.getValue(currentlyEditingKey, {});
+		window.gm_storage.setValue(currentlyEditingKey, { ...currentData, ...data });
 		alert(`"${name}" has been updated!`);
 	} else {
-		//ADD MODE
+		//ADD MODE - Default isPaused to false
 		const counter = window.gm_storage.getValue('Number', 0) + 1;
 		const key = `Counter${counter}${url}`;
-		window.gm_storage.setValue(key, { ...data, content: '', lastChecked: 0 });
+		window.gm_storage.setValue(key, { ...data, isPaused: false, content: '', lastChecked: 0 });
 		window.gm_storage.setValue('Number', counter);
 	}
 	hideForm();
@@ -183,16 +184,17 @@ const loadSites = () => {
 		if (storedData.tokenEnabled) {
 			detailsHtml += `<small><span class="detail-label">Token Fetching:</span> Enabled</small>`;
 		}
+		// Added display for Notification status
 		if (storedData.notification) {
 			detailsHtml += `<small><span class="detail-label">Notification:</span> On</small>`;
 		}
 
 		li.innerHTML = `<div class="entry-details">${detailsHtml}</div>
-							  <div class="entry-actions">
-								  <button class="action-btn pause-btn" title="${isPaused ? 'Resume' : 'Pause'}">${isPaused ? '▶️' : '⏸️'}</button>
-								  <button class="action-btn edit-btn" title="Edit">✏️</button>
-								  <button class="action-btn delete-btn" title="Delete">❌</button>
-							  </div>`;
+                              <div class="entry-actions">
+                                  <button class="action-btn pause-btn" title="${isPaused ? 'Resume' : 'Pause'}">${isPaused ? '▶️' : '⏸️'}</button>
+                                  <button class="action-btn edit-btn" title="Edit">✏️</button>
+                                  <button class="action-btn delete-btn" title="Delete">❌</button>
+                              </div>`;
 
 		li.querySelector('.pause-btn').addEventListener('click', () => {
 			const currentData = window.gm_storage.getValue(key, {});
@@ -222,7 +224,7 @@ const loadSites = () => {
 			selectorInput.value = storedData.selector || '';
 			idAttributeInput.value = storedData.idAttribute || '';
 			tokenEnabledCheckbox.checked = storedData.tokenEnabled || false;
-			notificationCheckbox.checked = storedData.notification || false;
+			notificationCheckbox.checked = storedData.notification || false; // Added: Load saved state
 			tokenFields.classList.toggle('hidden', !tokenEnabledCheckbox.checked);
 			tokenUrlInput.value = storedData.tokenUrl || '';
 			tokenSelectorInput.value = storedData.tokenSelector || '';
