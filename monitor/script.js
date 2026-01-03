@@ -16,7 +16,7 @@ const bodyInput = document.getElementById('bodyInput');
 const addBtn = document.getElementById('addBtn');
 const sitesList = document.getElementById('sitesList');
 const pausedSitesList = document.getElementById('pausedSitesList');
-const notificationCheckbox = document.getElementById('notificationCheckbox'); // Added
+const notificationTypeInput = document.getElementById('notificationTypeInput');
 const tokenEnabledCheckbox = document.getElementById('tokenEnabledCheckbox');
 const tokenFields = document.getElementById('tokenFields');
 const tokenUrlInput = document.getElementById('tokenUrlInput');
@@ -73,7 +73,7 @@ const resetForm = () => {
 	[nameInput, urlInput, websiteInput, selectorInput, idAttributeInput, headersInput, bodyInput, tokenUrlInput, tokenSelectorInput, tokenAttributeInput, tokenRegExInput, tokenPlaceholderInput].forEach((el) => (el.value = ''));
 	comparisonMethodInput.value = 'text';
 	tokenEnabledCheckbox.checked = false;
-	notificationCheckbox.checked = false; // Added: Reset notification box
+	notificationTypeInput.value = ''; // Reset notification dropdown
 	urlInput.readOnly = false;
 	addBtn.textContent = 'Add Site';
 	currentlyEditingKey = null;
@@ -95,6 +95,7 @@ addBtn.addEventListener('click', () => {
 	const tokenAttribute = tokenAttributeInput.value.trim();
 	const tokenRegEx = tokenRegExInput.value.trim();
 	const tokenPlaceholder = tokenPlaceholderInput.value.trim();
+	const notifType = notificationTypeInput.value;
 
 	if (!name || !url) {
 		alert('Name and Endpoint URL cannot be empty.');
@@ -120,7 +121,6 @@ addBtn.addEventListener('click', () => {
 	}
 	const body = bodyInput.value.trim();
 
-	// Updated data object to include notification
 	const data = {
 		name,
 		website,
@@ -135,16 +135,17 @@ addBtn.addEventListener('click', () => {
 		tokenAttribute,
 		tokenRegEx,
 		tokenPlaceholder,
-		notification: notificationCheckbox.checked, // Save checkbox state
+		notification: !!notifType, // True if 'show' or 'copy' is selected
+		notificationType: notifType, // 'show', 'copy', or ''
 	};
 
 	if (currentlyEditingKey) {
-		//EDIT MODE - Preserve existing isPaused state
+		//EDIT MODE
 		const currentData = window.gm_storage.getValue(currentlyEditingKey, {});
 		window.gm_storage.setValue(currentlyEditingKey, { ...currentData, ...data });
 		alert(`"${name}" has been updated!`);
 	} else {
-		//ADD MODE - Default isPaused to false
+		//ADD MODE
 		const counter = window.gm_storage.getValue('Number', 0) + 1;
 		const key = `Counter${counter}${url}`;
 		window.gm_storage.setValue(key, { ...data, isPaused: false, content: '', lastChecked: 0 });
@@ -178,15 +179,13 @@ const loadSites = () => {
 		if (storedData.comparisonMethod) {
 			detailsHtml += `<small><span class="detail-label">Method:</span> ${storedData.comparisonMethod.replace(/_/g, ' ')}</small>`;
 		}
-		if (['order', 'new_items'].includes(storedData.comparisonMethod) && storedData.selector) {
-			detailsHtml += `<small><span class="detail-label">Selector:</span> ${storedData.selector}</small>`;
-		}
 		if (storedData.tokenEnabled) {
-			detailsHtml += `<small><span class="detail-label">Token Fetching:</span> Enabled</small>`;
+			detailsHtml += `<small><span class="detail-label">Token:</span> Enabled</small>`;
 		}
-		// Added display for Notification status
+		// Updated display logic for new notification types
 		if (storedData.notification) {
-			detailsHtml += `<small><span class="detail-label">Notification:</span> On</small>`;
+			const typeLabel = storedData.notificationType === 'copy' ? 'Copy' : 'Show';
+			detailsHtml += `<small><span class="detail-label">Notify:</span> ${typeLabel}</small>`;
 		}
 
 		li.innerHTML = `<div class="entry-details">${detailsHtml}</div>
@@ -223,14 +222,22 @@ const loadSites = () => {
 			listFields.classList.toggle('hidden', !['order', 'new_items'].includes(comparisonMethodInput.value));
 			selectorInput.value = storedData.selector || '';
 			idAttributeInput.value = storedData.idAttribute || '';
+
 			tokenEnabledCheckbox.checked = storedData.tokenEnabled || false;
-			notificationCheckbox.checked = storedData.notification || false; // Added: Load saved state
 			tokenFields.classList.toggle('hidden', !tokenEnabledCheckbox.checked);
 			tokenUrlInput.value = storedData.tokenUrl || '';
 			tokenSelectorInput.value = storedData.tokenSelector || '';
 			tokenAttributeInput.value = storedData.tokenAttribute || '';
 			tokenRegExInput.value = storedData.tokenRegEx || '';
 			tokenPlaceholderInput.value = storedData.tokenPlaceholder || '';
+
+			// Set notification dropdown
+			if (storedData.notification) {
+				notificationTypeInput.value = storedData.notificationType || 'show';
+			} else {
+				notificationTypeInput.value = '';
+			}
+
 			headersInput.value = JSON.stringify(storedData.header || {}, null, 2);
 			bodyInput.value = storedData.body || '';
 			currentlyEditingKey = key;
@@ -245,10 +252,7 @@ const loadSites = () => {
 					resetForm();
 				});
 			}
-			window.scrollTo({
-				top: 0,
-				behavior: 'smooth',
-			});
+			window.scrollTo({ top: 0, behavior: 'smooth' });
 		});
 
 		if (isPaused) {
@@ -267,7 +271,6 @@ const loadSites = () => {
 //This function waits for the userscript to create the gm_storage object
 function waitForStorage() {
 	if (window.gm_storage) {
-		//This code now runs only after gm_storage is ready
 		const totalMs = window.gm_storage.getValue('check_interval_ms', 60000);
 		const hours = Math.floor(totalMs / 3600000);
 		const minutes = Math.floor((totalMs % 3600000) / 60000);
@@ -276,7 +279,7 @@ function waitForStorage() {
 
 		loadSites();
 	} else {
-		setTimeout(waitForStorage, 100); //Wait 100ms and check again
+		setTimeout(waitForStorage, 100);
 	}
 }
 
