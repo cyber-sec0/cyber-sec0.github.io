@@ -84,8 +84,12 @@ tr td {
 	margin-top: -1.5rem;
 }
 
-a[href^="mailto:"] {
+header {
     user-select: text;
+}
+
+.gap-4 {
+    gap: 0.7rem !important;
 }
 
 body {
