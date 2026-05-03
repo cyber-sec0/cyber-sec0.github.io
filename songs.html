@@ -22,7 +22,7 @@
 		height: calc(100% - 160px); /*Exposes bottom controls*/
 		position: absolute;
 		top: 40px;
-		border: 2px solid red;
+		border: 2px solid red; /*Added border color*/
 	}
 	#switchBtn,
 	#volBtn {
@@ -84,8 +84,9 @@
 	};
 
 	document.getElementById('overlay').onwheel = (e) => {
-		window.ytPlayer?.setVolume(window.ytPlayer.getVolume() + (e.deltaY < 0 ? 5 : -5));
-		document.getElementById('volBtn').innerText = `Volume: ${window.ytPlayer?.getVolume() || 0}%`;
+		window.vol = Math.max(0, Math.min(100, (window.vol ?? window.ytPlayer.getVolume()) + (e.deltaY < 0 ? 5 : -5)));
+		window.ytPlayer?.setVolume(window.vol);
+		document.getElementById('volBtn').innerText = `Volume: ${window.vol}%`;
 	};
 
 	document.getElementById('overlay').onclick = () => {
