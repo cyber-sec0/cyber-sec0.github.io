@@ -19,12 +19,10 @@
 	}
 	#overlay {
 		width: 100%;
-		height: calc(100% - 120px); /*Exposes bottom controls*/
+		height: calc(100% - 160px); /*Exposes bottom controls*/
 		position: absolute;
-		top: 0;
-		left: 0;
-		z-index: 10;
-		cursor: pointer;
+		top: 40px;
+		border: 2px solid red;
 	}
 	#switchBtn,
 	#volBtn {
@@ -78,16 +76,16 @@
 	window.onYouTubeIframeAPIReady = () => {
 		window.ytPlayer = new YT.Player('videoFrame', {
 			events: {
-				onReady: () =>
-					setInterval(() => {
-						document.getElementById('volBtn').innerText = `Volume: ${window.ytPlayer?.getVolume() || 0}%`;
-					}, 100),
+				onReady: () => {
+					document.getElementById('volBtn').innerText = `Volume: ${window.ytPlayer?.getVolume() || 0}%`;
+				},
 			},
 		});
 	};
 
 	document.getElementById('overlay').onwheel = (e) => {
 		window.ytPlayer?.setVolume(window.ytPlayer.getVolume() + (e.deltaY < 0 ? 5 : -5));
+		document.getElementById('volBtn').innerText = `Volume: ${window.ytPlayer?.getVolume() || 0}%`;
 	};
 
 	document.getElementById('overlay').onclick = () => {
