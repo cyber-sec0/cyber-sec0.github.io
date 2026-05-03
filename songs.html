@@ -19,12 +19,12 @@
 	}
 	#overlay {
 		width: 100%;
-		height: calc(100% - 60px);
+		height: 100%;
 		position: absolute;
 		top: 0;
 		left: 0;
 		z-index: 10;
-		cursor: pointer;
+		pointer-events: none;
 	}
 	#switchBtn,
 	#volBtn {
@@ -86,11 +86,8 @@
 		});
 	};
 
+	//Kept scroll logic, but pointer-events:none prevents it from triggering over the iframe
 	document.getElementById('overlay').onwheel = (e) => {
 		window.ytPlayer?.setVolume(window.ytPlayer.getVolume() + (e.deltaY < 0 ? 5 : -5));
-	};
-
-	document.getElementById('overlay').onclick = () => {
-		window.ytPlayer?.getPlayerState() === 1 ? window.ytPlayer.pauseVideo() : window.ytPlayer?.playVideo();
 	};
 </script>
