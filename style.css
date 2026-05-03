@@ -75,6 +75,10 @@ tr td {
 	padding-left: 6% !important;
 }
 
+#stats {
+	display: none;
+}
+
 .ML,
 .PM {
 	/* display: none; */
