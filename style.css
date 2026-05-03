@@ -84,6 +84,10 @@ tr td {
 	margin-top: -1.5rem;
 }
 
+a[href^="mailto:"] {
+    user-select: text;
+}
+
 body {
 	user-select: none;
 	background-color: black;
