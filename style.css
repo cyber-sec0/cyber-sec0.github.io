@@ -89,13 +89,37 @@ tr td {
 }
 
 header {
-    user-select: text;
+	user-select: text;
 }
 
 body {
 	user-select: none;
-	background-color: black;
-	background-size: 100% 100%;
-	background-position: center;
 	font-family: Arial, sans-serif;
+}
+
+@media (prefers-color-scheme: dark) {
+	.container {
+		background-color: rgba(20, 20, 20, 0.9);
+		box-shadow: 0 0 20px rgba(255, 255, 255, 0.05);
+	}
+	h1,
+	th,
+	.text-gray-800 {
+		color: #ffffff !important;
+	}
+	th {
+		background-color: #333333;
+	}
+	td {
+		color: #dddddd;
+		background-color: #1a1a1a;
+		border-bottom: 1px solid #444444;
+	}
+	.bg-white {
+		background-color: #2d2d2d !important;
+	}
+	.text-gray-700,
+	.text-gray-500 {
+		color: #bbbbbb !important;
+	}
 }
