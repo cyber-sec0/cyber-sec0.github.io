@@ -1,23 +1,61 @@
+// Wait for HTML to load before running any of the scripts below
 document.addEventListener('DOMContentLoaded', () => {
-	document.querySelectorAll('.wallet-address').forEach(function (element) {
-		element.onclick = function () {
-			navigator.clipboard.writeText(element.textContent); //Loop through each wallet Addresses element
+	// 1. Form Submit Success Notification Logic
+	const formNextUrlInput = document.getElementById('nextUrl');
+	if (formNextUrlInput) {
+		formNextUrlInput.value = window.location.href.split('?')[0] + '?success=true';
+	}
 
-			document.querySelector('#copyMessage').style.display = 'block'; //Show copied message
-			document.querySelector('#copyMessage').style.top = this.getBoundingClientRect().top - document.body.getBoundingClientRect().top - document.querySelector('#copyMessage').offsetHeight + 52 + 'px'; //Get the next sibling which is the copy message
-			document.querySelector('#copyMessage').style.left = '37%';
+	if (new URLSearchParams(window.location.search).get('success') === 'true') {
+		const toast = document.getElementById('successToast');
+		if (toast) {
+			toast.style.display = 'flex';
+			setTimeout(() => toast.classList.remove('translate-x-[150%]'), 50);
+			setTimeout(() => {
+				toast.classList.add('translate-x-[150%]');
+				setTimeout(() => (toast.style.display = 'none'), 500);
+			}, 5000);
+		}
+		window.history.replaceState({}, document.title, window.location.href.split('?')[0]);
+	}
 
-			setTimeout(function () {
-				document.getElementById('copyMessage').style.display = 'none'; //Hide message after 1 second
-			}, 1000);
+	// 2. Clipboard Copy Logic
+	document.querySelectorAll('.wallet-address').forEach(function (td) {
+		td.onclick = function () {
+			navigator.clipboard.writeText(td.textContent.trim());
+
+			const toast = document.getElementById('successToast');
+			const title = document.getElementById('toastTitle');
+			const desc = document.getElementById('toastDesc');
+			const icon = document.getElementById('toastIcon');
+
+			if (toast && title && desc && icon) {
+				title.textContent = 'Copied!';
+				desc.textContent = 'Wallet address copied to clipboard.';
+				icon.className = 'fas fa-copy mr-3 text-xl';
+
+				toast.style.display = 'flex';
+				setTimeout(() => toast.classList.remove('translate-x-[150%]'), 50);
+				setTimeout(() => {
+					toast.classList.add('translate-x-[150%]');
+					setTimeout(() => {
+						toast.style.display = 'none';
+						// Reset toast back to its original Form submit state for later use
+						title.textContent = 'Success!';
+						desc.textContent = 'Your form has been successfully sent.';
+						icon.className = 'fas fa-check-circle mr-3 text-xl';
+					}, 500);
+				}, 3000);
+			}
 		};
 	});
 
+	// 3. Collapsible Crypto Table Logic
 	const toggleCryptoBtn = document.getElementById('toggleCryptoBtn');
 	const cryptoContainer = document.getElementById('cryptoContainer');
 	const cryptoChevron = document.getElementById('cryptoChevron');
 
-	if (toggleCryptoBtn) {
+	if (toggleCryptoBtn && cryptoContainer && cryptoChevron) {
 		toggleCryptoBtn.addEventListener('click', () => {
 			cryptoContainer.classList.toggle('hidden');
 			if (cryptoContainer.classList.contains('hidden')) {
@@ -29,6 +67,7 @@ document.addEventListener('DOMContentLoaded', () => {
 	}
 });
 
+// 4. Matrix Background Effect (Self-executing, runs safely on its own)
 (function (c) {
 	document.body.appendChild(c).style.cssText = 'position:fixed;top:0;left:0;z-index:-1';
 	c.width = window.innerWidth;
