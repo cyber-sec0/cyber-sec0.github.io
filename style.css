@@ -97,6 +97,15 @@ body {
 	font-family: Arial, sans-serif;
 }
 
+/* --- Added from stripped HTML inline styles --- */
+#successToast {
+	display: none;
+}
+
+.wallet-copy-hint {
+	margin-top: -3rem;
+}
+
 @media (prefers-color-scheme: dark) {
 	.container {
 		background-color: rgba(20, 20, 20, 0.9);
