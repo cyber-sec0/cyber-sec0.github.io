@@ -1,24 +1,42 @@
-document.querySelectorAll('.wallet-address').forEach(function (element) {
-	element.onclick = function () {
-		navigator.clipboard.writeText(element.textContent); //Loop through each wallet Addresses element
-
-		document.querySelector('#copyMessage').style.display = 'block'; //Show copied message
-		document.querySelector('#copyMessage').style.top = this.getBoundingClientRect().top - document.body.getBoundingClientRect().top - document.querySelector('#copyMessage').offsetHeight + 52 + 'px'; //Get the next sibling which is the copy message
-		document.querySelector('#copyMessage').style.left = '39%';
-
-		setTimeout(function () {
-			document.getElementById('copyMessage').style.display = 'none'; //Hide message after 1 second
-		}, 1000);
-	};
-});
-
 document.addEventListener('DOMContentLoaded', () => {
-	// 1. Collapsible Crypto Toggle
+	// 1. Copy to Clipboard Notification
+	document.querySelectorAll('.wallet-address').forEach(function (td) {
+		td.onclick = function () {
+			navigator.clipboard.writeText(td.textContent.trim());
+
+			const toast = document.getElementById('successToast');
+			const title = document.getElementById('toastTitle');
+			const desc = document.getElementById('toastDesc');
+			const icon = document.getElementById('toastIcon');
+
+			if (toast && title && desc && icon) {
+				title.textContent = 'Copied!';
+				desc.textContent = 'Wallet address copied to clipboard.';
+				icon.className = 'fas fa-copy mr-3 text-xl';
+
+				toast.style.display = 'flex';
+				setTimeout(() => toast.classList.remove('translate-x-[150%]'), 50);
+
+				setTimeout(() => {
+					toast.classList.add('translate-x-[150%]');
+					setTimeout(() => {
+						toast.style.display = 'none';
+						// Reset properties back to form submission defaults just in case
+						title.textContent = 'Success!';
+						desc.textContent = 'Your form has been successfully sent.';
+						icon.className = 'fas fa-check-circle mr-3 text-xl';
+					}, 500);
+				}, 3000);
+			}
+		};
+	});
+
+	// 2. Collapsible Crypto Toggle
 	const toggleCryptoBtn = document.getElementById('toggleCryptoBtn');
 	const cryptoContainer = document.getElementById('cryptoContainer');
 	const cryptoChevron = document.getElementById('cryptoChevron');
 
-	if (toggleCryptoBtn) {
+	if (toggleCryptoBtn && cryptoContainer && cryptoChevron) {
 		toggleCryptoBtn.addEventListener('click', () => {
 			cryptoContainer.classList.toggle('hidden');
 			if (cryptoContainer.classList.contains('hidden')) {
@@ -29,7 +47,7 @@ document.addEventListener('DOMContentLoaded', () => {
 		});
 	}
 
-	// 2. Form Submit Success Notification Logic (for the Ask a Question form)
+	// 3. Form Submit Success Notification
 	const formNextUrlInput = document.getElementById('nextUrl');
 	if (formNextUrlInput) {
 		formNextUrlInput.value = window.location.href.split('?')[0] + '?success=true';

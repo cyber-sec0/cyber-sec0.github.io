@@ -53,16 +53,6 @@ td {
 	text-decoration: underline;
 }
 
-.copy-message {
-	z-index: 999;
-	display: none;
-	color: white;
-	position: absolute;
-	border-radius: 5px;
-	padding: 10px 20px;
-	background-color: rgba(0, 0, 0, 0.8);
-}
-
 .crypto-text {
 	margin-top: 10%;
 	font-size: 12px;
@@ -97,7 +87,6 @@ body {
 	font-family: Arial, sans-serif;
 }
 
-/* --- Added from stripped HTML inline styles --- */
 #successToast {
 	display: none;
 }
