@@ -1,340 +1,341 @@
 <!doctype html>
 <html lang="en">
-    <head>
-        <meta charset="UTF-8" />
-        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-        <title>Translation Services</title>
-        <link rel="icon" href="Imgs/BTC.png" />
-        <link rel="stylesheet" href="style.css" />
-        <script src="https://cdn.tailwindcss.com"></script>
-        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" />
-    </head>
-    <body class="bg-gradient-to-br from-gray-900 via-gray-800 to-black text-gray-200 font-sans min-h-screen relative overflow-x-hidden">
-        <div id="successToast" style="display: none" class="fixed top-6 right-6 bg-green-500 text-white px-5 py-3 rounded shadow-2xl transform transition-transform duration-500 translate-x-[150%] z-50 flex items-center border border-green-400">
-            <i class="fas fa-check-circle mr-3 text-xl" id="toastIcon"></i>
-            <div class="flex flex-col">
-                <span class="font-bold text-sm" id="toastTitle">Success!</span>
-                <span class="text-xs" id="toastDesc">Your form has been successfully sent.</span>
-            </div>
-        </div>
+	<head>
+		<meta charset="UTF-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+		<title>Translation Services</title>
+		<link rel="icon" href="Imgs/BTC.png" />
+		<link rel="stylesheet" href="style.css" />
+		<script src="https://cdn.tailwindcss.com"></script>
+		<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" />
+	</head>
+	<body class="bg-gradient-to-br from-gray-900 via-gray-800 to-black text-gray-200 font-sans min-h-screen relative overflow-x-hidden">
+		<div id="successToast" style="display: none" class="fixed top-6 right-6 bg-green-500 text-white px-5 py-3 rounded shadow-2xl transform transition-transform duration-500 translate-x-[150%] z-50 flex items-center border border-green-400">
+			<i class="fas fa-check-circle mr-3 text-xl" id="toastIcon"></i>
+			<div class="flex flex-col">
+				<span class="font-bold text-sm" id="toastTitle">Success!</span>
+				<span class="text-xs" id="toastDesc">Your form has been successfully sent.</span>
+			</div>
+		</div>
 
-        <div class="mx-auto px-4 py-12 max-w-4xl">
-            <header class="text-center mb-12">
-                <h1 class="text-4xl md:text-5xl font-bold text-transparent bg-clip-text bg-gradient-to-r from-blue-400 to-purple-500 mb-4 tracking-wide">Translation Services</h1>
-                <p class="text-lg text-gray-400 mb-8">Reliable & fast translation</p>
-            </header>
+		<div class="mx-auto px-4 py-12 max-w-4xl">
+			<header class="text-center mb-12">
+				<h1 class="text-4xl md:text-5xl font-bold text-transparent bg-clip-text bg-gradient-to-r from-blue-400 to-purple-500 mb-4 tracking-wide">Translation Services</h1>
+				<p class="text-lg text-gray-400 mb-8">Reliable & fast translation</p>
+			</header>
 
-            <section class="bg-gray-800/60 backdrop-blur-md rounded-xl shadow-2xl border border-gray-700 p-8 mb-12">
-                <h2 class="text-2xl font-bold text-white mb-4 border-b border-gray-700 pb-2"><i class="fas fa-language mr-2 text-blue-400"></i>Supported Languages</h2>
-                <ul class="list-none text-gray-300 space-y-3 mt-4 text-lg">
-                    <li class="flex items-center"><i class="fas fa-check text-green-500 mr-3"></i><img src="https://flagcdn.com/w20/us.png" class="w-5 mr-2" alt="US" /> English</li>
-                    <li class="flex items-center"><i class="fas fa-check text-green-500 mr-3"></i><img src="https://flagcdn.com/w20/br.png" class="w-5 mr-2" alt="BR" /> Portuguese</li>
-                    <li class="flex items-center"><i class="fas fa-check text-green-500 mr-3"></i><img src="https://flagcdn.com/w20/es.png" class="w-5 mr-2" alt="ES" /> Spanish</li>
-                    <li class="flex items-center"><i class="fas fa-check text-green-500 mr-3"></i><img src="https://flagcdn.com/w20/jp.png" class="w-5 mr-2" alt="JP" /> Japanese</li>
-                    <li class="mt-6 text-sm text-gray-400 border-t border-gray-700 pt-4 flex items-center"><i class="fas fa-robot mr-2 text-purple-400"></i>Translation to other languages will utilize AI & other online translation services.</li>
-                </ul>
-            </section>
+			<section class="bg-gray-800/60 backdrop-blur-md rounded-xl shadow-2xl border border-gray-700 p-8 mb-12">
+				<h2 class="text-2xl font-bold text-white mb-4 border-b border-gray-700 pb-2"><i class="fas fa-language mr-2 text-blue-400"></i>Supported Languages</h2>
+				<ul class="list-none text-gray-300 space-y-3 mt-4 text-lg">
+					<li class="flex items-center"><i class="fas fa-check text-green-500 mr-3"></i><img src="https://flagcdn.com/w20/us.png" class="w-5 mr-2" alt="US" /> English</li>
+					<li class="flex items-center"><i class="fas fa-check text-green-500 mr-3"></i><img src="https://flagcdn.com/w20/br.png" class="w-5 mr-2" alt="BR" /> Portuguese</li>
+					<li class="flex items-center"><i class="fas fa-check text-green-500 mr-3"></i><img src="https://flagcdn.com/w20/es.png" class="w-5 mr-2" alt="ES" /> Spanish</li>
+					<li class="flex items-center"><i class="fas fa-check text-green-500 mr-3"></i><img src="https://flagcdn.com/w20/jp.png" class="w-5 mr-2" alt="JP" /> Japanese</li>
+					<li class="mt-6 text-sm text-gray-400 border-t border-gray-700 pt-4 flex items-center"><i class="fas fa-robot mr-2 text-purple-400"></i>Translation to other languages will utilize AI & other online translation services.</li>
+				</ul>
+			</section>
 
-            <section class="bg-gray-800/60 backdrop-blur-md rounded-xl shadow-2xl border border-gray-700 p-8">
-                <div class="flex flex-col sm:flex-row sm:items-center justify-between mb-6 border-b border-gray-700 pb-4 gap-4">
-                    <h2 id="formTitle" class="text-2xl font-bold text-white m-0"><i class="fas fa-paper-plane mr-2 text-purple-400"></i>Send Your Request</h2>
-                    <div class="flex space-x-1 bg-gray-900 p-1 rounded-lg border border-gray-600 shadow-inner">
-                        <button type="button" id="tabRequest" class="px-4 py-2 text-sm font-bold rounded-md bg-blue-600 text-white shadow transition-all">Service Request</button>
-                        <button type="button" id="tabQuestion" class="px-4 py-2 text-sm font-medium rounded-md text-gray-400 hover:text-white hover:bg-gray-700 transition-all">Ask Question</button>
-                    </div>
-                </div>
+			<section class="bg-gray-800/60 backdrop-blur-md rounded-xl shadow-2xl border border-gray-700 p-8">
+				<div class="flex flex-col sm:flex-row sm:items-center justify-between mb-6 border-b border-gray-700 pb-4 gap-4">
+					<h2 id="formTitle" class="text-2xl font-bold text-white m-0"><i class="fas fa-paper-plane mr-2 text-purple-400"></i>Send Your Request</h2>
+					<div class="flex space-x-1 bg-gray-900 p-1 rounded-lg border border-gray-600 shadow-inner">
+						<button type="button" id="tabRequest" class="px-4 py-2 text-sm font-bold rounded-md bg-blue-600 text-white shadow transition-all">Service Request</button>
+						<button type="button" id="tabQuestion" class="px-4 py-2 text-sm font-medium rounded-md text-gray-400 hover:text-white hover:bg-gray-700 transition-all">Ask Question</button>
+					</div>
+				</div>
 
-                <form action="https://formsubmit.co/e94dc582b4b7b5a6fee35b5ec5aaa5cd" method="POST" class="space-y-6">
-                    <input type="hidden" name="_subject" id="formSubject" value="New Translation Request" />
-                    <input type="hidden" name="_next" id="nextUrl" value="" />
+				<form action="https://formsubmit.co/e94dc582b4b7b5a6fee35b5ec5aaa5cd" method="POST" class="space-y-6">
+					<input type="hidden" name="_subject" id="formSubject" value="New Translation Request" />
+					<input type="hidden" name="_next" id="nextUrl" value="" />
 
-                    <div>
-                        <label for="email" class="block text-sm font-medium text-gray-300 mb-2">Your Email Address (For Delivery/Reply)</label>
-                        <div class="relative">
-                            <span class="absolute inset-y-0 left-0 flex items-center pl-4 text-gray-400">
-                                <i class="fas fa-envelope"></i>
-                            </span>
-                            <input type="email" id="email" name="email" required class="w-full pl-10 pr-4 py-3 bg-gray-900 border border-gray-600 rounded-lg text-white placeholder-gray-500 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all shadow-inner" placeholder="your@gmail.com" />
-                        </div>
-                    </div>
+					<div>
+						<label for="email" class="block text-sm font-medium text-gray-300 mb-2">Your Email Address (For Delivery/Reply)</label>
+						<div class="relative">
+							<span class="absolute inset-y-0 left-0 flex items-center pl-4 text-gray-400">
+								<i class="fas fa-envelope"></i>
+							</span>
+							<input type="email" id="email" name="email" required class="w-full pl-10 pr-4 py-3 bg-gray-900 border border-gray-600 rounded-lg text-white placeholder-gray-500 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all shadow-inner" placeholder="your@gmail.com" />
+						</div>
+					</div>
 
-                    <div class="hideable-field">
-                        <label for="videoLink" class="block text-sm font-medium text-gray-300 mb-2">Media File Link (To Download/Access)</label>
-                        <div class="relative">
-                            <span class="absolute inset-y-0 left-0 flex items-center pl-4 text-gray-400">
-                                <i class="fas fa-link"></i>
-                            </span>
-                            <input type="url" id="videoLink" name="videoLink" required class="w-full pl-10 pr-4 py-3 bg-gray-900 border border-gray-600 rounded-lg text-white placeholder-gray-500 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all shadow-inner" placeholder="https://onedrive.com/video.mp4" />
-                        </div>
-                    </div>
+					<div class="hideable-field">
+						<label for="videoLink" class="block text-sm font-medium text-gray-300 mb-2">Media File Link (To Download/Access)</label>
+						<div class="relative">
+							<span class="absolute inset-y-0 left-0 flex items-center pl-4 text-gray-400">
+								<i class="fas fa-link"></i>
+							</span>
+							<input type="url" id="videoLink" name="videoLink" required class="w-full pl-10 pr-4 py-3 bg-gray-900 border border-gray-600 rounded-lg text-white placeholder-gray-500 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all shadow-inner" placeholder="https://onedrive.com/video.mp4" />
+						</div>
+					</div>
 
-                    <div class="hideable-field relative">
-                        <label for="targetLanguage" class="block text-sm font-medium text-gray-300 mb-2">Target Language</label>
-                        <div class="relative">
-                            <span class="absolute inset-y-0 left-0 flex items-center pl-4 text-gray-400 z-10">
-                                <i class="fas fa-globe"></i>
-                            </span>
-                            <input type="text" id="targetLanguage" name="targetLanguage" required class="w-full pl-10 pr-4 py-3 bg-gray-900 border border-gray-600 rounded-lg text-white placeholder-gray-500 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all shadow-inner" placeholder="Select or type a language to translate the media to..." autocomplete="off" />
+					<div class="hideable-field relative">
+						<label for="targetLanguage" class="block text-sm font-medium text-gray-300 mb-2">Target Language</label>
+						<div class="relative">
+							<span class="absolute inset-y-0 left-0 flex items-center pl-4 text-gray-400 z-10">
+								<i class="fas fa-globe"></i>
+							</span>
+							<input type="text" id="targetLanguage" name="targetLanguage" required class="w-full pl-10 pr-4 py-3 bg-gray-900 border border-gray-600 rounded-lg text-white placeholder-gray-500 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all shadow-inner" placeholder="Select or type a language to translate the media to..." autocomplete="off" />
 
-                            <ul id="language-dropdown" class="hidden absolute z-20 w-full mt-1 bg-gray-900 border border-gray-600 rounded-lg shadow-lg max-h-60 overflow-y-auto">
-                                <li class="px-4 py-3 hover:bg-gray-700 cursor-pointer flex items-center text-white" data-value="English"><img src="https://flagcdn.com/w20/us.png" class="w-5 mr-3" alt="US" /> English</li>
-                                <li class="px-4 py-3 hover:bg-gray-700 cursor-pointer flex items-center text-white" data-value="Portuguese"><img src="https://flagcdn.com/w20/br.png" class="w-5 mr-3" alt="BR" /> Portuguese</li>
-                                <li class="px-4 py-3 hover:bg-gray-700 cursor-pointer flex items-center text-white" data-value="Spanish"><img src="https://flagcdn.com/w20/es.png" class="w-5 mr-3" alt="ES" /> Spanish</li>
-                                <li class="px-4 py-3 hover:bg-gray-700 cursor-pointer flex items-center text-white" data-value="Japanese"><img src="https://flagcdn.com/w20/jp.png" class="w-5 mr-3" alt="JP" /> Japanese</li>
-                            </ul>
-                        </div>
-                    </div>
+							<ul id="language-dropdown" class="hidden absolute z-20 w-full mt-1 bg-gray-900 border border-gray-600 rounded-lg shadow-lg max-h-60 overflow-y-auto">
+								<li class="px-4 py-3 hover:bg-gray-700 cursor-pointer flex items-center text-white" data-value="English"><img src="https://flagcdn.com/w20/us.png" class="w-5 mr-3" alt="US" /> English</li>
+								<li class="px-4 py-3 hover:bg-gray-700 cursor-pointer flex items-center text-white" data-value="Portuguese"><img src="https://flagcdn.com/w20/br.png" class="w-5 mr-3" alt="BR" /> Portuguese</li>
+								<li class="px-4 py-3 hover:bg-gray-700 cursor-pointer flex items-center text-white" data-value="Spanish"><img src="https://flagcdn.com/w20/es.png" class="w-5 mr-3" alt="ES" /> Spanish</li>
+								<li class="px-4 py-3 hover:bg-gray-700 cursor-pointer flex items-center text-white" data-value="Japanese"><img src="https://flagcdn.com/w20/jp.png" class="w-5 mr-3" alt="JP" /> Japanese</li>
+							</ul>
+						</div>
+					</div>
 
-                    <div class="hideable-field">
-                        <label for="budget" class="block text-sm font-medium text-gray-300 mb-2">Available Budget (Higher budget = higher priority)</label>
-                        <div class="relative">
-                            <span class="absolute inset-y-0 left-0 flex items-center pl-4 text-gray-400">
-                                <i class="fas fa-dollar-sign"></i>
-                            </span>
-                            <input type="number" id="budget" name="budget" required min="15" class="w-full pl-10 pr-4 py-3 bg-gray-900 border border-gray-600 rounded-lg text-white placeholder-gray-500 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all shadow-inner" placeholder="0.00" />
-                        </div>
-                    </div>
+					<div class="hideable-field">
+						<label for="budget" class="block text-sm font-medium text-gray-300 mb-2">Available Budget (Higher budget = higher priority)</label>
+						<div class="relative">
+							<span class="absolute inset-y-0 left-0 flex items-center pl-4 text-gray-400">
+								<i class="fas fa-dollar-sign"></i>
+							</span>
+							<input type="number" id="budget" name="budget" required min="15" class="w-full pl-10 pr-4 py-3 bg-gray-900 border border-gray-600 rounded-lg text-white placeholder-gray-500 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all shadow-inner" placeholder="0.00" />
+						</div>
+					</div>
 
-                    <div class="hideable-field">
-                        <div class="bg-gray-900 border border-gray-600 rounded-lg p-6 shadow-inner mt-2">
-                            <h3 class="text-lg font-bold text-white mb-4 border-b border-gray-700 pb-2"><i class="fas fa-credit-card mr-2 text-blue-400"></i>Complete Your Payment</h3>
+					<div class="hideable-field">
+						<div class="bg-gray-900 border border-gray-600 rounded-lg p-6 shadow-inner mt-2">
+							<h3 class="text-lg font-bold text-white mb-4 border-b border-gray-700 pb-2"><i class="fas fa-credit-card mr-2 text-blue-400"></i>Complete Your Payment</h3>
 
-                            <div class="flex flex-wrap items-center gap-3 mb-6">
-                                <div class="text-center">
-                                    <p class="text-[10px] font-bold text-gray-400 mb-1 uppercase tracking-wider">Preferable</p>
-                                    <a href="https://ko-fi.com/C0C6M3538" target="_blank" class="bg-[#29abe0] hover:bg-[#228ebc] text-white px-4 py-2 rounded-md flex items-center transition-all shadow text-sm"> <i class="fas fa-coffee mr-2"></i> Ko-Fi </a>
-                                </div>
-                                <div class="pt-4 flex flex-wrap gap-3">
-                                    <a href="https://www.patreon.com/hacker09" target="_blank" class="bg-[#ff424d] hover:bg-[#e03640] text-white px-4 py-2 rounded-md flex items-center transition-all text-sm"> <i class="fab fa-patreon mr-2"></i> Patreon </a>
-                                    <a href="https://www.buymeacoffee.com/hacker09" target="_blank" class="bg-[#ffdd00] hover:bg-[#e6c700] text-gray-900 font-medium px-4 py-2 rounded-md flex items-center transition-all text-sm"> <i class="fas fa-mug-hot mr-2"></i> BuyMeACoffee </a>
-                                    <a href="https://buy.stripe.com/28E28r2R9d3421q9FM9MY00" target="_blank" class="bg-[#635bff] hover:bg-[#4b45cc] text-white px-4 py-2 rounded-md flex items-center transition-all text-sm"> <img src="https://i.imgur.com/AP0gaZh.png" alt="Stripe" class="h-6 mr-2" /> Stripe </a>
-                                    <a href="https://github.com/sponsors/cyber-sec0" target="_blank" class="bg-gray-700 hover:bg-gray-600 text-white px-4 py-2 rounded-md flex items-center transition-all text-sm"> <i class="fab fa-github mr-2"></i> GitHub </a>
-                                </div>
-                            </div>
+							<div class="flex flex-wrap items-center gap-3 mb-6">
+								<div class="text-center">
+									<p class="text-[10px] font-bold text-gray-400 mb-1 uppercase tracking-wider">Preferable</p>
+									<a href="https://ko-fi.com/C0C6M3538" target="_blank" class="bg-[#29abe0] hover:bg-[#228ebc] text-white px-4 py-2 rounded-md flex items-center transition-all shadow text-sm"> <i class="fas fa-coffee mr-2"></i> Ko-Fi </a>
+								</div>
+								<div class="pt-4 flex flex-wrap gap-3">
+									<a href="https://www.patreon.com/hacker09" target="_blank" class="bg-[#ff424d] hover:bg-[#e03640] text-white px-4 py-2 rounded-md flex items-center transition-all text-sm"> <i class="fab fa-patreon mr-2"></i> Patreon </a>
+									<a href="https://www.buymeacoffee.com/hacker09" target="_blank" class="bg-[#ffdd00] hover:bg-[#e6c700] text-gray-900 font-medium px-4 py-2 rounded-md flex items-center transition-all text-sm"> <i class="fas fa-mug-hot mr-2"></i> BuyMeACoffee </a>
+									<a href="https://buy.stripe.com/28E28r2R9d3421q9FM9MY00" target="_blank" class="bg-[#635bff] hover:bg-[#4b45cc] text-white px-4 py-2 rounded-md flex items-center transition-all text-sm"> <img src="https://i.imgur.com/AP0gaZh.png" alt="Stripe" class="h-6 mr-2" /> Stripe </a>
+									<a href="https://github.com/sponsors/cyber-sec0" target="_blank" class="bg-gray-700 hover:bg-gray-600 text-white px-4 py-2 rounded-md flex items-center transition-all text-sm"> <i class="fab fa-github mr-2"></i> GitHub </a>
+								</div>
+							</div>
 
-                            <div class="mb-4 space-y-1">
-                                <p class="text-xs text-gray-500">* Ko-fi supports Paypal, Venmo and Debit &amp; Credit cards</p>
-                                <p class="text-xs text-gray-500">* Github uses Stripe to support Debit and credits cards and Patreon</p>
-                                <p class="text-xs text-gray-500">* Patreon supports PayPal, Venmo, <span class="underline decoration-dotted font-medium">Apple Pay</span> and Debit &amp; Credit cards</p>
-                                <p class="text-xs text-gray-500">* BuyMeACoffee supports <span class="underline decoration-dotted font-medium">Cash App, Bank transfers</span> and Debit &amp; Credit cards</p>
-                                <p class="text-xs text-gray-500">* Stripe supports <span class="underline decoration-dotted font-medium">Amazon Pay, Link, Affirm</span>, Cash App and Debit &amp; Credit Cards</p>
-                            </div>
+							<div class="mb-4 space-y-1">
+								<p class="text-xs text-gray-500">* Ko-fi supports Paypal, Venmo and Debit &amp; Credit cards</p>
+								<p class="text-xs text-gray-500">* Github uses Stripe to support Debit and credits cards and Patreon</p>
+								<p class="text-xs text-gray-500">* Patreon supports PayPal, Venmo, <span class="underline decoration-dotted font-medium">Apple Pay</span> and Debit &amp; Credit cards</p>
+								<p class="text-xs text-gray-500">* BuyMeACoffee supports <span class="underline decoration-dotted font-medium">Cash App, Bank transfers</span> and Debit &amp; Credit cards</p>
+								<p class="text-xs text-gray-500">* Stripe supports <span class="underline decoration-dotted font-medium">Amazon Pay, Link, Affirm</span>, Cash App and Debit &amp; Credit Cards</p>
+							</div>
 
-                            <button type="button" id="toggleCryptoBtn" class="w-full mt-2 flex justify-between items-center p-3 bg-gray-800 hover:bg-gray-700 border border-gray-600 rounded-lg text-sm font-medium text-gray-300 transition-all focus:outline-none">
-                                <span><i class="fab fa-bitcoin text-yellow-500 mr-2"></i>View Crypto Payment Options</span>
-                                <i id="cryptoChevron" class="fas fa-chevron-down transition-transform duration-300"></i>
-                            </button>
+							<button type="button" id="toggleCryptoBtn" class="w-full mt-2 flex justify-between items-center p-3 bg-gray-800 hover:bg-gray-700 border border-gray-600 rounded-lg text-sm font-medium text-gray-300 transition-all focus:outline-none">
+								<span><i class="fab fa-bitcoin text-yellow-500 mr-2"></i>View Crypto Payment Options</span>
+								<i id="cryptoChevron" class="fas fa-chevron-down transition-transform duration-300"></i>
+							</button>
 
-                            <div id="cryptoContainer" class="hidden mt-4 transition-all duration-300 origin-top">
-                                <p class="text-xs text-blue-400 mb-2"><i class="fas fa-info-circle mr-1"></i>Click any wallet address below to copy</p>
-                                <div class="overflow-x-auto rounded border border-gray-700">
-                                    <table class="w-full text-left border-collapse text-sm bg-gray-800">
-                                        <thead>
-                                            <tr class="bg-gray-700">
-                                                <th class="p-3 border-b border-gray-600 text-gray-300">Crypto</th>
-                                                <th class="p-3 border-b border-gray-600 text-gray-300">Wallet Address</th>
-                                            </tr>
-                                        </thead>
-                                        <tbody class="divide-y divide-gray-700">
-                                            <tr class="hover:bg-gray-700 transition-colors">
-                                                <td class="p-3 flex items-center"><img src="Imgs/BTC.png" alt="BTC" class="h-5 w-5 mr-2 object-contain" /> BTC</td>
-                                                <td class="p-3 wallet-address cursor-pointer text-gray-400 hover:text-white" title="Click to copy">3KoEo23zSwRPTDck2aT1ccrSFqnVWieUFS</td>
-                                            </tr>
-                                            <tr class="hover:bg-gray-700 transition-colors">
-                                                <td class="p-3 flex items-center"><img src="Imgs/BCH.png" alt="BCH" class="h-5 w-5 mr-2 object-contain" /> BCH</td>
-                                                <td class="p-3 wallet-address cursor-pointer text-gray-400 hover:text-white" title="Click to copy">3P3FzYExuNpGpXA4Dwjd2rsRLAnsDaUxTR</td>
-                                            </tr>
-                                            <tr class="hover:bg-gray-700 transition-colors">
-                                                <td class="p-3 flex items-center"><img src="Imgs/LTC.png" alt="LTC" class="h-5 w-5 mr-2 object-contain" /> LTC</td>
-                                                <td class="p-3 wallet-address cursor-pointer text-gray-400 hover:text-white" title="Click to copy">MW2qWHsAVVkUrMyE4FThCfUCY5DtrYgEyc</td>
-                                            </tr>
-                                            <tr class="hover:bg-gray-700 transition-colors">
-                                                <td class="p-3 flex items-center"><img src="Imgs/ether.svg" alt="ETH" class="h-5 w-5 mr-2 object-contain filter invert brightness-0" /> ETH</td>
-                                                <td class="p-3 wallet-address cursor-pointer text-gray-400 hover:text-white" title="Click to copy">0x6BD1162a158E1758fF8A665676A17094A46D9e16</td>
-                                            </tr>
-                                            <tr class="ML hover:bg-gray-700 transition-colors">
-                                                <td class="p-3 flex items-center"><img src="Imgs/BTC.png" alt="BTC" class="h-5 w-5 mr-2 object-contain" /> BTC</td>
-                                                <td class="p-3 wallet-address cursor-pointer text-gray-400 hover:text-white" title="Click to copy">bc1q9x3rwd53gkpnp2pxsdvd3vqqmkyy2dh627l3ft</td>
-                                            </tr>
-                                            <tr class="ML hover:bg-gray-700 transition-colors">
-                                                <td class="p-3 flex items-center"><img src="Imgs/LTC.png" alt="LTC" class="h-5 w-5 mr-2 object-contain" /> LTC</td>
-                                                <td class="p-3 wallet-address cursor-pointer text-gray-400 hover:text-white" title="Click to copy">ltc1qs40c7gaqwmn2ja36t2gk2nruq5ejm84rlhtzhp</td>
-                                            </tr>
-                                            <tr class="ML hover:bg-gray-700 transition-colors">
-                                                <td class="p-3 flex items-center"><img src="Imgs/ether.svg" alt="ETH" class="h-5 w-5 mr-2 object-contain filter invert brightness-0" /> ETH</td>
-                                                <td class="p-3 wallet-address cursor-pointer text-gray-400 hover:text-white" title="Click to copy">0x2fda9dbd8F4b9C0890d2941250e7090efF2034DB</td>
-                                            </tr>
-                                            <tr class="ML hover:bg-gray-700 transition-colors">
-                                                <td class="p-3 flex items-center"><img src="Imgs/usdp.png" alt="USDP" class="h-5 w-5 mr-2 object-contain" /> USDP</td>
-                                                <td class="p-3 wallet-address cursor-pointer text-gray-400 hover:text-white" title="Click to copy">0xB35fE8c55B1764646E13af6aFa127f8CF629Ab3f</td>
-                                            </tr>
-                                            <tr class="ML hover:bg-gray-700 transition-colors">
-                                                <td class="p-3 flex items-center"><img src="Imgs/uniswap.webp" alt="Uniswap" class="h-5 w-5 mr-2 object-contain" /> Uniswap</td>
-                                                <td class="p-3 wallet-address cursor-pointer text-gray-400 hover:text-white" title="Click to copy">0x47B51D4814e8816fA2000937b7d3A79267D2e675</td>
-                                            </tr>
-                                            <tr class="ML hover:bg-gray-700 transition-colors">
-                                                <td class="p-3 flex items-center"><img src="Imgs/chainlink.png" alt="LINK" class="h-5 w-5 mr-2 object-contain" /> LINK</td>
-                                                <td class="p-3 wallet-address cursor-pointer text-gray-400 hover:text-white" title="Click to copy">0x0Dd35593f3d81b875a36a2eCA76464cC2407f24B</td>
-                                            </tr>
-                                            <tr class="PM hover:bg-gray-700 transition-colors">
-                                                <td class="p-3 flex items-center"><img src="Imgs/BTC.png" alt="BTC" class="h-5 w-5 mr-2 object-contain" /> BTC</td>
-                                                <td class="p-3 wallet-address cursor-pointer text-gray-400 hover:text-white" title="Click to copy">bc1quay76sm5jdnqmdm4lvhcysukw9a2a8v080f8t6</td>
-                                            </tr>
-                                        </tbody>
-                                    </table>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
+							<div id="cryptoContainer" class="hidden mt-4 transition-all duration-300 origin-top">
+								<p class="text-xs text-blue-400 mb-2"><i class="fas fa-info-circle mr-1"></i>Click any wallet address below to copy</p>
+								<div class="overflow-x-auto rounded border border-gray-700">
+									<table class="w-full text-left border-collapse text-sm bg-gray-800">
+										<thead>
+											<tr class="bg-gray-700">
+												<th class="p-3 border-b border-gray-600 text-gray-300">Crypto</th>
+												<th class="p-3 border-b border-gray-600 text-gray-300">Wallet Address</th>
+											</tr>
+										</thead>
+										<tbody class="divide-y divide-gray-700">
+											<tr class="hover:bg-gray-700 transition-colors">
+												<td class="p-3 flex items-center"><img src="Imgs/BTC.png" alt="BTC" class="h-5 w-5 mr-2 object-contain" /> BTC</td>
+												<td class="p-3 wallet-address cursor-pointer text-gray-400 hover:text-white" title="Click to copy">3KoEo23zSwRPTDck2aT1ccrSFqnVWieUFS</td>
+											</tr>
+											<tr class="hover:bg-gray-700 transition-colors">
+												<td class="p-3 flex items-center"><img src="Imgs/BCH.png" alt="BCH" class="h-5 w-5 mr-2 object-contain" /> BCH</td>
+												<td class="p-3 wallet-address cursor-pointer text-gray-400 hover:text-white" title="Click to copy">3P3FzYExuNpGpXA4Dwjd2rsRLAnsDaUxTR</td>
+											</tr>
+											<tr class="hover:bg-gray-700 transition-colors">
+												<td class="p-3 flex items-center"><img src="Imgs/LTC.png" alt="LTC" class="h-5 w-5 mr-2 object-contain" /> LTC</td>
+												<td class="p-3 wallet-address cursor-pointer text-gray-400 hover:text-white" title="Click to copy">MW2qWHsAVVkUrMyE4FThCfUCY5DtrYgEyc</td>
+											</tr>
+											<tr class="hover:bg-gray-700 transition-colors">
+												<td class="p-3 flex items-center"><img src="Imgs/ether.svg" alt="ETH" class="h-5 w-5 mr-2 object-contain filter invert brightness-0" /> ETH</td>
+												<td class="p-3 wallet-address cursor-pointer text-gray-400 hover:text-white" title="Click to copy">0x6BD1162a158E1758fF8A665676A17094A46D9e16</td>
+											</tr>
+											<tr class="ML hover:bg-gray-700 transition-colors">
+												<td class="p-3 flex items-center"><img src="Imgs/BTC.png" alt="BTC" class="h-5 w-5 mr-2 object-contain" /> BTC</td>
+												<td class="p-3 wallet-address cursor-pointer text-gray-400 hover:text-white" title="Click to copy">bc1q9x3rwd53gkpnp2pxsdvd3vqqmkyy2dh627l3ft</td>
+											</tr>
+											<tr class="ML hover:bg-gray-700 transition-colors">
+												<td class="p-3 flex items-center"><img src="Imgs/LTC.png" alt="LTC" class="h-5 w-5 mr-2 object-contain" /> LTC</td>
+												<td class="p-3 wallet-address cursor-pointer text-gray-400 hover:text-white" title="Click to copy">ltc1qs40c7gaqwmn2ja36t2gk2nruq5ejm84rlhtzhp</td>
+											</tr>
+											<tr class="ML hover:bg-gray-700 transition-colors">
+												<td class="p-3 flex items-center"><img src="Imgs/ether.svg" alt="ETH" class="h-5 w-5 mr-2 object-contain filter invert brightness-0" /> ETH</td>
+												<td class="p-3 wallet-address cursor-pointer text-gray-400 hover:text-white" title="Click to copy">0x2fda9dbd8F4b9C0890d2941250e7090efF2034DB</td>
+											</tr>
+											<tr class="ML hover:bg-gray-700 transition-colors">
+												<td class="p-3 flex items-center"><img src="Imgs/usdp.png" alt="USDP" class="h-5 w-5 mr-2 object-contain" /> USDP</td>
+												<td class="p-3 wallet-address cursor-pointer text-gray-400 hover:text-white" title="Click to copy">0xB35fE8c55B1764646E13af6aFa127f8CF629Ab3f</td>
+											</tr>
+											<tr class="ML hover:bg-gray-700 transition-colors">
+												<td class="p-3 flex items-center"><img src="Imgs/uniswap.webp" alt="Uniswap" class="h-5 w-5 mr-2 object-contain" /> Uniswap</td>
+												<td class="p-3 wallet-address cursor-pointer text-gray-400 hover:text-white" title="Click to copy">0x47B51D4814e8816fA2000937b7d3A79267D2e675</td>
+											</tr>
+											<tr class="ML hover:bg-gray-700 transition-colors">
+												<td class="p-3 flex items-center"><img src="Imgs/chainlink.png" alt="LINK" class="h-5 w-5 mr-2 object-contain" /> LINK</td>
+												<td class="p-3 wallet-address cursor-pointer text-gray-400 hover:text-white" title="Click to copy">0x0Dd35593f3d81b875a36a2eCA76464cC2407f24B</td>
+											</tr>
+											<tr class="PM hover:bg-gray-700 transition-colors">
+												<td class="p-3 flex items-center"><img src="Imgs/BTC.png" alt="BTC" class="h-5 w-5 mr-2 object-contain" /> BTC</td>
+												<td class="p-3 wallet-address cursor-pointer text-gray-400 hover:text-white" title="Click to copy">bc1quay76sm5jdnqmdm4lvhcysukw9a2a8v080f8t6</td>
+											</tr>
+										</tbody>
+									</table>
+								</div>
+							</div>
+						</div>
+					</div>
 
-                    <div class="hideable-field">
-                        <label for="paymentProof" class="block text-sm font-medium text-gray-300 mb-2">Payment Proof</label>
-                        <div class="relative">
-                            <span class="absolute inset-y-0 left-0 flex items-center pl-4 text-gray-400">
-                                <i class="fas fa-receipt"></i>
-                            </span>
-                            <input type="text" id="paymentProof" name="paymentProof" required class="w-full pl-10 pr-4 py-3 bg-gray-900 border border-gray-600 rounded-lg text-white placeholder-gray-500 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all shadow-inner" placeholder='Provide a "transaction/receipt ID" or an image link showing your payment receipt' />
-                        </div>
-                    </div>
+					<div class="hideable-field">
+						<label for="paymentProof" class="block text-sm font-medium text-gray-300 mb-2">Payment Proof</label>
+						<div class="relative">
+							<span class="absolute inset-y-0 left-0 flex items-center pl-4 text-gray-400">
+								<i class="fas fa-receipt"></i>
+							</span>
+							<input type="text" id="paymentProof" name="paymentProof" required class="w-full pl-10 pr-4 py-3 bg-gray-900 border border-gray-600 rounded-lg text-white placeholder-gray-500 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all shadow-inner" placeholder='Provide a "transaction/receipt ID" or an image link showing your payment receipt' />
+						</div>
+					</div>
 
-                    <div>
-                        <label id="messageLabel" for="message" class="block text-sm font-medium text-gray-300 mb-2">Additional Notes</label>
-                        <div class="relative">
-                            <span class="absolute top-3 left-0 flex items-start pl-4 text-gray-400">
-                                <i class="fas fa-sticky-note" id="messageIcon"></i>
-                            </span>
-                            <textarea id="message" name="message" rows="4" required class="w-full pl-10 pr-4 py-3 bg-gray-900 border border-gray-600 rounded-lg text-white placeholder-gray-500 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all shadow-inner" placeholder="Specific instructions, formatting requests, etc..."></textarea>
-                        </div>
-                    </div>
+					<div>
+						<label id="messageLabel" for="message" class="block text-sm font-medium text-gray-300 mb-2">Additional Notes</label>
+						<div class="relative">
+							<span class="absolute top-3 left-0 flex items-start pl-4 text-gray-400">
+								<i class="fas fa-sticky-note" id="messageIcon"></i>
+							</span>
+							<textarea id="message" name="message" rows="4" required class="w-full pl-10 pr-4 py-3 bg-gray-900 border border-gray-600 rounded-lg text-white placeholder-gray-500 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all shadow-inner" placeholder="Specific instructions, formatting requests, etc..."></textarea>
+						</div>
+					</div>
 
-                    <div class="flex items-center mt-2">
-                        <input type="checkbox" id="autoresponse" name="_autoresponse" value="Thank you! We have received your submission and will process it shortly. Here is a copy for your records." class="w-4 h-4 text-blue-500 bg-gray-900 border-gray-600 rounded focus:ring-blue-500 focus:ring-2 cursor-pointer" />
-                        <label for="autoresponse" class="ml-2 text-sm font-medium text-gray-300 cursor-pointer">Send me a copy of my request</label>
-                    </div>
+					<div class="flex items-center mt-2">
+						<input type="checkbox" id="autoresponse" name="_autoresponse" value="Thank you! We have received your submission and will process it shortly. Here is a copy for your records." class="w-4 h-4 text-blue-500 bg-gray-900 border-gray-600 rounded focus:ring-blue-500 focus:ring-2 cursor-pointer" />
+						<label for="autoresponse" class="ml-2 text-sm font-medium text-gray-300 cursor-pointer">Send me a copy of my request</label>
+					</div>
 
-                    <button type="submit" id="submitBtn" class="w-full bg-blue-600 hover:bg-blue-500 text-white font-bold py-4 px-4 rounded-lg transition-all shadow-[0_0_15px_rgba(37,99,235,0.4)] border border-blue-400 transform hover:-translate-y-0.5 mt-6 uppercase tracking-wider text-lg">Submit Request</button>
-                </form>
-            </section>
-        </div>
+					<button type="submit" id="submitBtn" class="w-full bg-blue-600 hover:bg-blue-500 text-white font-bold py-4 px-4 rounded-lg transition-all shadow-[0_0_15px_rgba(37,99,235,0.4)] border border-blue-400 transform hover:-translate-y-0.5 mt-6 uppercase tracking-wider text-lg">Submit Request</button>
+				</form>
+			</section>
+		</div>
 
-        <script>
-            document.addEventListener('DOMContentLoaded', () => {
-                document.getElementById('nextUrl').value = window.location.href.split('?')[0] + '?success=true';
+		<script>
+			document.addEventListener('DOMContentLoaded', () => {
+				document.getElementById('nextUrl').value = window.location.href.split('?')[0] + '?success=true';
 
-                if (new URLSearchParams(window.location.search).get('success') === 'true') {
-                    const toast = document.getElementById('successToast');
-                    toast.style.display = 'flex';
-                    setTimeout(() => toast.classList.remove('translate-x-[150%]'), 50);
-                    setTimeout(() => {
-                        toast.classList.add('translate-x-[150%]');
-                        setTimeout(() => (toast.style.display = 'none'), 500);
-                    }, 5000);
-                    window.history.replaceState({}, document.title, window.location.href.split('?')[0]);
-                }
+				if (new URLSearchParams(window.location.search).get('success') === 'true') {
+					const toast = document.getElementById('successToast');
+					toast.style.display = 'flex';
+					setTimeout(() => toast.classList.remove('translate-x-[150%]'), 50);
+					setTimeout(() => {
+						toast.classList.add('translate-x-[150%]');
+						setTimeout(() => (toast.style.display = 'none'), 500);
+					}, 5000);
+					window.history.replaceState({}, document.title, window.location.href.split('?')[0]);
+				}
 
-                document.querySelectorAll('.wallet-address').forEach((td) => {
-                    td.addEventListener('click', () => {
-                        navigator.clipboard.writeText(td.textContent.trim());
+				document.querySelectorAll('.wallet-address').forEach((td) => {
+					td.addEventListener('click', () => {
+						navigator.clipboard.writeText(td.textContent.trim());
 
-                        const toast = document.getElementById('successToast');
-                        const title = document.getElementById('toastTitle');
-                        const desc = document.getElementById('toastDesc');
-                        const icon = document.getElementById('toastIcon');
+						const toast = document.getElementById('successToast');
+						const title = document.getElementById('toastTitle');
+						const desc = document.getElementById('toastDesc');
+						const icon = document.getElementById('toastIcon');
 
-                        title.textContent = 'Copied!';
-                        desc.textContent = 'Wallet address copied to clipboard.';
-                        icon.className = 'fas fa-copy mr-3 text-xl';
+						title.textContent = 'Copied!';
+						desc.textContent = 'Wallet address copied to clipboard.';
+						icon.className = 'fas fa-copy mr-3 text-xl';
 
-                        toast.style.display = 'flex';
-                        setTimeout(() => toast.classList.remove('translate-x-[150%]'), 50);
-                        setTimeout(() => {
-                            toast.classList.add('translate-x-[150%]');
-                            setTimeout(() => {
-                                toast.style.display = 'none';
-                                title.textContent = 'Success!';
-                                desc.textContent = 'Your form has been successfully sent.';
-                                icon.className = 'fas fa-check-circle mr-3 text-xl';
-                            }, 500);
-                        }, 3000);
-                    });
-                });
-            });
+						toast.style.display = 'flex';
+						setTimeout(() => toast.classList.remove('translate-x-[150%]'), 50);
+						setTimeout(() => {
+							toast.classList.add('translate-x-[150%]');
+							setTimeout(() => {
+								toast.style.display = 'none';
+								title.textContent = 'Success!';
+								desc.textContent = 'Your form has been successfully sent.';
+								icon.className = 'fas fa-check-circle mr-3 text-xl';
+							}, 500);
+						}, 3000);
+					});
+				});
+			});
 
-            document.getElementById('targetLanguage').addEventListener('focus', (e) => document.getElementById('language-dropdown').classList.remove('hidden'));
-            document.addEventListener('click', (e) => {
-                if (!document.getElementById('targetLanguage').contains(e.target) && !document.getElementById('language-dropdown').contains(e.target)) {
-                    document.getElementById('language-dropdown').classList.add('hidden');
-                }
-            });
-            document.querySelectorAll('#language-dropdown li').forEach((i) => {
-                i.addEventListener('click', () => {
-                    document.getElementById('targetLanguage').value = i.getAttribute('data-value');
-                    document.getElementById('language-dropdown').classList.add('hidden');
-                });
-            });
+			document.getElementById('targetLanguage').addEventListener('focus', (e) => document.getElementById('language-dropdown').classList.remove('hidden'));
+			document.addEventListener('click', (e) => {
+				if (!document.getElementById('targetLanguage').contains(e.target) && !document.getElementById('language-dropdown').contains(e.target)) {
+					document.getElementById('language-dropdown').classList.add('hidden');
+				}
+			});
+			document.querySelectorAll('#language-dropdown li').forEach((i) => {
+				i.addEventListener('click', () => {
+					document.getElementById('targetLanguage').value = i.getAttribute('data-value');
+					document.getElementById('language-dropdown').classList.add('hidden');
+				});
+			});
 
-            const toggleCryptoBtn = document.getElementById('toggleCryptoBtn');
-            const cryptoContainer = document.getElementById('cryptoContainer');
-            const cryptoChevron = document.getElementById('cryptoChevron');
+			const toggleCryptoBtn = document.getElementById('toggleCryptoBtn');
+			const cryptoContainer = document.getElementById('cryptoContainer');
+			const cryptoChevron = document.getElementById('cryptoChevron');
 
-            toggleCryptoBtn.addEventListener('click', () => {
-                cryptoContainer.classList.toggle('hidden');
-                if (cryptoContainer.classList.contains('hidden')) {
-                    cryptoChevron.classList.remove('rotate-180');
-                } else {
-                    cryptoChevron.classList.add('rotate-180');
-                }
-            });
+			toggleCryptoBtn.addEventListener('click', () => {
+				cryptoContainer.classList.toggle('hidden');
+				if (cryptoContainer.classList.contains('hidden')) {
+					cryptoChevron.classList.remove('rotate-180');
+				} else {
+					cryptoChevron.classList.add('rotate-180');
+				}
+			});
 
-            const tabRequest = document.getElementById('tabRequest');
-            const tabQuestion = document.getElementById('tabQuestion');
-            const formTitle = document.getElementById('formTitle');
-            const formSubject = document.getElementById('formSubject');
-            const messageLabel = document.getElementById('messageLabel');
-            const messageInput = document.getElementById('message');
-            const messageIcon = document.getElementById('messageIcon');
-            const submitBtn = document.getElementById('submitBtn');
-            const hideableFields = document.querySelectorAll('.hideable-field');
+			const tabRequest = document.getElementById('tabRequest');
+			const tabQuestion = document.getElementById('tabQuestion');
+			const formTitle = document.getElementById('formTitle');
+			const formSubject = document.getElementById('formSubject');
+			const messageLabel = document.getElementById('messageLabel');
+			const messageInput = document.getElementById('message');
+			const messageIcon = document.getElementById('messageIcon');
+			const submitBtn = document.getElementById('submitBtn');
+			const hideableFields = document.querySelectorAll('.hideable-field');
 
-            tabRequest.addEventListener('click', () => {
-                tabRequest.className = 'px-4 py-2 text-sm font-bold rounded-md bg-blue-600 text-white shadow transition-all';
-                tabQuestion.className = 'px-4 py-2 text-sm font-medium rounded-md text-gray-400 hover:text-white hover:bg-gray-700 transition-all';
+			tabRequest.addEventListener('click', () => {
+				tabRequest.className = 'px-4 py-2 text-sm font-bold rounded-md bg-blue-600 text-white shadow transition-all';
+				tabQuestion.className = 'px-4 py-2 text-sm font-medium rounded-md text-gray-400 hover:text-white hover:bg-gray-700 transition-all';
 
-                formTitle.innerHTML = '<i class="fas fa-paper-plane mr-2 text-purple-400"></i>Send Your Request';
-                formSubject.value = 'New Translation Request';
-                submitBtn.textContent = 'Submit Request';
+				formTitle.innerHTML = '<i class="fas fa-paper-plane mr-2 text-purple-400"></i>Send Your Request';
+				formSubject.value = 'New Translation Request';
+				submitBtn.textContent = 'Submit Request';
 
-                messageLabel.textContent = 'Additional Notes';
-                messageInput.placeholder = 'Specific instructions, formatting requests, etc...';
-                messageInput.setAttribute('required', 'true');
-                messageIcon.className = 'fas fa-sticky-note';
+				messageLabel.textContent = 'Additional Notes';
+				messageInput.placeholder = 'Specific instructions, formatting requests, etc...';
+				messageInput.setAttribute('required', 'true');
+				messageIcon.className = 'fas fa-sticky-note';
 
-                hideableFields.forEach((f) => {
-                    f.classList.remove('hidden');
-                    const inputs = f.querySelectorAll('input');
-                    inputs.forEach((i) => i.setAttribute('required', 'true'));
-                });
-            });
+				hideableFields.forEach((f) => {
+					f.classList.remove('hidden');
+					const inputs = f.querySelectorAll('input');
+					inputs.forEach((i) => i.setAttribute('required', 'true'));
+				});
+			});
 
-            tabQuestion.addEventListener('click', () => {
-                tabQuestion.className = 'px-4 py-2 text-sm font-bold rounded-md bg-blue-600 text-white shadow transition-all';
-                tabRequest.className = 'px-4 py-2 text-sm font-medium rounded-md text-gray-400 hover:text-white hover:bg-gray-700 transition-all';
+			tabQuestion.addEventListener('click', () => {
+				tabQuestion.className = 'px-4 py-2 text-sm font-bold rounded-md bg-blue-600 text-white shadow transition-all';
+				tabRequest.className = 'px-4 py-2 text-sm font-medium rounded-md text-gray-400 hover:text-white hover:bg-gray-700 transition-all';
 
-                formTitle.innerHTML = '<i class="fas fa-question-circle mr-2 text-blue-400"></i>Ask a Question';
-                formSubject.value = 'New Translation Question';
-                submitBtn.textContent = 'Send Question';
+				formTitle.innerHTML = '<i class="fas fa-question-circle mr-2 text-blue-400"></i>Ask a Question';
+				formSubject.value = 'New Translation Question';
+				submitBtn.textContent = 'Send Question';
 
-                messageLabel.textContent = 'Write your Question(s)';
-                messageInput.placeholder = 'How does the translation process work?';
-                messageInput.setAttribute('required', 'true');
-                messageIcon.className = 'fas fa-comment-dots';
+				messageLabel.textContent = 'Write your Question(s)';
+				messageInput.placeholder = 'How does the translation process work?';
+				messageInput.setAttribute('required', 'true');
+				messageIcon.className = 'fas fa-comment-dots';
 
-                hideableFields.forEach((f) => {
-                    f.classList.add('hidden');
-                    const inputs = f.querySelectorAll('input');
-                    inputs.forEach((i) => i.removeAttribute('required'));
-                });
-            });
-        </script>
-    </body>
+				hideableFields.forEach((f) => {
+					f.classList.add('hidden');
+					const inputs = f.querySelectorAll('input');
+					inputs.forEach((i) => i.removeAttribute('required'));
+				});
+			});
+		</script>
+		<img src="https://www.flagcounter.me/hqT/" id="stats" />
+	</body>
 </html>
