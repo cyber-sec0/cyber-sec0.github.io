@@ -11,10 +11,10 @@
 	</head>
 	<body class="bg-gradient-to-br from-gray-900 via-gray-800 to-black text-gray-200 font-sans min-h-screen relative overflow-x-hidden">
 		<div id="successToast" style="display: none" class="fixed top-6 right-6 bg-green-500 text-white px-5 py-3 rounded shadow-2xl transform transition-transform duration-500 translate-x-[150%] z-50 flex items-center border border-green-400">
-			<i class="fas fa-check-circle mr-3 text-xl"></i>
+			<i class="fas fa-check-circle mr-3 text-xl" id="toastIcon"></i>
 			<div class="flex flex-col">
-				<span class="font-bold text-sm">Success!</span>
-				<span class="text-xs">Your form has been successfully sent.</span>
+				<span class="font-bold text-sm" id="toastTitle">Success!</span>
+				<span class="text-xs" id="toastDesc">Your form has been successfully sent.</span>
 			</div>
 		</div>
 
@@ -96,8 +96,88 @@
 					</div>
 
 					<div class="hideable-field">
-						<span class="block text-sm font-medium text-gray-300 mb-2">Complete your payment:</span>
-						<a href="https://cyber-sec0.github.io/" target="_blank" class="inline-flex items-center px-4 py-3 w-full bg-gray-900 border border-gray-600 rounded-lg text-blue-400 hover:text-blue-300 hover:border-blue-500 transition-all shadow-inner"> <i class="fas fa-external-link-alt mr-3 text-gray-400"></i> https://cyber-sec0.github.io/ </a>
+						<div class="bg-gray-900 border border-gray-600 rounded-lg p-6 shadow-inner mt-2">
+							<h3 class="text-lg font-bold text-white mb-4 border-b border-gray-700 pb-2"><i class="fas fa-credit-card mr-2 text-blue-400"></i>Complete Your Payment</h3>
+
+							<div class="flex flex-wrap items-center gap-3 mb-6">
+								<div class="text-center">
+									<p class="text-[10px] font-bold text-gray-400 mb-1 uppercase tracking-wider">Preferable</p>
+									<a href="https://ko-fi.com/C0C6M3538" target="_blank" class="bg-[#29abe0] hover:bg-[#228ebc] text-white px-4 py-2 rounded-md flex items-center transition-all shadow text-sm"> <i class="fas fa-coffee mr-2"></i> Ko-Fi </a>
+								</div>
+								<div class="pt-4 flex flex-wrap gap-3">
+									<a href="https://www.patreon.com/hacker09" target="_blank" class="bg-[#ff424d] hover:bg-[#e03640] text-white px-4 py-2 rounded-md flex items-center transition-all text-sm"> <i class="fab fa-patreon mr-2"></i> Patreon </a>
+									<a href="https://www.buymeacoffee.com/hacker09" target="_blank" class="bg-[#ffdd00] hover:bg-[#e6c700] text-gray-900 font-medium px-4 py-2 rounded-md flex items-center transition-all text-sm"> <i class="fas fa-mug-hot mr-2"></i> BuyMeACoffee </a>
+									<a href="https://buy.stripe.com/28E28r2R9d3421q9FM9MY00" target="_blank" class="bg-[#635bff] hover:bg-[#4b45cc] text-white px-4 py-2 rounded-md flex items-center transition-all text-sm"> <img src="https://i.imgur.com/AP0gaZh.png" alt="Stripe" class="h-4 mr-2 filter brightness-0 invert" /> Stripe </a>
+									<a href="https://github.com/sponsors/cyber-sec0" target="_blank" class="bg-gray-700 hover:bg-gray-600 text-white px-4 py-2 rounded-md flex items-center transition-all text-sm"> <i class="fab fa-github mr-2"></i> GitHub </a>
+								</div>
+							</div>
+
+							<div class="mb-6 space-y-1">
+								<p class="text-xs text-gray-500">* Ko-fi supports Paypal, Venmo and Debit &amp; Credit cards</p>
+								<p class="text-xs text-gray-500">* Github uses Stripe to support Debit and credits cards and Patreon</p>
+								<p class="text-xs text-gray-500">* Patreon supports PayPal, Venmo, <span class="underline decoration-dotted font-medium">Apple Pay</span> and Debit &amp; Credit cards</p>
+								<p class="text-xs text-gray-500">* BuyMeACoffee supports <span class="underline decoration-dotted font-medium">Cash App, Bank transfers</span> and Debit &amp; Credit cards</p>
+								<p class="text-xs text-gray-500">* Stripe supports <span class="underline decoration-dotted font-medium">Amazon Pay, Link, Affirm</span>, Cash App and Debit &amp; Credit Cards</p>
+							</div>
+
+							<p class="text-xs text-blue-400 mb-2"><i class="fas fa-info-circle mr-1"></i>Click any wallet address below to copy</p>
+							<div class="overflow-x-auto rounded border border-gray-700">
+								<table class="w-full text-left border-collapse text-sm bg-gray-800">
+									<thead>
+										<tr class="bg-gray-700">
+											<th class="p-3 border-b border-gray-600 text-gray-300">Crypto</th>
+											<th class="p-3 border-b border-gray-600 text-gray-300">Wallet Address</th>
+										</tr>
+									</thead>
+									<tbody class="divide-y divide-gray-700">
+										<tr class="hover:bg-gray-700 transition-colors">
+											<td class="p-3 flex items-center"><img src="Imgs/BTC.png" alt="BTC" class="h-5 w-5 mr-2 object-contain" /> BTC</td>
+											<td class="p-3 wallet-address cursor-pointer text-gray-400 hover:text-white" title="Click to copy">3KoEo23zSwRPTDck2aT1ccrSFqnVWieUFS</td>
+										</tr>
+										<tr class="hover:bg-gray-700 transition-colors">
+											<td class="p-3 flex items-center"><img src="Imgs/BCH.png" alt="BCH" class="h-5 w-5 mr-2 object-contain" /> BCH</td>
+											<td class="p-3 wallet-address cursor-pointer text-gray-400 hover:text-white" title="Click to copy">3P3FzYExuNpGpXA4Dwjd2rsRLAnsDaUxTR</td>
+										</tr>
+										<tr class="hover:bg-gray-700 transition-colors">
+											<td class="p-3 flex items-center"><img src="Imgs/LTC.png" alt="LTC" class="h-5 w-5 mr-2 object-contain" /> LTC</td>
+											<td class="p-3 wallet-address cursor-pointer text-gray-400 hover:text-white" title="Click to copy">MW2qWHsAVVkUrMyE4FThCfUCY5DtrYgEyc</td>
+										</tr>
+										<tr class="hover:bg-gray-700 transition-colors">
+											<td class="p-3 flex items-center"><img src="Imgs/ether.svg" alt="ETH" class="h-5 w-5 mr-2 object-contain filter invert brightness-0" /> ETH</td>
+											<td class="p-3 wallet-address cursor-pointer text-gray-400 hover:text-white" title="Click to copy">0x6BD1162a158E1758fF8A665676A17094A46D9e16</td>
+										</tr>
+										<tr class="hover:bg-gray-700 transition-colors">
+											<td class="p-3 flex items-center"><img src="Imgs/BTC.png" alt="BTC" class="h-5 w-5 mr-2 object-contain" /> BTC (ML)</td>
+											<td class="p-3 wallet-address cursor-pointer text-gray-400 hover:text-white" title="Click to copy">bc1q9x3rwd53gkpnp2pxsdvd3vqqmkyy2dh627l3ft</td>
+										</tr>
+										<tr class="hover:bg-gray-700 transition-colors">
+											<td class="p-3 flex items-center"><img src="Imgs/LTC.png" alt="LTC" class="h-5 w-5 mr-2 object-contain" /> LTC (ML)</td>
+											<td class="p-3 wallet-address cursor-pointer text-gray-400 hover:text-white" title="Click to copy">ltc1qs40c7gaqwmn2ja36t2gk2nruq5ejm84rlhtzhp</td>
+										</tr>
+										<tr class="hover:bg-gray-700 transition-colors">
+											<td class="p-3 flex items-center"><img src="Imgs/ether.svg" alt="ETH" class="h-5 w-5 mr-2 object-contain filter invert brightness-0" /> ETH (ML)</td>
+											<td class="p-3 wallet-address cursor-pointer text-gray-400 hover:text-white" title="Click to copy">0x2fda9dbd8F4b9C0890d2941250e7090efF2034DB</td>
+										</tr>
+										<tr class="hover:bg-gray-700 transition-colors">
+											<td class="p-3 flex items-center"><img src="Imgs/usdp.png" alt="USDP" class="h-5 w-5 mr-2 object-contain" /> USDP (ML)</td>
+											<td class="p-3 wallet-address cursor-pointer text-gray-400 hover:text-white" title="Click to copy">0xB35fE8c55B1764646E13af6aFa127f8CF629Ab3f</td>
+										</tr>
+										<tr class="hover:bg-gray-700 transition-colors">
+											<td class="p-3 flex items-center"><img src="Imgs/uniswap.webp" alt="Uniswap" class="h-5 w-5 mr-2 object-contain" /> Uniswap (ML)</td>
+											<td class="p-3 wallet-address cursor-pointer text-gray-400 hover:text-white" title="Click to copy">0x47B51D4814e8816fA2000937b7d3A79267D2e675</td>
+										</tr>
+										<tr class="hover:bg-gray-700 transition-colors">
+											<td class="p-3 flex items-center"><img src="Imgs/chainlink.png" alt="LINK" class="h-5 w-5 mr-2 object-contain" /> LINK (ML)</td>
+											<td class="p-3 wallet-address cursor-pointer text-gray-400 hover:text-white" title="Click to copy">0x0Dd35593f3d81b875a36a2eCA76464cC2407f24B</td>
+										</tr>
+										<tr class="hover:bg-gray-700 transition-colors">
+											<td class="p-3 flex items-center"><img src="Imgs/BTC.png" alt="BTC" class="h-5 w-5 mr-2 object-contain" /> BTC (PM)</td>
+											<td class="p-3 wallet-address cursor-pointer text-gray-400 hover:text-white" title="Click to copy">bc1quay76sm5jdnqmdm4lvhcysukw9a2a8v080f8t6</td>
+										</tr>
+									</tbody>
+								</table>
+							</div>
+						</div>
 					</div>
 
 					<div class="hideable-field">
@@ -132,82 +212,107 @@
 
 		<script>
 			document.addEventListener('DOMContentLoaded', () => {
-				document.getElementById('nextUrl').value = window.location.href.split('?')[0] + '?success=true'; //Set redirect URL
+				document.getElementById('nextUrl').value = window.location.href.split('?')[0] + '?success=true';
 
 				if (new URLSearchParams(window.location.search).get('success') === 'true') {
-					document.getElementById('successToast').style.display = 'flex'; //Show toast
-
-					setTimeout(() => document.getElementById('successToast').classList.remove('translate-x-[150%]'), 50); //Animate toast in
-
+					const toast = document.getElementById('successToast');
+					toast.style.display = 'flex';
+					setTimeout(() => toast.classList.remove('translate-x-[150%]'), 50);
 					setTimeout(() => {
-						document.getElementById('successToast').classList.add('translate-x-[150%]'); //Animate toast out
-						setTimeout(() => (document.getElementById('successToast').style.display = 'none'), 500); //Hide toast completely
+						toast.classList.add('translate-x-[150%]');
+						setTimeout(() => (toast.style.display = 'none'), 500);
 					}, 5000);
-
-					window.history.replaceState({}, document.title, window.location.href.split('?')[0]); //Clean URL parameters
+					window.history.replaceState({}, document.title, window.location.href.split('?')[0]);
 				}
+
+				document.querySelectorAll('.wallet-address').forEach((td) => {
+					td.addEventListener('click', () => {
+						navigator.clipboard.writeText(td.textContent.trim());
+
+						const toast = document.getElementById('successToast');
+						const title = document.getElementById('toastTitle');
+						const desc = document.getElementById('toastDesc');
+						const icon = document.getElementById('toastIcon');
+
+						title.textContent = 'Copied!';
+						desc.textContent = 'Wallet address copied to clipboard.';
+						icon.className = 'fas fa-copy mr-3 text-xl';
+
+						toast.style.display = 'flex';
+						setTimeout(() => toast.classList.remove('translate-x-[150%]'), 50);
+						setTimeout(() => {
+							toast.classList.add('translate-x-[150%]');
+							setTimeout(() => {
+								toast.style.display = 'none';
+								title.textContent = 'Success!';
+								desc.textContent = 'Your form has been successfully sent.';
+								icon.className = 'fas fa-check-circle mr-3 text-xl';
+							}, 500);
+						}, 3000);
+					});
+				});
 			});
 
-			document.getElementById('targetLanguage').addEventListener('focus', (e) => document.getElementById('language-dropdown').classList.remove('hidden')); //Show dropdown
+			document.getElementById('targetLanguage').addEventListener('focus', (e) => document.getElementById('language-dropdown').classList.remove('hidden'));
 			document.addEventListener('click', (e) => {
 				if (!document.getElementById('targetLanguage').contains(e.target) && !document.getElementById('language-dropdown').contains(e.target)) {
-					document.getElementById('language-dropdown').classList.add('hidden'); //Hide dropdown
+					document.getElementById('language-dropdown').classList.add('hidden');
 				}
 			});
 			document.querySelectorAll('#language-dropdown li').forEach((i) => {
 				i.addEventListener('click', () => {
-					document.getElementById('targetLanguage').value = i.getAttribute('data-value'); //Set input value
-					document.getElementById('language-dropdown').classList.add('hidden'); //Hide dropdown
+					document.getElementById('targetLanguage').value = i.getAttribute('data-value');
+					document.getElementById('language-dropdown').classList.add('hidden');
 				});
 			});
 
-			const tabRequest = document.getElementById('tabRequest'); //Tab element
-			const tabQuestion = document.getElementById('tabQuestion'); //Tab element
-			const formTitle = document.getElementById('formTitle'); //Title element
-			const formSubject = document.getElementById('formSubject'); //Subject hidden input
-			const messageLabel = document.getElementById('messageLabel'); //Message label
-			const messageInput = document.getElementById('message'); //Message textarea
-			const messageIcon = document.getElementById('messageIcon'); //Message icon
-			const submitBtn = document.getElementById('submitBtn'); //Submit button
-			const hideableFields = document.querySelectorAll('.hideable-field'); //Fields to toggle
+			const tabRequest = document.getElementById('tabRequest');
+			const tabQuestion = document.getElementById('tabQuestion');
+			const formTitle = document.getElementById('formTitle');
+			const formSubject = document.getElementById('formSubject');
+			const messageLabel = document.getElementById('messageLabel');
+			const messageInput = document.getElementById('message');
+			const messageIcon = document.getElementById('messageIcon');
+			const submitBtn = document.getElementById('submitBtn');
+			const hideableFields = document.querySelectorAll('.hideable-field');
 
 			tabRequest.addEventListener('click', () => {
-				tabRequest.className = 'px-4 py-2 text-sm font-bold rounded-md bg-blue-600 text-white shadow transition-all'; //Active tab styling
-				tabQuestion.className = 'px-4 py-2 text-sm font-medium rounded-md text-gray-400 hover:text-white hover:bg-gray-700 transition-all'; //Inactive tab styling
+				tabRequest.className = 'px-4 py-2 text-sm font-bold rounded-md bg-blue-600 text-white shadow transition-all';
+				tabQuestion.className = 'px-4 py-2 text-sm font-medium rounded-md text-gray-400 hover:text-white hover:bg-gray-700 transition-all';
 
-				formTitle.innerHTML = '<i class="fas fa-paper-plane mr-2 text-purple-400"></i>Send Your Request'; //Update title
-				formSubject.value = 'New Translation Request'; //Update subject
-				submitBtn.textContent = 'Submit Request'; //Update button text
+				formTitle.innerHTML = '<i class="fas fa-paper-plane mr-2 text-purple-400"></i>Send Your Request';
+				formSubject.value = 'New Translation Request';
+				submitBtn.textContent = 'Submit Request';
 
-				messageLabel.textContent = 'Additional Notes'; //Update message label
-				messageInput.placeholder = 'Any specific instructions, formatting requests, etc...'; //Update message placeholder
-				messageInput.setAttribute('required', 'true'); //Ensure required is true
-				messageIcon.className = 'fas fa-sticky-note'; //Update icon
+				messageLabel.textContent = 'Additional Notes';
+				messageInput.placeholder = 'Specific instructions, formatting requests, etc...';
+				messageInput.setAttribute('required', 'true');
+				messageIcon.className = 'fas fa-sticky-note';
 
 				hideableFields.forEach((f) => {
-					f.classList.remove('hidden'); //Show fields
-					const inputs = f.querySelectorAll('input'); //Find inputs inside
-					inputs.forEach((i) => i.setAttribute('required', 'true')); //Make them required
+					f.classList.remove('hidden');
+					const inputs = f.querySelectorAll('input');
+					inputs.forEach((i) => i.setAttribute('required', 'true'));
 				});
 			});
 
 			tabQuestion.addEventListener('click', () => {
-				tabQuestion.className = 'px-4 py-2 text-sm font-bold rounded-md bg-blue-600 text-white shadow transition-all'; //Active tab styling
-				tabRequest.className = 'px-4 py-2 text-sm font-medium rounded-md text-gray-400 hover:text-white hover:bg-gray-700 transition-all'; //Inactive tab styling
+				tabQuestion.className = 'px-4 py-2 text-sm font-bold rounded-md bg-blue-600 text-white shadow transition-all';
+				tabRequest.className = 'px-4 py-2 text-sm font-medium rounded-md text-gray-400 hover:text-white hover:bg-gray-700 transition-all';
 
-				formTitle.innerHTML = '<i class="fas fa-question-circle mr-2 text-blue-400"></i>Ask a Question'; //Update title
-				formSubject.value = 'New Translation Question'; //Update subject
-				submitBtn.textContent = 'Send Question'; //Update button text
+				formTitle.innerHTML = '<i class="fas fa-question-circle mr-2 text-blue-400"></i>Ask a Question';
+				formSubject.value = 'New Translation Question';
+				submitBtn.textContent = 'Send Question';
 
-				messageLabel.textContent = 'Write your Question(s)'; //Update message label
-				messageInput.placeholder = 'How does the translation process work?'; //Update message placeholder
-				messageInput.setAttribute('required', 'true'); //Ensure required is true
-				messageIcon.className = 'fas fa-comment-dots'; //Update icon
+				messageLabel.textContent = 'Write your Question(s)';
+				messageInput.placeholder = 'How does the translation process work?';
+				messageInput.setAttribute('required', 'true');
+				messageIcon.className = 'fas fa-comment-dots';
 
 				hideableFields.forEach((f) => {
-					f.classList.add('hidden'); //Hide fields
-					const inputs = f.querySelectorAll('input'); //Find inputs inside
-					inputs.forEach((i) => i.removeAttribute('required')); //Remove required to allow submission
+					f.classList.add('hidden');
+					const inputs = f.querySelectorAll('input');
+					inputs.forEach((i) => i.removeAttribute('required'));
 				});
 			});
 		</script>
