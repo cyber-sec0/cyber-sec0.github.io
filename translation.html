@@ -111,12 +111,12 @@
 					</div>
 
 					<div>
-						<label id="messageLabel" for="message" class="block text-sm font-medium text-gray-300 mb-2">Additional Notes (Optional)</label>
+						<label id="messageLabel" for="message" class="block text-sm font-medium text-gray-300 mb-2">Additional Notes</label>
 						<div class="relative">
 							<span class="absolute top-3 left-0 flex items-start pl-4 text-gray-400">
 								<i class="fas fa-sticky-note" id="messageIcon"></i>
 							</span>
-							<textarea id="message" name="message" rows="4" class="w-full pl-10 pr-4 py-3 bg-gray-900 border border-gray-600 rounded-lg text-white placeholder-gray-500 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all shadow-inner" placeholder="Any specific instructions, formatting requests, etc..."></textarea>
+							<textarea id="message" name="message" rows="4" required class="w-full pl-10 pr-4 py-3 bg-gray-900 border border-gray-600 rounded-lg text-white placeholder-gray-500 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all shadow-inner" placeholder="Any specific instructions, formatting requests, etc..."></textarea>
 						</div>
 					</div>
 
@@ -132,83 +132,82 @@
 
 		<script>
 			document.addEventListener('DOMContentLoaded', () => {
-				document.getElementById('nextUrl').value = window.location.href.split('?')[0] + '?success=true';
+				document.getElementById('nextUrl').value = window.location.href.split('?')[0] + '?success=true'; //Set redirect URL
 
 				if (new URLSearchParams(window.location.search).get('success') === 'true') {
-					document.getElementById('successToast').style.display = 'flex';
+					document.getElementById('successToast').style.display = 'flex'; //Show toast
 
-					setTimeout(() => document.getElementById('successToast').classList.remove('translate-x-[150%]'), 50);
+					setTimeout(() => document.getElementById('successToast').classList.remove('translate-x-[150%]'), 50); //Animate toast in
 
 					setTimeout(() => {
-						document.getElementById('successToast').classList.add('translate-x-[150%]');
-						setTimeout(() => (document.getElementById('successToast').style.display = 'none'), 500);
+						document.getElementById('successToast').classList.add('translate-x-[150%]'); //Animate toast out
+						setTimeout(() => (document.getElementById('successToast').style.display = 'none'), 500); //Hide toast completely
 					}, 5000);
 
-					window.history.replaceState({}, document.title, window.location.href.split('?')[0]);
+					window.history.replaceState({}, document.title, window.location.href.split('?')[0]); //Clean URL parameters
 				}
 			});
 
-			document.getElementById('targetLanguage').addEventListener('focus', (e) => document.getElementById('language-dropdown').classList.remove('hidden'));
+			document.getElementById('targetLanguage').addEventListener('focus', (e) => document.getElementById('language-dropdown').classList.remove('hidden')); //Show dropdown
 			document.addEventListener('click', (e) => {
 				if (!document.getElementById('targetLanguage').contains(e.target) && !document.getElementById('language-dropdown').contains(e.target)) {
-					document.getElementById('language-dropdown').classList.add('hidden');
+					document.getElementById('language-dropdown').classList.add('hidden'); //Hide dropdown
 				}
 			});
 			document.querySelectorAll('#language-dropdown li').forEach((i) => {
 				i.addEventListener('click', () => {
-					document.getElementById('targetLanguage').value = i.getAttribute('data-value');
-					document.getElementById('language-dropdown').classList.add('hidden');
+					document.getElementById('targetLanguage').value = i.getAttribute('data-value'); //Set input value
+					document.getElementById('language-dropdown').classList.add('hidden'); //Hide dropdown
 				});
 			});
 
-			//Tab Switching Logic
-			const tabRequest = document.getElementById('tabRequest');
-			const tabQuestion = document.getElementById('tabQuestion');
-			const formTitle = document.getElementById('formTitle');
-			const formSubject = document.getElementById('formSubject');
-			const messageLabel = document.getElementById('messageLabel');
-			const messageInput = document.getElementById('message');
-			const messageIcon = document.getElementById('messageIcon');
-			const submitBtn = document.getElementById('submitBtn');
-			const hideableFields = document.querySelectorAll('.hideable-field');
+			const tabRequest = document.getElementById('tabRequest'); //Tab element
+			const tabQuestion = document.getElementById('tabQuestion'); //Tab element
+			const formTitle = document.getElementById('formTitle'); //Title element
+			const formSubject = document.getElementById('formSubject'); //Subject hidden input
+			const messageLabel = document.getElementById('messageLabel'); //Message label
+			const messageInput = document.getElementById('message'); //Message textarea
+			const messageIcon = document.getElementById('messageIcon'); //Message icon
+			const submitBtn = document.getElementById('submitBtn'); //Submit button
+			const hideableFields = document.querySelectorAll('.hideable-field'); //Fields to toggle
 
 			tabRequest.addEventListener('click', () => {
-				tabRequest.className = 'px-4 py-2 text-sm font-bold rounded-md bg-blue-600 text-white shadow transition-all';
-				tabQuestion.className = 'px-4 py-2 text-sm font-medium rounded-md text-gray-400 hover:text-white hover:bg-gray-700 transition-all';
+				tabRequest.className = 'px-4 py-2 text-sm font-bold rounded-md bg-blue-600 text-white shadow transition-all'; //Active tab styling
+				tabQuestion.className = 'px-4 py-2 text-sm font-medium rounded-md text-gray-400 hover:text-white hover:bg-gray-700 transition-all'; //Inactive tab styling
 
-				formTitle.innerHTML = '<i class="fas fa-paper-plane mr-2 text-purple-400"></i>Send Your Request';
-				formSubject.value = 'New Translation Request';
-				submitBtn.textContent = 'Submit Request';
+				formTitle.innerHTML = '<i class="fas fa-paper-plane mr-2 text-purple-400"></i>Send Your Request'; //Update title
+				formSubject.value = 'New Translation Request'; //Update subject
+				submitBtn.textContent = 'Submit Request'; //Update button text
 
-				messageLabel.textContent = 'Additional Notes (Optional)';
-				messageInput.placeholder = 'Any specific instructions, formatting requests, etc...';
-				messageInput.removeAttribute('required');
-				messageIcon.className = 'fas fa-sticky-note';
+				messageLabel.textContent = 'Additional Notes'; //Update message label
+				messageInput.placeholder = 'Any specific instructions, formatting requests, etc...'; //Update message placeholder
+				messageInput.setAttribute('required', 'true'); //Ensure required is true
+				messageIcon.className = 'fas fa-sticky-note'; //Update icon
 
 				hideableFields.forEach((f) => {
-					f.classList.remove('hidden');
-					const inputs = f.querySelectorAll('input');
-					inputs.forEach((i) => i.setAttribute('required', 'true'));
+					f.classList.remove('hidden'); //Show fields
+					const inputs = f.querySelectorAll('input'); //Find inputs inside
+					inputs.forEach((i) => i.setAttribute('required', 'true')); //Make them required
 				});
 			});
 
 			tabQuestion.addEventListener('click', () => {
-				tabQuestion.className = 'px-4 py-2 text-sm font-bold rounded-md bg-blue-600 text-white shadow transition-all';
-				tabRequest.className = 'px-4 py-2 text-sm font-medium rounded-md text-gray-400 hover:text-white hover:bg-gray-700 transition-all';
+				tabQuestion.className = 'px-4 py-2 text-sm font-bold rounded-md bg-blue-600 text-white shadow transition-all'; //Active tab styling
+				tabRequest.className = 'px-4 py-2 text-sm font-medium rounded-md text-gray-400 hover:text-white hover:bg-gray-700 transition-all'; //Inactive tab styling
 
-				formTitle.innerHTML = '<i class="fas fa-question-circle mr-2 text-blue-400"></i>Ask a Question';
-				formSubject.value = 'New Translation Question';
-				submitBtn.textContent = 'Send Question';
+				formTitle.innerHTML = '<i class="fas fa-question-circle mr-2 text-blue-400"></i>Ask a Question'; //Update title
+				formSubject.value = 'New Translation Question'; //Update subject
+				submitBtn.textContent = 'Send Question'; //Update button text
 
-				messageLabel.textContent = 'Write your Question(s)';
-				messageInput.placeholder = 'How does the translation process work?';
-				messageInput.setAttribute('required', 'true');
-				messageIcon.className = 'fas fa-comment-dots';
+				messageLabel.textContent = 'Write your Question(s)'; //Update message label
+				messageInput.placeholder = 'How does the translation process work?'; //Update message placeholder
+				messageInput.setAttribute('required', 'true'); //Ensure required is true
+				messageIcon.className = 'fas fa-comment-dots'; //Update icon
 
 				hideableFields.forEach((f) => {
-					f.classList.add('hidden');
-					const inputs = f.querySelectorAll('input');
-					inputs.forEach((i) => i.removeAttribute('required'));
+					f.classList.add('hidden'); //Hide fields
+					const inputs = f.querySelectorAll('input'); //Find inputs inside
+					inputs.forEach((i) => i.removeAttribute('required')); //Remove required to allow submission
 				});
 			});
 		</script>
