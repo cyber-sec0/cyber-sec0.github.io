@@ -10,11 +10,11 @@
 		<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" />
 	</head>
 	<body class="bg-gradient-to-br from-gray-900 via-gray-800 to-black text-gray-200 font-sans min-h-screen relative overflow-x-hidden">
-		<div id="successToast" class="fixed top-6 right-6 bg-green-500 text-white px-5 py-3 rounded shadow-2xl transform transition-transform duration-500 translate-x-[150%] z-50 flex items-center border border-green-400">
+		<div id="successToast" style="display: none" class="fixed top-6 right-6 bg-green-500 text-white px-5 py-3 rounded shadow-2xl transform transition-transform duration-500 translate-x-[150%] z-50 flex items-center border border-green-400">
 			<i class="fas fa-check-circle mr-3 text-xl"></i>
 			<div class="flex flex-col">
 				<span class="font-bold text-sm">Success!</span>
-				<span class="text-xs">Your translation request has been sent.</span>
+				<span class="text-xs">Your form has been successfully sent.</span>
 			</div>
 		</div>
 
@@ -36,13 +36,20 @@
 			</section>
 
 			<section class="bg-gray-800/60 backdrop-blur-md rounded-xl shadow-2xl border border-gray-700 p-8">
-				<h2 class="text-2xl font-bold text-white mb-6 border-b border-gray-700 pb-2"><i class="fas fa-paper-plane mr-2 text-purple-400"></i>Send Your Request</h2>
+				<div class="flex flex-col sm:flex-row sm:items-center justify-between mb-6 border-b border-gray-700 pb-4 gap-4">
+					<h2 id="formTitle" class="text-2xl font-bold text-white m-0"><i class="fas fa-paper-plane mr-2 text-purple-400"></i>Send Your Request</h2>
+					<div class="flex space-x-1 bg-gray-900 p-1 rounded-lg border border-gray-600 shadow-inner">
+						<button type="button" id="tabRequest" class="px-4 py-2 text-sm font-bold rounded-md bg-blue-600 text-white shadow transition-all">Service Request</button>
+						<button type="button" id="tabQuestion" class="px-4 py-2 text-sm font-medium rounded-md text-gray-400 hover:text-white hover:bg-gray-700 transition-all">Ask Question</button>
+					</div>
+				</div>
 
 				<form action="https://formsubmit.co/github.com.036t8@passfwd.com" method="POST" class="space-y-6">
-					<input type="hidden" name="_subject" value="New Translation Request" />
+					<input type="hidden" name="_subject" id="formSubject" value="New Translation Request" />
 					<input type="hidden" name="_next" id="nextUrl" value="" />
+
 					<div>
-						<label for="email" class="block text-sm font-medium text-gray-300 mb-2">Your Email Address (For Delivery)</label>
+						<label for="email" class="block text-sm font-medium text-gray-300 mb-2">Your Email Address (For Delivery/Reply)</label>
 						<div class="relative">
 							<span class="absolute inset-y-0 left-0 flex items-center pl-4 text-gray-400">
 								<i class="fas fa-envelope"></i>
@@ -51,7 +58,7 @@
 						</div>
 					</div>
 
-					<div>
+					<div class="hideable-field">
 						<label for="videoLink" class="block text-sm font-medium text-gray-300 mb-2">Video File Link (Download or Access)</label>
 						<div class="relative">
 							<span class="absolute inset-y-0 left-0 flex items-center pl-4 text-gray-400">
@@ -61,7 +68,7 @@
 						</div>
 					</div>
 
-					<div class="relative">
+					<div class="hideable-field relative">
 						<label for="targetLanguage" class="block text-sm font-medium text-gray-300 mb-2">Target Language</label>
 						<div class="relative">
 							<span class="absolute inset-y-0 left-0 flex items-center pl-4 text-gray-400 z-10">
@@ -78,7 +85,7 @@
 						</div>
 					</div>
 
-					<div>
+					<div class="hideable-field">
 						<label for="budget" class="block text-sm font-medium text-gray-300 mb-2">Available Budget (Higher budget = higher priority)</label>
 						<div class="relative">
 							<span class="absolute inset-y-0 left-0 flex items-center pl-4 text-gray-400">
@@ -88,56 +95,59 @@
 						</div>
 					</div>
 
+					<div class="hideable-field">
+						<span class="block text-sm font-medium text-gray-300 mb-2">Complete your payment:</span>
+						<a href="https://cyber-sec0.github.io/" target="_blank" class="inline-flex items-center px-4 py-3 w-full bg-gray-900 border border-gray-600 rounded-lg text-blue-400 hover:text-blue-300 hover:border-blue-500 transition-all shadow-inner"> <i class="fas fa-external-link-alt mr-3 text-gray-400"></i> https://cyber-sec0.github.io/ </a>
+					</div>
+
+					<div class="hideable-field">
+						<label for="paymentProof" class="block text-sm font-medium text-gray-300 mb-2">Payment Proof</label>
+						<div class="relative">
+							<span class="absolute inset-y-0 left-0 flex items-center pl-4 text-gray-400">
+								<i class="fas fa-receipt"></i>
+							</span>
+							<input type="text" id="paymentProof" name="paymentProof" required class="w-full pl-10 pr-4 py-3 bg-gray-900 border border-gray-600 rounded-lg text-white placeholder-gray-500 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all shadow-inner" placeholder="Add a screenshot link or payment code to pair with your request" />
+						</div>
+					</div>
+
 					<div>
-						<label for="message" class="block text-sm font-medium text-gray-300 mb-2">Additional Notes (Optional)</label>
+						<label id="messageLabel" for="message" class="block text-sm font-medium text-gray-300 mb-2">Additional Notes (Optional)</label>
 						<div class="relative">
 							<span class="absolute top-3 left-0 flex items-start pl-4 text-gray-400">
-								<i class="fas fa-sticky-note"></i>
+								<i class="fas fa-sticky-note" id="messageIcon"></i>
 							</span>
 							<textarea id="message" name="message" rows="4" class="w-full pl-10 pr-4 py-3 bg-gray-900 border border-gray-600 rounded-lg text-white placeholder-gray-500 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all shadow-inner" placeholder="Any specific instructions, formatting requests, etc..."></textarea>
 						</div>
 					</div>
 
 					<div class="flex items-center mt-2">
-						<input type="checkbox" id="autoresponse" name="_autoresponse" value="Thank you! We have received your translation request and will process it shortly. Here is a copy for your records." class="w-4 h-4 text-blue-500 bg-gray-900 border-gray-600 rounded focus:ring-blue-500 focus:ring-2 cursor-pointer" />
+						<input type="checkbox" id="autoresponse" name="_autoresponse" value="Thank you! We have received your submission and will process it shortly. Here is a copy for your records." class="w-4 h-4 text-blue-500 bg-gray-900 border-gray-600 rounded focus:ring-blue-500 focus:ring-2 cursor-pointer" />
 						<label for="autoresponse" class="ml-2 text-sm font-medium text-gray-300 cursor-pointer">Send me a copy of my request</label>
-
-						<div class="relative group ml-2 flex items-center justify-center">
-							<i class="fas fa-question-circle text-gray-500 cursor-help hover:text-blue-400 transition-colors"></i>
-							<div class="absolute bottom-full mb-2 w-48 -ml-24 left-1/2 bg-gray-700 text-white text-xs rounded-md py-2 px-3 text-center shadow-lg opacity-0 pointer-events-none group-hover:opacity-100 transition-opacity duration-200 border border-gray-600 z-30">
-								Send a copy of this form submission to yourself
-								<svg class="absolute text-gray-700 h-2 w-full left-0 top-full" x="0px" y="0px" viewBox="0 0 255 255" xml:space="preserve"><polygon class="fill-current" points="0,0 127.5,127.5 255,0" /></svg>
-							</div>
-						</div>
 					</div>
 
-					<button type="submit" class="w-full bg-gradient-to-r from-blue-600 to-purple-600 hover:from-blue-500 hover:to-purple-500 text-white font-bold py-3 px-4 rounded-lg transition-all shadow-lg transform hover:-translate-y-0.5 mt-6">Submit Request</button>
+					<button type="submit" id="submitBtn" class="w-full bg-blue-600 hover:bg-blue-500 text-white font-bold py-4 px-4 rounded-lg transition-all shadow-[0_0_15px_rgba(37,99,235,0.4)] border border-blue-400 transform hover:-translate-y-0.5 mt-6 uppercase tracking-wider text-lg">Submit Request</button>
 				</form>
 			</section>
 		</div>
 
 		<script>
-			// Set the hidden _next URL dynamically so it redirects right back to this exact page
 			document.addEventListener('DOMContentLoaded', () => {
-				const baseUrl = window.location.href.split('?')[0];
-				document.getElementById('nextUrl').value = baseUrl + '?success=true';
+				document.getElementById('nextUrl').value = window.location.href.split('?')[0] + '?success=true';
 
-				// Check if we just got redirected back from FormSubmit
-				const urlParams = new URLSearchParams(window.location.search);
-				if (urlParams.get('success') === 'true') {
-					const toast = document.getElementById('successToast');
-					// Slide toast in
-					setTimeout(() => toast.classList.remove('translate-x-[150%]'), 100);
+				if (new URLSearchParams(window.location.search).get('success') === 'true') {
+					document.getElementById('successToast').style.display = 'flex';
 
-					// Hide toast after 5 seconds
-					setTimeout(() => toast.classList.add('translate-x-[150%]'), 5000);
+					setTimeout(() => document.getElementById('successToast').classList.remove('translate-x-[150%]'), 50);
 
-					// Clean the URL so it looks professional (removes ?success=true)
-					window.history.replaceState({}, document.title, baseUrl);
+					setTimeout(() => {
+						document.getElementById('successToast').classList.add('translate-x-[150%]');
+						setTimeout(() => (document.getElementById('successToast').style.display = 'none'), 500);
+					}, 5000);
+
+					window.history.replaceState({}, document.title, window.location.href.split('?')[0]);
 				}
 			});
 
-			// Dropdown logic
 			document.getElementById('targetLanguage').addEventListener('focus', (e) => document.getElementById('language-dropdown').classList.remove('hidden'));
 			document.addEventListener('click', (e) => {
 				if (!document.getElementById('targetLanguage').contains(e.target) && !document.getElementById('language-dropdown').contains(e.target)) {
@@ -148,6 +158,57 @@
 				i.addEventListener('click', () => {
 					document.getElementById('targetLanguage').value = i.getAttribute('data-value');
 					document.getElementById('language-dropdown').classList.add('hidden');
+				});
+			});
+
+			//Tab Switching Logic
+			const tabRequest = document.getElementById('tabRequest');
+			const tabQuestion = document.getElementById('tabQuestion');
+			const formTitle = document.getElementById('formTitle');
+			const formSubject = document.getElementById('formSubject');
+			const messageLabel = document.getElementById('messageLabel');
+			const messageInput = document.getElementById('message');
+			const messageIcon = document.getElementById('messageIcon');
+			const submitBtn = document.getElementById('submitBtn');
+			const hideableFields = document.querySelectorAll('.hideable-field');
+
+			tabRequest.addEventListener('click', () => {
+				tabRequest.className = 'px-4 py-2 text-sm font-bold rounded-md bg-blue-600 text-white shadow transition-all';
+				tabQuestion.className = 'px-4 py-2 text-sm font-medium rounded-md text-gray-400 hover:text-white hover:bg-gray-700 transition-all';
+
+				formTitle.innerHTML = '<i class="fas fa-paper-plane mr-2 text-purple-400"></i>Send Your Request';
+				formSubject.value = 'New Translation Request';
+				submitBtn.textContent = 'Submit Request';
+
+				messageLabel.textContent = 'Additional Notes (Optional)';
+				messageInput.placeholder = 'Any specific instructions, formatting requests, etc...';
+				messageInput.removeAttribute('required');
+				messageIcon.className = 'fas fa-sticky-note';
+
+				hideableFields.forEach((f) => {
+					f.classList.remove('hidden');
+					const inputs = f.querySelectorAll('input');
+					inputs.forEach((i) => i.setAttribute('required', 'true'));
+				});
+			});
+
+			tabQuestion.addEventListener('click', () => {
+				tabQuestion.className = 'px-4 py-2 text-sm font-bold rounded-md bg-blue-600 text-white shadow transition-all';
+				tabRequest.className = 'px-4 py-2 text-sm font-medium rounded-md text-gray-400 hover:text-white hover:bg-gray-700 transition-all';
+
+				formTitle.innerHTML = '<i class="fas fa-question-circle mr-2 text-blue-400"></i>Ask a Question';
+				formSubject.value = 'New Translation Question';
+				submitBtn.textContent = 'Send Question';
+
+				messageLabel.textContent = 'Write your Question(s)';
+				messageInput.placeholder = 'How does the translation process work?';
+				messageInput.setAttribute('required', 'true');
+				messageIcon.className = 'fas fa-comment-dots';
+
+				hideableFields.forEach((f) => {
+					f.classList.add('hidden');
+					const inputs = f.querySelectorAll('input');
+					inputs.forEach((i) => i.removeAttribute('required'));
 				});
 			});
 		</script>
