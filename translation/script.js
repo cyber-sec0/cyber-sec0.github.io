@@ -88,6 +88,7 @@ document.addEventListener('DOMContentLoaded', () => {
 	const messageIcon = document.getElementById('messageIcon');
 	const submitBtn = document.getElementById('submitBtn');
 	const hideableFields = document.querySelectorAll('.hideable-field');
+	const checkboxLabel = document.getElementById('checkboxLabel'); // Added checkbox label
 
 	if (tabRequest && tabQuestion) {
 		tabRequest.addEventListener('click', () => {
@@ -102,6 +103,9 @@ document.addEventListener('DOMContentLoaded', () => {
 			messageInput.placeholder = 'Specific instructions, formatting requests, etc...';
 			messageInput.setAttribute('required', 'true');
 			messageIcon.className = 'fas fa-sticky-note';
+
+			// Reverts back to the original text for the Request form
+			if (checkboxLabel) checkboxLabel.textContent = 'Send me a copy of my request';
 
 			hideableFields.forEach((f) => {
 				f.classList.remove('hidden');
@@ -122,6 +126,9 @@ document.addEventListener('DOMContentLoaded', () => {
 			messageInput.placeholder = 'How does the translation process work?';
 			messageInput.setAttribute('required', 'true');
 			messageIcon.className = 'fas fa-comment-dots';
+
+			// Updates to the question-specific text
+			if (checkboxLabel) checkboxLabel.textContent = 'Send me a copy of my question';
 
 			hideableFields.forEach((f) => {
 				f.classList.add('hidden');
