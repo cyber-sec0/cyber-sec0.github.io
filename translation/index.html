@@ -24,16 +24,17 @@
 				<p class="text-lg text-gray-400 mb-8">Reliable & fast multilingual transcription and subtitling</p>
 			</header>
 
-			<section class="bg-gray-800/60 backdrop-blur-md rounded-xl shadow-2xl border border-gray-700 p-8 mb-12">
+			<section class="bg-gray-800/60 backdrop-blur-md rounded-xl shadow-2xl border border-gray-700 p-8 mb-5">
 				<h2 class="text-2xl font-bold text-white mb-4 border-b border-gray-700 pb-2"><i class="fas fa-language mr-2 text-blue-400"></i>Supported Languages</h2>
 
-				<ul class="list-none text-gray-300 mt-4 text-lg grid grid-cols-1 sm:grid-cols-2 gap-4">
+				<ul class="list-none text-gray-300 mt-4 text-lg grid grid-cols-1 sm:grid-cols-2 gap-4 sm:pl-[9rem]">
 					<li class="flex items-center"><i class="fas fa-check text-green-500 mr-3"></i><img src="https://flagcdn.com/w20/us.png" class="w-5 mr-2" alt="US" /> English</li>
 					<li class="flex items-center"><i class="fas fa-check text-green-500 mr-3"></i><img src="https://flagcdn.com/w20/br.png" class="w-5 mr-2" alt="BR" /> Portuguese</li>
 					<li class="flex items-center"><i class="fas fa-check text-green-500 mr-3"></i><img src="https://flagcdn.com/w20/es.png" class="w-5 mr-2" alt="ES" /> Spanish</li>
 					<li class="flex items-center"><i class="fas fa-check text-green-500 mr-3"></i><img src="https://flagcdn.com/w20/jp.png" class="w-5 mr-2" alt="JP" /> Japanese</li>
-					<li class="sm:col-span-2 mt-2 text-sm text-gray-400 border-t border-gray-700 pt-4 flex items-center"><i class="fas fa-robot mr-2 text-purple-400"></i>Translation to other languages will utilize AI & other online translation services.</li>
 				</ul>
+
+				<div class="mt-6 text-sm text-gray-400 border-t border-gray-700 pt-4 flex items-center"><i class="fas fa-robot mr-2 text-purple-400"></i>Translation to other languages will utilize AI &amp; other online translation services.</div>
 			</section>
 
 			<section class="bg-gray-800/60 backdrop-blur-md rounded-xl shadow-2xl border border-gray-700 p-8">
@@ -217,126 +218,7 @@
 				</form>
 			</section>
 		</div>
-
-		<script>
-			document.addEventListener('DOMContentLoaded', () => {
-				document.getElementById('nextUrl').value = window.location.href.split('?')[0] + '?success=true';
-
-				if (new URLSearchParams(window.location.search).get('success') === 'true') {
-					const toast = document.getElementById('successToast');
-					toast.style.display = 'flex';
-					setTimeout(() => toast.classList.remove('translate-x-[150%]'), 50);
-					setTimeout(() => {
-						toast.classList.add('translate-x-[150%]');
-						setTimeout(() => (toast.style.display = 'none'), 500);
-					}, 5000);
-					window.history.replaceState({}, document.title, window.location.href.split('?')[0]);
-				}
-
-				document.querySelectorAll('.wallet-address').forEach((td) => {
-					td.addEventListener('click', () => {
-						navigator.clipboard.writeText(td.textContent.trim());
-
-						const toast = document.getElementById('successToast');
-						const title = document.getElementById('toastTitle');
-						const desc = document.getElementById('toastDesc');
-						const icon = document.getElementById('toastIcon');
-
-						title.textContent = 'Copied!';
-						desc.textContent = 'Wallet address copied to clipboard.';
-						icon.className = 'fas fa-copy mr-3 text-xl';
-
-						toast.style.display = 'flex';
-						setTimeout(() => toast.classList.remove('translate-x-[150%]'), 50);
-						setTimeout(() => {
-							toast.classList.add('translate-x-[150%]');
-							setTimeout(() => {
-								toast.style.display = 'none';
-								title.textContent = 'Success!';
-								desc.textContent = 'Your email has been successfully sent.';
-								icon.className = 'fas fa-check-circle mr-3 text-xl';
-							}, 500);
-						}, 3000);
-					});
-				});
-			});
-
-			document.getElementById('targetLanguage').addEventListener('focus', (e) => document.getElementById('language-dropdown').classList.remove('hidden'));
-			document.addEventListener('click', (e) => {
-				if (!document.getElementById('targetLanguage').contains(e.target) && !document.getElementById('language-dropdown').contains(e.target)) {
-					document.getElementById('language-dropdown').classList.add('hidden');
-				}
-			});
-			document.querySelectorAll('#language-dropdown li').forEach((i) => {
-				i.addEventListener('click', () => {
-					document.getElementById('targetLanguage').value = i.getAttribute('data-value');
-					document.getElementById('language-dropdown').classList.add('hidden');
-				});
-			});
-
-			const toggleCryptoBtn = document.getElementById('toggleCryptoBtn');
-			const cryptoContainer = document.getElementById('cryptoContainer');
-			const cryptoChevron = document.getElementById('cryptoChevron');
-
-			toggleCryptoBtn.addEventListener('click', () => {
-				cryptoContainer.classList.toggle('hidden');
-				if (cryptoContainer.classList.contains('hidden')) {
-					cryptoChevron.classList.remove('rotate-180');
-				} else {
-					cryptoChevron.classList.add('rotate-180');
-				}
-			});
-
-			const tabRequest = document.getElementById('tabRequest');
-			const tabQuestion = document.getElementById('tabQuestion');
-			const formTitle = document.getElementById('formTitle');
-			const formSubject = document.getElementById('formSubject');
-			const messageLabel = document.getElementById('messageLabel');
-			const messageInput = document.getElementById('message');
-			const messageIcon = document.getElementById('messageIcon');
-			const submitBtn = document.getElementById('submitBtn');
-			const hideableFields = document.querySelectorAll('.hideable-field');
-
-			tabRequest.addEventListener('click', () => {
-				tabRequest.className = 'px-4 py-2 text-sm font-bold rounded-md bg-blue-600 text-white shadow transition-all';
-				tabQuestion.className = 'px-4 py-2 text-sm font-medium rounded-md text-gray-400 hover:text-white hover:bg-gray-700 transition-all';
-
-				formTitle.innerHTML = '<i class="fas fa-paper-plane mr-2 text-purple-400"></i>Send Your Request';
-				formSubject.value = 'New Translation Request';
-				submitBtn.textContent = 'Submit Request';
-
-				messageLabel.textContent = 'Additional Notes';
-				messageInput.placeholder = 'Specific instructions, formatting requests, etc...';
-				messageInput.setAttribute('required', 'true');
-				messageIcon.className = 'fas fa-sticky-note';
-
-				hideableFields.forEach((f) => {
-					f.classList.remove('hidden');
-					const inputs = f.querySelectorAll('input');
-					inputs.forEach((i) => i.setAttribute('required', 'true'));
-				});
-			});
-
-			tabQuestion.addEventListener('click', () => {
-				tabQuestion.className = 'px-4 py-2 text-sm font-bold rounded-md bg-blue-600 text-white shadow transition-all';
-				tabRequest.className = 'px-4 py-2 text-sm font-medium rounded-md text-gray-400 hover:text-white hover:bg-gray-700 transition-all';
-
-				formTitle.innerHTML = '<i class="fas fa-question-circle mr-2 text-blue-400"></i>Ask a Question';
-				formSubject.value = 'New Translation Question';
-				submitBtn.textContent = 'Send Question';
-
-				messageLabel.textContent = 'Write your Question(s)';
-				messageInput.placeholder = 'How does the translation process work?';
-				messageInput.setAttribute('required', 'true');
-				messageIcon.className = 'fas fa-comment-dots';
-
-				hideableFields.forEach((f) => {
-					f.classList.add('hidden');
-					const inputs = f.querySelectorAll('input');
-					inputs.forEach((i) => i.removeAttribute('required'));
-				});
-			});
-		</script>
+		<script src="script.js" defer></script>
 		<img src="https://www.flagcounter.me/hqT/" id="stats" />
 	</body>
 </html>
