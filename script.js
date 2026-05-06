@@ -5,7 +5,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
 			document.querySelector('#copyMessage').style.display = 'block'; //Show copied message
 			document.querySelector('#copyMessage').style.top = this.getBoundingClientRect().top - document.body.getBoundingClientRect().top - document.querySelector('#copyMessage').offsetHeight + 52 + 'px'; //Get the next sibling which is the copy message
-			document.querySelector('#copyMessage').style.left = '39%';
+			document.querySelector('#copyMessage').style.left = '38%';
 
 			setTimeout(function () {
 				document.getElementById('copyMessage').style.display = 'none'; //Hide message after 1 second
