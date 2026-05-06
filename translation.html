@@ -14,24 +14,25 @@
 			<i class="fas fa-check-circle mr-3 text-xl" id="toastIcon"></i>
 			<div class="flex flex-col">
 				<span class="font-bold text-sm" id="toastTitle">Success!</span>
-				<span class="text-xs" id="toastDesc">Your form has been successfully sent.</span>
+				<span class="text-xs" id="toastDesc">Your email has been successfully sent.</span>
 			</div>
 		</div>
 
 		<div class="mx-auto px-4 py-12 max-w-4xl">
 			<header class="text-center mb-12">
 				<h1 class="text-4xl md:text-5xl font-bold text-transparent bg-clip-text bg-gradient-to-r from-blue-400 to-purple-500 mb-4 tracking-wide">Translation Services</h1>
-				<p class="text-lg text-gray-400 mb-8">Reliable & fast translation</p>
+				<p class="text-lg text-gray-400 mb-8">Reliable & fast multilingual transcription and subtitling</p>
 			</header>
 
 			<section class="bg-gray-800/60 backdrop-blur-md rounded-xl shadow-2xl border border-gray-700 p-8 mb-12">
 				<h2 class="text-2xl font-bold text-white mb-4 border-b border-gray-700 pb-2"><i class="fas fa-language mr-2 text-blue-400"></i>Supported Languages</h2>
-				<ul class="list-none text-gray-300 space-y-3 mt-4 text-lg">
+
+				<ul class="list-none text-gray-300 mt-4 text-lg grid grid-cols-1 sm:grid-cols-2 gap-4">
 					<li class="flex items-center"><i class="fas fa-check text-green-500 mr-3"></i><img src="https://flagcdn.com/w20/us.png" class="w-5 mr-2" alt="US" /> English</li>
 					<li class="flex items-center"><i class="fas fa-check text-green-500 mr-3"></i><img src="https://flagcdn.com/w20/br.png" class="w-5 mr-2" alt="BR" /> Portuguese</li>
 					<li class="flex items-center"><i class="fas fa-check text-green-500 mr-3"></i><img src="https://flagcdn.com/w20/es.png" class="w-5 mr-2" alt="ES" /> Spanish</li>
 					<li class="flex items-center"><i class="fas fa-check text-green-500 mr-3"></i><img src="https://flagcdn.com/w20/jp.png" class="w-5 mr-2" alt="JP" /> Japanese</li>
-					<li class="mt-6 text-sm text-gray-400 border-t border-gray-700 pt-4 flex items-center"><i class="fas fa-robot mr-2 text-purple-400"></i>Translation to other languages will utilize AI & other online translation services.</li>
+					<li class="sm:col-span-2 mt-2 text-sm text-gray-400 border-t border-gray-700 pt-4 flex items-center"><i class="fas fa-robot mr-2 text-purple-400"></i>Translation to other languages will utilize AI & other online translation services.</li>
 				</ul>
 			</section>
 
@@ -102,7 +103,7 @@
 							<div class="flex flex-wrap items-center gap-3 mb-6">
 								<div class="text-center">
 									<p class="text-[10px] font-bold text-gray-400 mb-1 uppercase tracking-wider">Preferable</p>
-									<a href="https://ko-fi.com/C0C6M3538" target="_blank" class="bg-[#29abe0] hover:bg-[#228ebc] text-white px-4 py-2 rounded-md flex items-center transition-all shadow text-sm"> <i class="fas fa-coffee mr-2"></i> Ko-Fi </a>
+									<a href="https://ko-fi.com/C0C6M3538" target="_blank" class="donation-btn bg-blue-500 hover:bg-blue-600 text-white px-4 py-2 rounded-md flex items-center transition-all shadow text-sm"> <i class="fas fa-coffee mr-2"></i> Ko-Fi </a>
 								</div>
 								<div class="pt-4 flex flex-wrap gap-3">
 									<a href="https://www.patreon.com/hacker09" target="_blank" class="bg-[#ff424d] hover:bg-[#e03640] text-white px-4 py-2 rounded-md flex items-center transition-all text-sm"> <i class="fab fa-patreon mr-2"></i> Patreon </a>
@@ -252,7 +253,7 @@
 							setTimeout(() => {
 								toast.style.display = 'none';
 								title.textContent = 'Success!';
-								desc.textContent = 'Your form has been successfully sent.';
+								desc.textContent = 'Your email has been successfully sent.';
 								icon.className = 'fas fa-check-circle mr-3 text-xl';
 							}, 500);
 						}, 3000);
