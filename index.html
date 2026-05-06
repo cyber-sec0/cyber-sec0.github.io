@@ -145,25 +145,6 @@
                 </div>
             <img src="https://www.flagcounter.me/hqT/" id="stats" />
             <script src="script.js" async=""></script>
-
-            <script>
-                document.addEventListener('DOMContentLoaded', () => {
-                    const toggleCryptoBtn = document.getElementById('toggleCryptoBtn');
-                    const cryptoContainer = document.getElementById('cryptoContainer');
-                    const cryptoChevron = document.getElementById('cryptoChevron');
-
-                    if (toggleCryptoBtn) {
-                        toggleCryptoBtn.addEventListener('click', () => {
-                            cryptoContainer.classList.toggle('hidden');
-                            if (cryptoContainer.classList.contains('hidden')) {
-                                cryptoChevron.classList.remove('rotate-180');
-                            } else {
-                                cryptoChevron.classList.add('rotate-180');
-                            }
-                        });
-                    }
-                });
-            </script>
         </div>
     </body>
 </html>

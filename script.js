@@ -4,12 +4,29 @@ document.querySelectorAll('.wallet-address').forEach(function (element) {
 
 		document.querySelector('#copyMessage').style.display = 'block'; //Show copied message
 		document.querySelector('#copyMessage').style.top = this.getBoundingClientRect().top - document.body.getBoundingClientRect().top - document.querySelector('#copyMessage').offsetHeight + 52 + 'px'; //Get the next sibling which is the copy message
-		document.querySelector('#copyMessage').style.left = '37%';
+		document.querySelector('#copyMessage').style.left = '39%';
 
 		setTimeout(function () {
 			document.getElementById('copyMessage').style.display = 'none'; //Hide message after 1 second
 		}, 1000);
 	};
+});
+
+document.addEventListener('DOMContentLoaded', () => {
+	const toggleCryptoBtn = document.getElementById('toggleCryptoBtn');
+	const cryptoContainer = document.getElementById('cryptoContainer');
+	const cryptoChevron = document.getElementById('cryptoChevron');
+
+	if (toggleCryptoBtn) {
+		toggleCryptoBtn.addEventListener('click', () => {
+			cryptoContainer.classList.toggle('hidden');
+			if (cryptoContainer.classList.contains('hidden')) {
+				cryptoChevron.classList.remove('rotate-180');
+			} else {
+				cryptoChevron.classList.add('rotate-180');
+			}
+		});
+	}
 });
 
 (function (c) {
