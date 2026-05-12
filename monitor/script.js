@@ -27,6 +27,33 @@ const tokenPlaceholderInput = document.getElementById('tokenPlaceholderInput');
 
 let currentlyEditingKey = null;
 
+const bridge = document.createElement('div');
+bridge.id = 'gm-bridge';
+bridge.style.display = 'none';
+document.body.appendChild(bridge);
+
+window.gm_storage = {
+  getValue: (key, def) => {
+    bridge.dataset.request = JSON.stringify({ action: 'getValue', key, def });
+    bridge.dispatchEvent(new Event('gm-request'));
+    const res = JSON.parse(bridge.dataset.response);
+    return res === null ? def : res;
+  },
+  setValue: (key, val) => {
+    bridge.dataset.request = JSON.stringify({ action: 'setValue', key, val });
+    bridge.dispatchEvent(new Event('gm-request'));
+  },
+  deleteValue: (key) => {
+    bridge.dataset.request = JSON.stringify({ action: 'deleteValue', key });
+    bridge.dispatchEvent(new Event('gm-request'));
+  },
+  listValues: () => {
+    bridge.dataset.request = JSON.stringify({ action: 'listValues' });
+    bridge.dispatchEvent(new Event('gm-request'));
+    return JSON.parse(bridge.dataset.response);
+  }
+};
+
 saveSettingsBtn.addEventListener('click', () => {
 	const hours = parseInt(checkIntervalHoursInput.value, 10) || 0;
 	const minutes = parseInt(checkIntervalMinutesInput.value, 10) || 0;
@@ -73,7 +100,7 @@ const resetForm = () => {
 	[nameInput, urlInput, websiteInput, selectorInput, idAttributeInput, headersInput, bodyInput, tokenUrlInput, tokenSelectorInput, tokenAttributeInput, tokenRegExInput, tokenPlaceholderInput].forEach((el) => (el.value = ''));
 	comparisonMethodInput.value = 'text';
 	tokenEnabledCheckbox.checked = false;
-	notificationTypeInput.value = ''; // Reset notification dropdown
+	notificationTypeInput.value = ''; //Reset notification dropdown
 	urlInput.readOnly = false;
 	addBtn.textContent = 'Add Site';
 	currentlyEditingKey = null;
@@ -135,8 +162,8 @@ addBtn.addEventListener('click', () => {
 		tokenAttribute,
 		tokenRegEx,
 		tokenPlaceholder,
-		notification: !!notifType, // True if 'show' or 'copy' is selected
-		notificationType: notifType, // 'show', 'copy', or ''
+		notification: !!notifType,
+		notificationType: notifType,
 	};
 
 	if (currentlyEditingKey) {
@@ -266,9 +293,8 @@ const loadSites = () => {
 	}
 };
 
-//This function waits for the userscript to create the gm_storage object
 function waitForStorage() {
-	if (window.gm_storage) {
+	if (document.documentElement.dataset.gmReady === "true") {
 		const totalMs = window.gm_storage.getValue('check_interval_ms', 60000);
 		const hours = Math.floor(totalMs / 3600000);
 		const minutes = Math.floor((totalMs % 3600000) / 60000);
