@@ -73,7 +73,7 @@ const resetForm = () => {
 	[nameInput, urlInput, websiteInput, selectorInput, idAttributeInput, headersInput, bodyInput, tokenUrlInput, tokenSelectorInput, tokenAttributeInput, tokenRegExInput, tokenPlaceholderInput].forEach((el) => (el.value = ''));
 	comparisonMethodInput.value = 'text';
 	tokenEnabledCheckbox.checked = false;
-	notificationTypeInput.value = ''; // Reset notification dropdown
+	notificationTypeInput.value = '';
 	urlInput.readOnly = false;
 	addBtn.textContent = 'Add Site';
 	currentlyEditingKey = null;
@@ -135,17 +135,15 @@ addBtn.addEventListener('click', () => {
 		tokenAttribute,
 		tokenRegEx,
 		tokenPlaceholder,
-		notification: !!notifType, // True if 'show' or 'copy' is selected
-		notificationType: notifType, // 'show', 'copy', or ''
+		notification: !!notifType,
+		notificationType: notifType,
 	};
 
 	if (currentlyEditingKey) {
-		//EDIT MODE
 		const currentData = window.gm_storage.getValue(currentlyEditingKey, {});
 		window.gm_storage.setValue(currentlyEditingKey, { ...currentData, ...data });
 		alert(`"${name}" has been updated!`);
 	} else {
-		//ADD MODE
 		const counter = window.gm_storage.getValue('Number', 0) + 1;
 		const key = `Counter${counter}${url}`;
 		window.gm_storage.setValue(key, { ...data, isPaused: false, content: '', lastChecked: 0 });
@@ -189,11 +187,21 @@ const loadSites = () => {
 
 		li.innerHTML = `<div class="entry-details">${detailsHtml}</div>
                               <div class="entry-actions">
+                                  <button class="action-btn refresh-btn" title="Force Check Now">🔄</button>
                                   <button class="action-btn pause-btn" title="${isPaused ? 'Resume' : 'Pause'}">${isPaused ? '▶️' : '⏸️'}</button>
                                   <button class="action-btn edit-btn" title="Edit">✏️</button>
                                   <button class="action-btn delete-btn" title="Delete">❌</button>
                               </div>`;
 
+		li.querySelector('.refresh-btn').addEventListener('click', () => {
+			//Setting lastChecked to 0 and reloading forces TM script to fetch instantly
+			const currentData = window.gm_storage.getValue(key, {});
+			currentData.lastChecked = 0;
+			delete currentData.lastError;
+			window.gm_storage.setValue(key, currentData);
+			window.gm_storage.deleteValue(`lock_open_${storedData.website || url}`);
+			location.reload();
+		});
 		li.querySelector('.pause-btn').addEventListener('click', () => {
 			const currentData = window.gm_storage.getValue(key, {});
 			currentData.isPaused = !currentData.isPaused;
@@ -266,7 +274,6 @@ const loadSites = () => {
 	}
 };
 
-//This function waits for the userscript to create the gm_storage object
 function waitForStorage() {
 	if (window.gm_storage) {
 		const totalMs = window.gm_storage.getValue('check_interval_ms', 60000);
