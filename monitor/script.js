@@ -161,9 +161,11 @@ const loadSites = () => {
 	let pausedCount = 0;
 
 	window.gm_storage.listValues().forEach((key) => {
-		if (/^Number$|^check_interval_ms$|^lock_/.test(key)) {
+		// Added ^debounce_notify_ and ^error_notified_ to the ignore list
+		if (/^Number$|^check_interval_ms$|^lock_|^debounce_notify_|^error_notified_/.test(key)) {
 			return;
 		}
+
 		const storedData = window.gm_storage.getValue(key, {});
 		const url = key.replace(/Counter\d+/, '');
 		const li = document.createElement('li');
@@ -194,7 +196,6 @@ const loadSites = () => {
                               </div>`;
 
 		li.querySelector('.refresh-btn').addEventListener('click', () => {
-			//Setting lastChecked to 0 and reloading forces TM script to fetch instantly
 			const currentData = window.gm_storage.getValue(key, {});
 			currentData.lastChecked = 0;
 			delete currentData.lastError;
