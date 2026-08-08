@@ -39,6 +39,16 @@ This folder contains a simple Office Add-in wrapper that loads the WordHippo web
 - If Word does not allow local catalogs, verify your Office version and Trust Center settings.
 - For better support, update the `SourceLocation` URL in `manifest.xml` if the add-in files are hosted on a web server.
 
+## Clearing a Stuck Add-in Cache
+
+If you modify the add-in or fails to load, you can clear the local Office add-in cache to see your changes with this Windows command:
+
+```bat
+taskkill /f /im winword.exe & rmdir /s /q "%LOCALAPPDATA%\Microsoft\Office\16.0\Wef" & mkdir "%LOCALAPPDATA%\Microsoft\Office\16.0\Wef"
+```
+
+Run these commands in an elevated Command Prompt if necessary, then restart Word and try the add-in again.
+
 ## Optional Improvements
 
 - Host the `word-hippo-word-addon` folder on a web server and update `manifest.xml` to use the HTTPS URL.
