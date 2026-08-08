@@ -67,7 +67,6 @@
 			#wordFormSelect {
 				display: none;
 			}
-
 			#iframeWrapper {
 				flex: 1;
 				width: 100%;
@@ -82,6 +81,26 @@
 				left: 0;
 				border: none;
 				transform-origin: 0 0;
+			}
+			@media (prefers-color-scheme: dark) {
+				html,
+				body {
+					background: #1e1e1e;
+					color: #fff;
+				}
+				#controls {
+					background: #2d2d2d;
+					border-bottom: 1px solid #444;
+				}
+				input,
+				select {
+					background: #3c3c3c;
+					color: #fff;
+					border: 1px solid #555;
+				}
+				#placeholder {
+					color: #aaa;
+				}
 			}
 		</style>
 	</head>
@@ -121,11 +140,9 @@
 			</div>
 		</div>
 		<div id="placeholder">Select a word in your document and click Grab, or type a word above and click Search.</div>
-
 		<div id="iframeWrapper">
 			<iframe id="hippoFrame" name="hippoFrame"></iframe>
 		</div>
-
 		<script src="app.js"></script>
 	</body>
 </html>
