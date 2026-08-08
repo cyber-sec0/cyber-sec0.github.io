@@ -16,15 +16,12 @@ Office.onReady(() => {
 		let iframe = document.getElementById('hippoFrame');
 
 		if (wrapper.style.display === 'block') {
-			// 645px perfectly encapsulates the left content column with a tiny bit of breathing room.
-			let scale = wrapper.clientWidth / 645;
+			// 665px bounds the left column.
+			let scale = wrapper.clientWidth / 665;
 
-			// Force desktop layout. The right-hand column gets shoved into the 645px -> 980px zone.
-			iframe.style.width = '980px';
+			// 1010px gives WordHippo enough room for its 970px table + the vertical scrollbar, killing the X scrollbar entirely.
+			iframe.style.width = '1010px';
 			iframe.style.height = wrapper.clientHeight / scale + 'px';
-
-			// The wrapper has "overflow: hidden". When we scale up the 645px chunk to fill the panel,
-			// everything past 645px (the ads and the right search box) gets cleanly sliced off.
 			iframe.style.transform = 'scale(' + scale + ')';
 		}
 	};
