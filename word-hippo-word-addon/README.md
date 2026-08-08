@@ -50,8 +50,3 @@ taskkill /f /im winword.exe & rmdir /s /q "%LOCALAPPDATA%\Microsoft\Office\16.0\
 ```
 
 Run these commands in an elevated Command Prompt if necessary, then restart Word and try the add-in again.
-
-## Optional Improvements
-
-- Host the `word-hippo-word-addon` folder on a web server and update `manifest.xml` to use the HTTPS URL.
-- Add custom logic in `app.js` to capture selected text from the current Word document and pass it to WordHippo.
