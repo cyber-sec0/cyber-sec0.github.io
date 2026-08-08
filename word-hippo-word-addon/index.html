@@ -5,6 +5,9 @@
 		<title>WordHippo Add-in</title>
 		<script src="https://appsforoffice.microsoft.com/lib/1/hosted/office.js"></script>
 		<style>
+			* {
+				box-sizing: border-box;
+			}
 			html,
 			body {
 				width: 100%;
@@ -36,11 +39,6 @@
 				font-size: 14px;
 				border: 1px solid #ccc;
 				border-radius: 4px;
-			}
-			input {
-				width: calc(100% - 18px);
-			}
-			select {
 				width: 100%;
 			}
 			button {
@@ -82,6 +80,7 @@
 				border: none;
 				transform-origin: 0 0;
 			}
+
 			@media (prefers-color-scheme: dark) {
 				html,
 				body {

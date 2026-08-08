@@ -8,29 +8,42 @@ Office.onReady(() => {
 	};
 
 	document.getElementById('actionSelect').onchange = () => {
-		//sub-dropdown-toggle
 		document.getElementById('wordFormSelect').style.display = document.getElementById('actionSelect').value === 'form' ? 'block' : 'none';
 	};
+
+	const resizeIframe = () => {
+		let wrapper = document.getElementById('iframeWrapper');
+		let iframe = document.getElementById('hippoFrame');
+
+		if (wrapper.style.display === 'block') {
+			// 645px perfectly encapsulates the left content column with a tiny bit of breathing room.
+			let scale = wrapper.clientWidth / 645;
+
+			// Force desktop layout. The right-hand column gets shoved into the 645px -> 980px zone.
+			iframe.style.width = '980px';
+			iframe.style.height = wrapper.clientHeight / scale + 'px';
+
+			// The wrapper has "overflow: hidden". When we scale up the 645px chunk to fill the panel,
+			// everything past 645px (the ads and the right search box) gets cleanly sliced off.
+			iframe.style.transform = 'scale(' + scale + ')';
+		}
+	};
+
+	window.onresize = resizeIframe;
 
 	document.getElementById('searchBtn').onclick = () => {
 		if (!document.getElementById('wordInput').value.trim()) return;
 		document.getElementById('placeholder').style.display = 'none';
-		document.getElementById('iframeWrapper').style.display = 'block'; //show-wrapper-and-calculate-scale
+		document.getElementById('iframeWrapper').style.display = 'block';
 
-		(window.onresize = () => {
-			document.getElementById('hippoFrame').style.width = '650px'; //cropWidth-650-focuses-on-left-content-column-hiding-ads-and-increasing-text-size
-			document.getElementById('hippoFrame').style.height = document.getElementById('iframeWrapper').clientHeight / (document.getElementById('iframeWrapper').clientWidth / 650) + 'px';
-			document.getElementById('hippoFrame').style.transform = 'scale(' + document.getElementById('iframeWrapper').clientWidth / 650 + ')';
-		})();
+		resizeIframe(); // Trigger crop math instantly
 
 		document.getElementById('hippoFrame').src = ((w, a, f) => {
-			//build-exact-urls
 			return a === 'form' ? 'https://www.wordhippo.com/what-is/' + f + '/' + w + '.html' : a === 'with-friends' ? 'https://www.wordhippo.com/what-is/words-with-friends-word-finder.html' : a === 'scrabble' ? 'https://www.wordhippo.com/what-is/scrabble-word-finder.html' : a === 'cross' ? 'https://www.wordhippo.com/what-is/crossword-codeword-finder-solver.html' : a === 'conjugations' ? 'https://www.wordhippo.com/what-is/search-page/conjugations.html' : 'https://www.wordhippo.com/what-is/' + (a === 'synonyms' ? 'another-word-for' : a === 'antonyms' ? 'the-opposite-of' : a === 'definitions' ? 'the-meaning-of-the-word' : a === 'rhymes' ? 'words-that-rhyme-with' : a === 'sentences' ? 'sentences-with-the-word' : a === 'starting-with' ? 'words-starting-with' : a === 'ending-with' ? 'words-ending-with' : a === 'containing' ? 'words-containing' : a === 'containing-the-letters' ? 'words-containing-the-letters' : 'how-do-you-pronounce-the-word') + '/' + w + '.html';
 		})(encodeURIComponent(document.getElementById('wordInput').value.trim().toLowerCase()), document.getElementById('actionSelect').value, document.getElementById('wordFormSelect').value);
 	};
 
 	Office.context.document.getSelectedDataAsync(Office.CoercionType.Text, (result) => {
-		//auto-grab
 		if (result.status === Office.AsyncResultStatus.Succeeded && result.value) {
 			document.getElementById('wordInput').value = result.value.trim();
 		}
