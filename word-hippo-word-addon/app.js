@@ -16,12 +16,19 @@ Office.onReady(() => {
 		let iframe = document.getElementById('hippoFrame');
 
 		if (wrapper.style.display === 'block') {
-			// 665px bounds the left column.
 			let scale = wrapper.clientWidth / 665;
 
-			// 1010px gives WordHippo enough room for its 970px table + the vertical scrollbar, killing the X scrollbar entirely.
+			// The height in pixels of the WordHippo top menu
+			let cropTop = 115;
+
 			iframe.style.width = '1010px';
-			iframe.style.height = wrapper.clientHeight / scale + 'px';
+
+			// Add the cropped amount back to the height so we don't get an empty gap at the bottom
+			iframe.style.height = wrapper.clientHeight / scale + cropTop + 'px';
+
+			// Shove the iframe upward to permanently hide the sticky header
+			iframe.style.top = -(cropTop * scale) + 'px';
+
 			iframe.style.transform = 'scale(' + scale + ')';
 		}
 	};
