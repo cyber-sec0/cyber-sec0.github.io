@@ -2,6 +2,8 @@
 
 This folder contains a simple Office Add-in wrapper that loads the WordHippo website inside a Word task pane.
 
+![alt text](image.png)
+
 ## What It Does
 
 - Hosts a lightweight add-in that opens WordHippo in an embedded iframe.
