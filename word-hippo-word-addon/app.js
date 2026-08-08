@@ -17,17 +17,11 @@ Office.onReady(() => {
 		document.getElementById('placeholder').style.display = 'none';
 		document.getElementById('iframeWrapper').style.display = 'block'; //show-wrapper-and-calculate-scale
 
-		(function fitIframe() {
-			document.getElementById('hippoFrame').style.width = '980px'; //forces-bounds-to-crop-empty-sides
-			document.getElementById('hippoFrame').style.height = document.getElementById('iframeWrapper').clientHeight / (document.getElementById('iframeWrapper').clientWidth / 980) + 'px';
-			document.getElementById('hippoFrame').style.transform = 'scale(' + document.getElementById('iframeWrapper').clientWidth / 980 + ')';
+		(window.onresize = () => {
+			document.getElementById('hippoFrame').style.width = '650px'; //cropWidth-650-focuses-on-left-content-column-hiding-ads-and-increasing-text-size
+			document.getElementById('hippoFrame').style.height = document.getElementById('iframeWrapper').clientHeight / (document.getElementById('iframeWrapper').clientWidth / 650) + 'px';
+			document.getElementById('hippoFrame').style.transform = 'scale(' + document.getElementById('iframeWrapper').clientWidth / 650 + ')';
 		})();
-
-		window.onresize = () => {
-			document.getElementById('hippoFrame').style.width = '980px'; //forces-bounds-to-crop-empty-sides
-			document.getElementById('hippoFrame').style.height = document.getElementById('iframeWrapper').clientHeight / (document.getElementById('iframeWrapper').clientWidth / 980) + 'px';
-			document.getElementById('hippoFrame').style.transform = 'scale(' + document.getElementById('iframeWrapper').clientWidth / 980 + ')';
-		};
 
 		document.getElementById('hippoFrame').src = ((w, a, f) => {
 			//build-exact-urls
@@ -39,21 +33,6 @@ Office.onReady(() => {
 		//auto-grab
 		if (result.status === Office.AsyncResultStatus.Succeeded && result.value) {
 			document.getElementById('wordInput').value = result.value.trim();
-		}
-	});
-
-	document.addEventListener('keydown', (e) => {
-		//handle-shortcuts
-		if (e.altKey && e.key.toLowerCase() === 's') {
-			Office.addin.hide();
-		}
-		if (e.altKey && e.key.toLowerCase() === 'w') {
-			Office.context.document.getSelectedDataAsync(Office.CoercionType.Text, (result) => {
-				if (result.status === Office.AsyncResultStatus.Succeeded && result.value) {
-					document.getElementById('wordInput').value = result.value.trim();
-					document.getElementById('searchBtn').click();
-				}
-			});
 		}
 	});
 });

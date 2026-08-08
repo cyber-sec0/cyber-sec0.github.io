@@ -38,13 +38,6 @@ This folder contains a simple Office Add-in wrapper that loads the WordHippo web
 - The add-in depends on an internet connection to load `https://www.wordhippo.com/`.
 - If Word does not allow local catalogs, verify your Office version and Trust Center settings.
 - For better support, update the `SourceLocation` URL in `manifest.xml` if the add-in files are hosted on a web server.
-- Keyboard shortcuts in Word add-ins only trigger when the side panel is actively clicked or focused due to Microsoft Word iframe security blocking document keystrokes.
-- Dark mode is enabled via CSS media queries.
-
-## Keyboard Shortcuts
-
-- `Alt + S` opens or hides the WordHippo sidebar.
-- `Alt + W` instantly looks up whatever word the cursor is currently touching.
 
 ## Optional Improvements
 
