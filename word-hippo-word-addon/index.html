@@ -14,27 +14,34 @@
 				display: flex;
 				flex-direction: column;
 				font-family: sans-serif;
+				background: #fff;
 			}
 			#controls {
-				padding: 8px;
+				padding: 10px;
 				background: #f3f2f1;
 				border-bottom: 1px solid #ccc;
 				display: flex;
 				flex-direction: column;
-				gap: 5px;
+				gap: 8px;
 			}
 			.row {
 				display: flex;
 				gap: 5px;
+				flex-direction: column;
 			}
 			input,
 			select,
 			button {
-				padding: 5px;
+				padding: 8px;
 				font-size: 14px;
+				border: 1px solid #ccc;
+				border-radius: 4px;
 			}
 			input {
-				flex: 1;
+				width: calc(100% - 18px);
+			}
+			select {
+				width: 100%;
 			}
 			button {
 				cursor: pointer;
@@ -42,37 +49,66 @@
 				color: white;
 				border: none;
 				font-weight: bold;
+				padding: 10px;
 			}
 			button:hover {
 				background: #005a9e;
 			}
+
+			/* The iframe is hidden by default */
 			iframe {
 				flex: 1;
 				width: 100%;
 				border: none;
+				display: none;
+			}
+
+			/* The placeholder text shown before a search */
+			#placeholder {
+				flex: 1;
+				display: flex;
+				align-items: center;
+				justify-content: center;
+				color: #666;
+				font-size: 14px;
+				text-align: center;
+				padding: 20px;
 			}
 		</style>
 	</head>
 	<body>
 		<div id="controls">
+			<button id="grabBtn">Grab Selected Text</button>
 			<div class="row">
-				<button id="grabBtn">Grab Selected Text</button>
-			</div>
-			<div class="row">
-				<input type="text" id="wordInput" placeholder="Enter word..." />
+				<input type="text" id="wordInput" placeholder="Enter word or letters..." />
 				<select id="actionSelect">
-					<option value="another-word-for">Synonyms</option>
-					<option value="the-opposite-of">Antonyms</option>
-					<option value="the-meaning-of">Meaning</option>
-					<option value="words-that-rhyme-with">Rhymes</option>
-					<option value="sentences-with-the-word">Sentences</option>
+					<option value="synonyms" selected>Another word for</option>
+					<option value="antonyms">Opposite of</option>
+					<option value="definitions">Meaning of</option>
+					<option value="rhymes">Rhymes with</option>
+					<option value="sentences">Sentences with</option>
+					<option value="form">Find word forms</option>
+					<option value="from_en">Translate from English</option>
+					<option value="to_en">Translate to English</option>
+					<option value="with-friends">Words With Friends</option>
+					<option value="scrabble">Scrabble</option>
+					<option value="cross">Crossword / Codeword</option>
+					<option value="starting-with">Words starting with</option>
+					<option value="ending-with">Words ending with</option>
+					<option value="containing">Words containing exactly</option>
+					<option value="containing-the-letters">Words containing the letters</option>
+					<option value="pronunciation">Pronounce</option>
+					<option value="conjugations">Find conjugations</option>
 				</select>
-			</div>
-			<div class="row">
 				<button id="searchBtn">Search WordHippo</button>
 			</div>
 		</div>
-		<iframe id="hippoFrame" src="https://www.wordhippo.com/"></iframe>
+
+		<div id="placeholder">Select a word in your document and click Grab, or type a word above and click Search.</div>
+
+		<!-- "name" attribute is crucial so our hidden form can target it -->
+		<iframe id="hippoFrame" name="hippoFrame"></iframe>
+
 		<script src="app.js"></script>
 	</body>
 </html>
