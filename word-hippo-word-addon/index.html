@@ -54,16 +54,12 @@
 			button:hover {
 				background: #005a9e;
 			}
-
-			/* The iframe is hidden by default */
 			iframe {
 				flex: 1;
 				width: 100%;
 				border: none;
 				display: none;
 			}
-
-			/* The placeholder text shown before a search */
 			#placeholder {
 				flex: 1;
 				display: flex;
@@ -73,6 +69,9 @@
 				font-size: 14px;
 				text-align: center;
 				padding: 20px;
+			}
+			#wordFormSelect {
+				display: none;
 			}
 		</style>
 	</head>
@@ -88,8 +87,6 @@
 					<option value="rhymes">Rhymes with</option>
 					<option value="sentences">Sentences with</option>
 					<option value="form">Find word forms</option>
-					<option value="from_en">Translate from English</option>
-					<option value="to_en">Translate to English</option>
 					<option value="with-friends">Words With Friends</option>
 					<option value="scrabble">Scrabble</option>
 					<option value="cross">Crossword / Codeword</option>
@@ -100,15 +97,21 @@
 					<option value="pronunciation">Pronounce</option>
 					<option value="conjugations">Find conjugations</option>
 				</select>
+				<select id="wordFormSelect">
+					<option value="the-plural-of">Plural of</option>
+					<option value="the-singular-of">Singular of</option>
+					<option value="the-past-tense-of">Past tense of</option>
+					<option value="the-present-tense-of">Present tense of</option>
+					<option value="the-verb-for">Verb for</option>
+					<option value="the-adjective-for">Adjective for</option>
+					<option value="the-adverb-for">Adverb for</option>
+					<option value="the-noun-for">Noun for</option>
+				</select>
 				<button id="searchBtn">Search WordHippo</button>
 			</div>
 		</div>
-
 		<div id="placeholder">Select a word in your document and click Grab, or type a word above and click Search.</div>
-
-		<!-- "name" attribute is crucial so our hidden form can target it -->
 		<iframe id="hippoFrame" name="hippoFrame"></iframe>
-
 		<script src="app.js"></script>
 	</body>
 </html>
