@@ -50,9 +50,9 @@
     </Hosts>
     <Resources>
       <bt:Images>
-        <bt:Image id="Icon16" DefaultValue="https://cyber-sec0.github.io/word-hippo-word-addon/icon.svg" />
-        <bt:Image id="Icon32" DefaultValue="https://cyber-sec0.github.io/word-hippo-word-addon/icon.svg" />
-        <bt:Image id="Icon80" DefaultValue="https://cyber-sec0.github.io/word-hippo-word-addon/icon.svg" />
+        <bt:Image id="Icon16" DefaultValue="https://cyber-sec0.github.io/word-hippo-word-addon/icon.png" />
+        <bt:Image id="Icon32" DefaultValue="https://cyber-sec0.github.io/word-hippo-word-addon/icon.png" />
+        <bt:Image id="Icon80" DefaultValue="https://cyber-sec0.github.io/word-hippo-word-addon/icon.png" />
       </bt:Images>
       <bt:Urls>
         <bt:Url id="TaskpaneUrl" DefaultValue="https://cyber-sec0.github.io/word-hippo-word-addon/index.html" />
