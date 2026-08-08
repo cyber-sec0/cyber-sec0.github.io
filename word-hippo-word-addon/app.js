@@ -19,7 +19,7 @@ Office.onReady(() => {
 			let scale = wrapper.clientWidth / 665;
 
 			// The height in pixels of the WordHippo top menu
-			let cropTop = 105;
+			let cropTop = 95;
 
 			iframe.style.width = '1010px';
 
