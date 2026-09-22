@@ -17,12 +17,6 @@
 		left: 0;
 		border: none;
 	}
-	#overlay {
-		width: 100%;
-		height: calc(100% - 250px); /*Exposes bottom controls*/
-		position: absolute;
-		top: 40px;
-	}
 	#switchBtn {
 		position: fixed;
 		right: 87%;
@@ -47,7 +41,6 @@
 <title>Youtube Switcher</title>
 <link rel="icon" href="https://www.youtube.com/s/desktop/03f86491/img/favicon.ico" type="image/x-icon" />
 <iframe id="videoFrame" src="https://www.youtube.com/embed/rFZHOHl-L8A?autoplay=1&enablejsapi=1" allow="microphone; autoplay; encrypted-media; picture-in-picture; web-share" allowfullscreen></iframe>
-<div id="overlay"></div>
 <button id="switchBtn">Switch Video</button>
 
 <script>
@@ -93,9 +86,5 @@
 		window.ytPlayer = new YT.Player('videoFrame', {
 			events: {},
 		});
-	};
-
-	document.getElementById('overlay').onclick = () => {
-		window.ytPlayer?.getPlayerState() === 1 ? window.ytPlayer.pauseVideo() : window.ytPlayer?.playVideo();
 	};
 </script>
